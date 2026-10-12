@@ -4,7 +4,7 @@ Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e
 
 ## Status do projeto
 
-Estrutura inicial em React + Vite. A navegação entre as quatro seções está implementada; a apresentação em português e inglês e as habilidades já foram adicionadas. Projetos, experiências, formulário e identidade visual ainda estão em desenvolvimento. Este repositório ainda não representa a entrega completa da Sprint 01.
+Estrutura inicial em React + Vite. A navegação entre as quatro seções está implementada; a apresentação em português e inglês e as habilidades já foram adicionadas. FluxSUS, experiência acadêmica e contatos foram preenchidos. O formulário tem validação e integração preparada, mas depende da configuração e do teste real do EmailJS. Identidade visual e publicação continuam pendentes. Este repositório ainda não representa a entrega completa da Sprint 01.
 
 ## Links úteis
 
@@ -18,16 +18,18 @@ Estrutura inicial em React + Vite. A navegação entre as quatro seções está 
 - [x] Navegação para Sobre mim, Projetos, Experiências e Contato.
 - [x] Layout inicial adaptável à largura da tela.
 - [x] Apresentação pessoal em português e inglês, com habilidades organizadas.
-- [ ] Timeline com projetos reais, tecnologias, repositórios e imagens/GIFs.
-- [ ] Experiências reais com instituição, atividade, período e descrição.
-- [ ] Ícones de contato e formulário com validação e envio real de e-mail.
+- [x] Timeline do FluxSUS com período, contribuição, tecnologias e repositório.
+- [ ] Imagens/GIFs do FluxSUS em execução.
+- [x] Experiência acadêmica com instituição, atividade, período e descrição.
+- [x] Links de e-mail, WhatsApp, Discord e GitHub e formulário com validação.
+- [ ] Configurar EmailJS e confirmar envio/recebimento real de e-mail.
 - [ ] Temas claro e escuro.
 - [ ] Wireframes de média fidelidade no Figma e imagens neste README.
 - [ ] Hospedagem na nuvem e revisão final de responsividade/usabilidade.
 
 ## Tecnologias utilizadas
 
-JavaScript, HTML, CSS, React e React DOM. Vite e @vitejs/plugin-react são as dependências de desenvolvimento. As versões estão em package.json e as resoluções exatas em package-lock.json. Nenhuma biblioteca de componentes ou serviço de e-mail foi adicionada nesta etapa.
+JavaScript, HTML, CSS, React e React DOM. Vite e @vitejs/plugin-react são as dependências de desenvolvimento. As versões estão em package.json e as resoluções exatas em package-lock.json. EmailJS é acessado por fetch via API REST; não requer biblioteca adicional.
 
 ## Arquitetura
 
@@ -80,7 +82,7 @@ O build gera dist/. O preview permite conferir essa versão localmente. Para enc
 
 ### Variáveis de ambiente
 
-Nenhuma variável é necessária nesta etapa. Quando a integração de e-mail for implementada, seus requisitos serão documentados. Arquivos .env e .env.local são ignorados pelo Git; variáveis com prefixo VITE_ ficam visíveis no navegador e não devem conter segredos.
+A navegação funciona sem variáveis. Para ativar o formulário, copie .env.example para .env.local e configure as três variáveis do EmailJS conforme [docs/email-setup.md](docs/email-setup.md). Arquivos .env e .env.local são ignorados pelo Git; variáveis com prefixo VITE_ ficam visíveis no navegador e não devem conter segredos.
 
 ## Deploy
 
@@ -89,6 +91,10 @@ Ainda não realizado. O artefato de publicação é dist/, gerado por npm run bu
 ## Demonstração e verificações
 
 Capturas de tela e GIFs serão adicionados após os protótipos. Para conferir a base, execute o build e abra o servidor local; verifique os quatro links de navegação e a largura de celular. Não há suíte de testes automatizados nesta etapa.
+
+## FluxSUS
+
+Projeto acadêmico em equipe, de janeiro a junho de 2026 (período informado pelo autor). A descrição e a stack foram conferidas no README, na estrutura do front-end e no pom.xml do repositório. O back-end usa o driver MariaDB; isso é distinto das habilidades pessoais em MySQL e PostgreSQL. O repositório é privado e o link só funciona para pessoas autorizadas. Capturas de execução ainda serão adicionadas; imagens de wireframes não serão apresentadas como telas em funcionamento.
 
 ## Autor
 

@@ -23,3 +23,18 @@ li { margin-block: 1rem; overflow-wrap: anywhere; }
 footer { padding-block: 1rem; }
 .skip-link { position: absolute; left: 1rem; top: -5rem; padding: 0.5rem 1rem; background: #fff; }
 .skip-link:focus { top: 0.5rem; }
+
+.timeline { list-style: none; padding-left: 1.5rem; border-left: 2px solid #d9dce2; }
+.timeline > li { position: relative; }
+.timeline > li::before { content: ''; position: absolute; left: -1.95rem; top: 0.5rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #234fa2; }
+.tags, .contact-links { display: flex; gap: 0.5rem 1rem; flex-wrap: wrap; list-style: none; padding: 0; }
+.tags li { background: #eef2f8; padding: 0.25rem 0.6rem; border-radius: 4px; margin: 0; }
+.contact-links a { overflow-wrap: anywhere; }
+.experience-list { padding-left: 1.2rem; }
+.muted { color: #505866; font-size: 0.9rem; }
+form { display: grid; gap: 0.6rem; max-width: 38rem; }
+input, textarea, button { font: inherit; }
+input, textarea { width: 100%; min-width: 0; border: 1px solid #858c99; border-radius: 4px; padding: 0.6rem; background: #fff; color: #202124; }
+textarea { resize: vertical; }
+button { justify-self: start; padding: 0.6rem 1rem; border: 0; border-radius: 4px; background: #234fa2; color: #fff; cursor: pointer; }
+button:disabled { background: #626975; cursor: not-allowed; }

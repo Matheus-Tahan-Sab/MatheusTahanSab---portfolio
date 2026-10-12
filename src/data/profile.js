@@ -1,5 +1,8 @@
 // Conteúdo pessoal separado da apresentação para facilitar futuras atualizações.
 export const profile = {
+  "email": "sabmatheus24@gmail.com",
+  "discord": "https://discordapp.com/users/413783538811404308",
+  "whatsapp": "https://wa.me/5531989870366",
   "github": "https://github.com/Matheus-Tahan-Sab",
   "about": {
     "pt": [
