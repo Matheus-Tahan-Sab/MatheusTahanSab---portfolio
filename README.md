@@ -4,7 +4,7 @@ Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e
 
 ## Status do projeto
 
-Estrutura inicial em React + Vite. A navegação entre as quatro seções está implementada; conteúdo pessoal, formulário e identidade visual ainda estão em desenvolvimento. Este repositório ainda não representa a entrega completa da Sprint 01.
+Estrutura inicial em React + Vite. A navegação entre as quatro seções está implementada; a apresentação em português e inglês e as habilidades já foram adicionadas. Projetos, experiências, formulário e identidade visual ainda estão em desenvolvimento. Este repositório ainda não representa a entrega completa da Sprint 01.
 
 ## Links úteis
 
@@ -17,7 +17,7 @@ Estrutura inicial em React + Vite. A navegação entre as quatro seções está 
 - [x] Base React com cabeçalho, conteúdo e rodapé.
 - [x] Navegação para Sobre mim, Projetos, Experiências e Contato.
 - [x] Layout inicial adaptável à largura da tela.
-- [ ] Apresentação pessoal em português e inglês.
+- [x] Apresentação pessoal em português e inglês, com habilidades organizadas.
 - [ ] Timeline com projetos reais, tecnologias, repositórios e imagens/GIFs.
 - [ ] Experiências reais com instituição, atividade, período e descrição.
 - [ ] Ícones de contato e formulário com validação e envio real de e-mail.
