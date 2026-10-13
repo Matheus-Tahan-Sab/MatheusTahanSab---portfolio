@@ -31,7 +31,7 @@ O formulário do protótipo simula a navegação entre estados; ele não envia e
 - Controles reutilizados do Simple Design System; cabeçalhos, rodapés e etiquetas locais.
 - Tons neutros para concentrar a revisão na hierarquia, no conteúdo e nas interações.
 - Tipografia Inter no wireframe, como referência portátil para a fonte genérica `system-ui` usada no site atual. A escolha visual final será definida na estilização.
-- O FluxSUS tem um espaço reservado e identificado para uma captura real. Ele não representa uma imagem do sistema em execução.
+- O FluxSUS no wireframe tem um espaço reservado e identificado para uma captura real. A implementação atual já tem uma galeria de capturas e outra de wireframes; o Figma documenta a estrutura anterior à inclusão dessas imagens.
 - Temas claro e escuro serão detalhados na próxima etapa.
 
 ## Capturas exportadas
@@ -55,5 +55,5 @@ As cinco capturas abaixo foram exportadas do arquivo Figma. O plano Starter atin
 ## Próximos passos
 
 - Aplicar a estilização escolhida com as estruturas fornecidas pelo professor.
-- Adicionar as capturas/GIFs reais do FluxSUS.
+- Capturas reais do FluxSUS já publicadas no site e no [README principal](../../README.md); o espaço reservado do wireframe documenta a etapa anterior à galeria.
 - Exportar as demais telas quando o limite gratuito da integração permitir, ou pelo editor do Figma.

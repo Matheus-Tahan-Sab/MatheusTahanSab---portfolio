@@ -28,12 +28,40 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [ ] Implementar temas claro e escuro.
 - [x] Hospedar front-end e back-end e registrar as URLs aqui.
 
+## Como usar o site
+
+1. Abra o [portfólio publicado](https://matheus-tahan-sab-portfolio.vercel.app).
+2. Navegue pelo menu entre Sobre mim, Projetos, Experiências e Contato.
+3. Em Sobre mim, abra **Read in English** para ver a apresentação em inglês.
+4. Em Projetos, selecione uma imagem para abrir a captura em tamanho original. As capturas reais e os wireframes estão identificados separadamente.
+5. No formulário de Contato, preencha nome, e-mail e mensagem e aguarde a confirmação. A API gratuita pode precisar iniciar após inatividade; o formulário aguarda até 90 segundos e não reenvia automaticamente.
+6. Os contatos diretos continuam disponíveis caso o envio não seja confirmado. O repositório do FluxSUS é privado e exige autorização para visualizar seu código.
+
+## Conferência do enunciado
+
+A [conferência dos requisitos](docs/requisitos-lab01.md) foi feita com o enunciado oficial do Laboratório 01, em 13/10/2026. A estilização final e os temas claro/escuro ficaram fora desta revisão a pedido do autor. O enunciado menciona LinkedIn nos contatos, mas o autor informou não possuir perfil; esse item está registrado como ressalva.
+
 ## Tecnologias utilizadas
 
 - Front-end: JavaScript, HTML, CSS, React, React DOM, Vite.
 - Back-end: Java 17, Spring Boot 3.4.5, Spring Web, Bean Validation, Maven e API HTTPS do Resend.
 - Testes do back-end: JUnit, Spring Boot Test e MockMvc.
 - Hospedagem: Vercel (Hobby) para o front-end e Render (Free, Docker) para o back-end.
+
+## Dependências e bibliotecas
+
+| Dependência | Versão | Finalidade |
+| --- | --- | --- |
+| `react` | 19.3.0 | Componentes, estado e formulário. |
+| `react-dom` | 19.3.0 | Renderização no navegador. |
+| `vite` | 7.3.7 | Servidor de desenvolvimento e build. |
+| `@vitejs/plugin-react` | 5.2.0 | Integração de React com Vite. |
+| `spring-boot-starter-web` | 3.4.5 | API REST, servidor e cliente HTTP RestClient. |
+| `spring-boot-starter-validation` | 3.4.5 | Validação de nome, e-mail e mensagem. |
+| `spring-boot-starter-test` | 3.4.5 | JUnit, Mockito e MockMvc para os testes do back-end. |
+| `spring-boot-maven-plugin` | 3.4.5 | Build e execução da API. |
+
+As versões instaladas do front-end estão fixadas em `package-lock.json`. O `pom.xml` do back-end usa o gerenciamento de versões do Spring Boot 3.4.5. Resend é acessado diretamente por HTTPS; não há SDK adicional, banco de dados ou serviço pago obrigatório no portfólio.
 
 ## Arquitetura
 
@@ -95,7 +123,7 @@ Para executar testes e empacotar a API, entre em backend e rode:
 
 ## Deploy
 
-O front-end está publicado na Vercel e o back-end no Render, ambos em planos gratuitos. A versão validada na publicação corresponde ao commit [`8540100`](https://github.com/Matheus-Tahan-Sab/MatheusTahanSab---portfolio/commit/85401005e067fd654f5d8ef505addf8347f35502), na branch `main`.
+O front-end está publicado na Vercel e o back-end no Render, ambos em planos gratuitos. A primeira versão validada na publicação corresponde ao commit [`8540100`](https://github.com/Matheus-Tahan-Sab/MatheusTahanSab---portfolio/commit/85401005e067fd654f5d8ef505addf8347f35502), na branch `main`.
 
 | Plataforma | Configuração pública |
 | --- | --- |
@@ -114,7 +142,7 @@ No plano gratuito do Render, a API pode entrar em suspensão após períodos de 
 
 Em 12/10/2026, o formulário do site publicado foi validado com um envio real ao destinatário `sabmatheus24@gmail.com`. O front-end exibiu **“Mensagem enviada com sucesso!”**, o Resend registrou o status **`delivered`** e a mensagem **“Nova mensagem pelo portfólio”** foi confirmada na caixa de entrada do Gmail. O teste continha o identificador `PORTFOLIO-8540100-VALIDACAO`, confirmando o fluxo Vercel → API Spring Boot no Render → Resend → Gmail.
 
-O build do front-end e os testes do back-end passaram no GitHub Actions para o commit da publicação. O back-end tem testes para aceitar solicitações válidas e recusar e-mail inválido ou mensagem em branco antes de chamar o serviço de envio.
+Em 13/10/2026, um novo envio pelo site publicado foi recebido no Gmail com o identificador `PORTFOLIO-300459B-TESTE-LOCAL-PROD`. O back-end também foi executado localmente com Java 17, com cinco testes aprovados. O build do front-end e os testes do back-end passaram no GitHub Actions. O back-end tem testes para aceitar solicitações válidas e recusar e-mail inválido ou mensagem em branco antes de chamar o serviço de envio.
 
 Quatro capturas reais do FluxSUS foram adicionadas em `public/images/projects/fluxsus/` e estão visíveis na seção Projetos.
 

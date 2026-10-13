@@ -3,6 +3,16 @@ import Section from '../components/ui/Section.jsx';
 import { profile } from '../data/profile.js';
 import { sendContactMessage } from '../services/email.js';
 
+function ContactIcon({ type }) {
+  const shapes = {
+    email: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
+    whatsapp: <><path d="M5 19 3 22l5-2a9 9 0 1 0-3-1Z" /><path d="M8 7c0 5 4 9 9 9l1-3-3-1-1 2-3-3 2-1-1-3Z" /></>,
+    discord: <><path d="M7 5h10l4 13-5 2-1-2H9l-1 2-5-2Z" /><circle cx="9" cy="12" r="1" /><circle cx="15" cy="12" r="1" /><path d="M8 16c2 1 6 1 8 0" /></>,
+    github: <><circle cx="12" cy="12" r="9" /><circle cx="9" cy="7" r="1.5" /><circle cx="15" cy="10" r="1.5" /><circle cx="9" cy="17" r="1.5" /><path d="M9 8.5v7m0-2.5c4 0 6-1 6-1.5" /></>,
+  };
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{shapes[type]}</svg>;
+}
+
 export default function Contact() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
@@ -31,10 +41,10 @@ export default function Contact() {
   return (
     <Section id="contato" title="Contato">
       <ul className="contact-links">
-        <li><a href={`mailto:${profile.email}`}><span aria-hidden="true">✉ </span>{profile.email}</a></li>
-        <li><a href={profile.whatsapp}><span aria-hidden="true">☎ </span>WhatsApp</a></li>
-        <li><a href={profile.discord}><span aria-hidden="true">☏ </span>Discord</a></li>
-        <li><a href={profile.github}>GitHub</a></li>
+        <li><a href={`mailto:${profile.email}`}><ContactIcon type="email" /> {profile.email}</a></li>
+        <li><a href={profile.whatsapp}><ContactIcon type="whatsapp" /> WhatsApp</a></li>
+        <li><a href={profile.discord}><ContactIcon type="discord" /> Discord</a></li>
+        <li><a href={profile.github}><ContactIcon type="github" /> GitHub</a></li>
       </ul>
       <h3>Envie uma mensagem</h3>
       <form onSubmit={handleSubmit}>

@@ -2,7 +2,7 @@ const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 export async function sendContactMessage({ name, email, message, website = '' }) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), 90000);
   try {
     const response = await fetch(`${apiUrl.replace(/\/$/, '')}/api/contact`, {
       method: 'POST',
