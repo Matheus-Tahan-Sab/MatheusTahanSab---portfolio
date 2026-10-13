@@ -39,3 +39,11 @@ input, textarea { width: 100%; min-width: 0; border: 1px solid #858c99; border-r
 textarea { resize: vertical; }
 button { justify-self: start; padding: 0.6rem 1rem; border: 0; border-radius: 4px; background: #234fa2; color: #fff; cursor: pointer; }
 button:disabled { background: #626975; cursor: not-allowed; }
+
+.project-gallery { margin-block: 1.5rem; }
+.project-gallery h4 { margin-bottom: 0.5rem; }
+.project-gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 1rem; }
+.project-gallery-grid figure { min-width: 0; margin: 0; }
+.project-gallery-grid a { display: block; padding: 0.5rem; border: 1px solid #d9dce2; border-radius: 4px; }
+.project-gallery-grid img { display: block; width: 100%; height: 320px; object-fit: contain; }
+.project-gallery-grid figcaption { margin-top: 0.5rem; text-align: center; font-size: 0.9rem; }
