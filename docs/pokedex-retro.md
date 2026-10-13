@@ -50,3 +50,9 @@ O formulário mantém a integração real. A API atualmente autoriza a origem do
 4. Confira a leitura de Experiências e a organização de Contato.
 5. Veja também em um celular ou em uma janela estreita.
 6. Escolha os ajustes visuais antes de integrar a branch à main.
+
+## Companheiros Pokémon
+
+Lucario fica na apresentação e pula ao clique ou Enter; Swampert acompanha os projetos com movimento suave; Gengar flutua e percorre um espaço próprio no rodapé, com brilho no tema escuro. Os três aparecem nos dois temas. A troca de tema exibe uma Pokébola ou Ultra Ball por 750 ms, sem bloquear cliques.
+
+Sprites PNG locais da coleção PokéAPI, com origem e créditos em `public/images/pokemon/README.md`. As animações usam CSS e não acrescentam dependências ou consultas à API. O botão do rodapé pausa os movimentos e salva a preferência; `prefers-reduced-motion` desativa as animações automaticamente.

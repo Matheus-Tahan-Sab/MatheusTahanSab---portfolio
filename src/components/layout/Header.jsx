@@ -9,11 +9,17 @@ const navigation = [
 
 export default function Header() {
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+  const [transition, setTransition] = useState(null);
+  const [transitionCount, setTransitionCount] = useState(0);
   function toggleTheme() {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = nextTheme;
     document.querySelector('meta[name="theme-color"]').content = nextTheme === 'dark' ? '#181c21' : '#ce3f40';
     setTheme(nextTheme);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.documentElement.dataset.motion !== 'paused') {
+      setTransition(nextTheme);
+      setTransitionCount(value => value + 1);
+    }
     try {
       localStorage.setItem('mts-portfolio-theme', nextTheme);
     } catch {
@@ -22,6 +28,7 @@ export default function Header() {
   }
   return (
     <header className="site-header">
+      {transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
       <div className="container header-inner">
         <a className="brand" href="#inicio" aria-label="Matheus Tahan Sab — início">
           <span className="device-light" aria-hidden="true" />
