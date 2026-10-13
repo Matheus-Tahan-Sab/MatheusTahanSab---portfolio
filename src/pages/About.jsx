@@ -1,3 +1,5 @@
+import SkillsSection from '../components/SkillsSection/SkillsSection.jsx';
+import { skills, categories } from '../data/skillIcons.js';
 import Section from '../components/ui/Section.jsx';
 import { profile } from '../data/profile.js';
 
@@ -15,11 +17,7 @@ export default function About() {
         </div>
         <div className="skills-panel">
           <div className="panel-title"><h3>Habilidades e tecnologias</h3><span aria-hidden="true">✦</span></div>
-          <dl className="skills-list">
-            {profile.skills.map((group) => (
-              <div key={group.label}><dt>{group.label}</dt><dd>{group.items.map(item => <span key={item}>{item}</span>)}</dd></div>
-            ))}
-          </dl>
+          <SkillsSection skills={skills} categories={categories} />
           <p className="skills-note">Sempre aprendendo e ampliando meu repertório.</p>
         </div>
       </div>

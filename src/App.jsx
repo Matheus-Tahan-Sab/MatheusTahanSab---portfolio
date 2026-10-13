@@ -1,4 +1,5 @@
 import PokemonCompanion from './components/ui/PokemonCompanion.jsx';
+import DeveloperActivity from './pages/DeveloperActivity.jsx';
 import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
 import Hero from './components/layout/Hero.jsx';
@@ -17,6 +18,7 @@ export default function App() {
         <About />
         <Projects />
         <Experiences />
+        <DeveloperActivity />
         <Contact />
       </main>
       <Footer />

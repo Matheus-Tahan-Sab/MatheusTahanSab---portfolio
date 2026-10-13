@@ -376,3 +376,29 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
   .walker-jolteon { --journey: 32s; }
   .walker-charizard { --journey: 40s; }
 }
+
+/* Adaptação dos componentes da disciplina à Pokédex e à Ultra Ball. */
+.skills-section { --sk-brand: #31553f; --sk-muted: var(--muted); --sk-border: #9dac91; --sk-surface: #c6d3ab; gap: 0.8rem; }
+.skills-globe { --globe-color: #31553f; height: 340px; }
+.skills-globe-item { background: #fffbed; border-color: #9dac91; }
+.skills-globe-label { color: #fffbed; background: #31553f; }
+.skills-chips button, .skills-view button { height: auto; min-height: 36px; padding: 0.45rem 0.65rem; border-radius: 4px; font-size: 0.72rem; background: var(--paper); color: var(--ink); }
+.skills-chips button.active, .skills-view button.active { color: #fffbed; background: #31553f; }
+.skills-grid { margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+.skills-grid a { background: var(--paper); border-radius: 4px; padding: 0.8rem 0.4rem; }
+.globe-pause { min-height: 36px; cursor: pointer; color: var(--ink); background: var(--paper); border: 1px solid var(--muted); border-radius: 4px; padding: 0.4rem 0.7rem; align-self: center; }
+.github-panel { --brand: #31553f; --brand-deep: #1d3e2c; --text: var(--ink); --surface: var(--paper); --border: #a6b59a; }
+.github-panel h3 { font-size: 1.05rem; }
+.integration-panel, .curriculum-panel { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--muted); }
+.curriculum-panel .cv-viewer { margin-top: 1rem; }
+[data-theme="dark"] .skills-section { --sk-brand: #f2cc48; --sk-border: #626a70; --sk-surface: #303731; }
+[data-theme="dark"] .skills-globe { --globe-color: #f2cc48; }
+[data-theme="dark"] .skills-globe-item { background: #efece0; }
+[data-theme="dark"] .skills-chips button.active, [data-theme="dark"] .skills-view button.active { background: #f2cc48; color: #181c21; }
+[data-theme="dark"] .skills-globe-label { color: #181c21; background: #f2cc48; }
+[data-theme="dark"] .github-panel { --brand: #f2cc48; --brand-deep: #d2af36; --brand-soft: #ffe17b; --border: #59616b; --text: var(--ink); --surface: var(--paper); --surface-muted: #292f35; --muted: #b7bec5; }
+[data-theme="dark"] .github-panel .gh-card, [data-theme="dark"] .github-panel .gh-kpi, [data-theme="dark"] .github-panel .gh-repo { background: var(--paper); color: var(--ink); border-color: #59616b; }
+[data-theme="dark"] .github-panel select { background: var(--paper); color: var(--ink); }
+@media (max-width: 480px) { .skills-globe { height: 290px; } .gh-repo-title a { overflow-wrap: anywhere; } }
+.skills-globe { isolation: isolate; }
+[data-theme="dark"] .github-panel .gh-button { color: #181c21; }
