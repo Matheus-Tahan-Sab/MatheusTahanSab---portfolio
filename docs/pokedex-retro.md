@@ -53,8 +53,8 @@ O formulário mantém a integração real. A API atualmente autoriza a origem do
 
 ## Companheiros Pokémon
 
-Swampert, Lucario e Gengar são opcionais, desligados na primeira visita. O botão “Pokémon: ligar/desligar” salva a escolha localmente em `mts-portfolio-companions-v1`; a preferência antiga de pausa não os ativa automaticamente.
+O time de seis — Swampert, Lucario, Gengar, Garchomp, Jolteon e Charizard — é opcional, desligados na primeira visita. O botão “Pokémon: ligar/desligar” salva a escolha localmente em `mts-portfolio-companions-v1`; a preferência antiga de pausa não os ativa automaticamente.
 
-Quando ligados, os três caminham exclusivamente pela borda inferior, em sprites menores (escala 1,5×) e trajetos mais lentos, sem capturar cliques. Focar qualquer campo ou botão do formulário pausa todos os quadros e trajetos e oculta os personagens temporariamente; sair do formulário retoma o passeio. `prefers-reduced-motion` oculta a camada e seu controle.
+Quando ligados, os seis caminham exclusivamente pela borda inferior, em sprites menores (escala 1,5×) e trajetos mais lentos, sem capturar cliques. Focar qualquer campo ou botão do formulário pausa todos os quadros e trajetos e oculta os personagens temporariamente; sair do formulário retoma o passeio. `prefers-reduced-motion` oculta a camada e seu controle.
 
 Sprites locais de PMDCollab/SpriteCollab, com metadados e créditos em `public/images/pokemon/`. A transição de tema Pokébola/Ultra Ball funciona independentemente dos companheiros. Sem novas dependências ou consultas a APIs.

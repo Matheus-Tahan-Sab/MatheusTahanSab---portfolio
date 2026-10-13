@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const companions = ['swampert', 'lucario', 'gengar'];
+const companions = ['swampert', 'lucario', 'gengar', 'garchomp', 'jolteon', 'charizard'];
 const preferenceKey = 'mts-portfolio-companions-v1';
 
 export default function PokemonCompanion() {
