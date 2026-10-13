@@ -8,6 +8,12 @@ O autor escolheu um tema inspirado em Pokédex retrô. A interface usa vermelho,
 
 A fonte Press Start 2P foi obtida do [repositório oficial Google Fonts](https://github.com/google/fonts/tree/main/ofl/pressstart2p), hospedada com a aplicação e acompanhada da licença SIL Open Font License em `public/fonts/OFL-PressStart2P.txt`. Ela aparece nos títulos; os textos longos usam fontes de sistema para leitura confortável.
 
+## Temas claro e escuro
+
+O modo claro preserva a paleta original da Pokédex. O modo escuro usa preto, grafite e amarelo, inspirado na Ultra Ball, em todos os painéis, textos, botões e campos. As capturas reais do FluxSUS mantêm suas cores originais.
+
+O botão do cabeçalho alterna os temas por clique ou teclado e informa seu estado com aria-pressed. A preferência é guardada localmente no navegador; o tema salvo é aplicado antes da renderização. Se o armazenamento estiver bloqueado, a troca continua funcionando durante a sessão. O primeiro acesso usa o modo claro.
+
 ## Funcionalidades preservadas
 
 - Conteúdo pessoal em português e inglês.

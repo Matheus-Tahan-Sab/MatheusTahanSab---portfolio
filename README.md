@@ -10,7 +10,7 @@ O endereço de produção continua usando a branch `main`. Esta proposta deve se
 
 ## Status do projeto
 
-Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Os temas claro e escuro ainda estão pendentes.
+Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Nesta branch, o modo claro mantém a Pokédex original e o modo escuro usa a paleta da Ultra Ball, com preferência salva no navegador.
 
 ## Links úteis
 
@@ -31,7 +31,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [x] Configurar a chave do Resend e testar recebimento real.
 - [x] Adicionar capturas do FluxSUS em execução com dados fictícios.
 - [x] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
-- [ ] Implementar temas claro e escuro.
+- [x] Implementar temas claro e escuro na prévia Pokédex.
 - [x] Hospedar front-end e back-end e registrar as URLs aqui.
 
 ## Como usar o site

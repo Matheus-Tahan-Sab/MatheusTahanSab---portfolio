@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ce3f40" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('mts-portfolio-theme') === 'dark' ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+      document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#181c21' : '#ce3f40';
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="description" content="Portfólio de desenvolvimento de Matheus Tahan Sab." />
     <title>Matheus Tahan Sab | Portfólio</title>

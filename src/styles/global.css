@@ -242,3 +242,95 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* A escolha visual é local ao navegador; a API não depende do tema. */
+:root { color-scheme: light; }
+.header-actions { display: flex; align-items: center; gap: 0.7rem; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; min-height: 42px; padding: 0.55rem 0.65rem; border: 2px solid var(--red-dark); border-radius: 4px; box-shadow: 0 3px 0 var(--red-dark); background: #bb3437; color: #fff9eb; font-size: 0.8rem; font-weight: 650; cursor: pointer; flex-shrink: 0; }
+.theme-toggle:hover { background: #92282e; }
+.theme-toggle svg { flex-shrink: 0; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #f2efdf;
+  background: #14171b;
+  --ink: #f2efdf;
+  --muted: #b7bec5;
+  --red: #252a31;
+  --red-dark: #f2cc48;
+  --paper: #1e2329;
+  --green: #f2cc48;
+  --screen: #272b29;
+}
+[data-theme="dark"] body { background-image: radial-gradient(#3a4147 0.7px, transparent 0.7px); }
+[data-theme="dark"] :focus-visible { outline-color: #ffe17b; }
+[data-theme="dark"] .site-header { background: #181c21; border-bottom-color: #f2cc48; box-shadow: 0 3px 0 #070a0d; }
+[data-theme="dark"] .brand { color: #f3edda; }
+[data-theme="dark"] .brand-copy strong span { color: #f2cc48; }
+[data-theme="dark"] .device-light { border-color: #e5ce75; background: #f2d15a; box-shadow: inset -5px -5px 0 #b18b22, 0 0 0 2px #090c0f; }
+[data-theme="dark"] .device-light::before { background: #fff2b9; }
+[data-theme="dark"] .main-nav a,
+[data-theme="dark"] .theme-toggle { background: #2a3037; border-color: #505761; box-shadow: 0 3px 0 #090c0f; color: #f3edda; }
+[data-theme="dark"] .main-nav a span { color: #f2cc48; }
+[data-theme="dark"] .main-nav a:hover,
+[data-theme="dark"] .theme-toggle:hover { background: #383f48; border-color: #f2cc48; }
+[data-theme="dark"] .theme-toggle { color: #f2cc48; }
+[data-theme="dark"] .status-dot { border-color: #c6a338; box-shadow: 2px 2px 0 #3b3c31; }
+[data-theme="dark"] .button { color: #181b20; border-color: #b6932d; box-shadow: 3px 3px 0 #080b0e; }
+[data-theme="dark"] .button:hover { background: #ffe17a; }
+[data-theme="dark"] .button-secondary { color: #f2efdf; border-color: #6a737b; background: #252b32; }
+[data-theme="dark"] .button-secondary:hover { background: #343b44; }
+[data-theme="dark"] .button:disabled { color: #f2efdf; background: #545d65; border-color: #6a737b; }
+[data-theme="dark"] .trainer-device { position: relative; background: #171b20; border-color: #a78c38; box-shadow: 7px 7px 0 #080b0e; }
+[data-theme="dark"] .device-top { color: #f2cc48; }
+[data-theme="dark"] .device-lights span { border-color: #0d1014; background: #5c6067; }
+[data-theme="dark"] .device-lights span:nth-child(2) { background: #f2cc48; }
+[data-theme="dark"] .device-lights span:nth-child(3) { background: #dfbf54; }
+[data-theme="dark"] .trainer-screen { border-color: #444b51; outline-color: #0b0e12; background-image: repeating-linear-gradient(0deg, #e5d78b08, #e5d78b08 1px, transparent 1px, transparent 4px); }
+[data-theme="dark"] .screen-top { color: #e4d594; border-bottom-color: #5e624f; }
+[data-theme="dark"] .trainer-class,
+[data-theme="dark"] .trainer-info dt { color: #c5c8b8; }
+[data-theme="dark"] .trainer-info > div { border-top-color: #646958; }
+[data-theme="dark"] .trainer-types span { color: #161a1e; border-color: #b49a42; }
+[data-theme="dark"] .trainer-types span + span { background: #424638; color: #f2efdf; border-color: #747b60; }
+[data-theme="dark"] .pixel-trainer path[fill="#d84142"] { fill: #eac644; }
+[data-theme="dark"] .pixel-trainer path[fill="#bccba1"] { fill: #606449; }
+[data-theme="dark"] .d-pad { background: #f2cc48; }
+[data-theme="dark"] .device-speaker i { background: #626047; }
+[data-theme="dark"] .control-button { border-color: #a98d36; background: #f2cc48; box-shadow: 2px 3px 0 #080b0e; }
+[data-theme="dark"] .portfolio-section { border-color: #505963; box-shadow: 5px 5px 0 #080b0e; }
+[data-theme="dark"] .section-heading { background: #292f35; border-bottom-color: #505963; }
+[data-theme="dark"] .section-number { color: #f2cc48; background: #181d23; border-color: #ba9e43; }
+[data-theme="dark"] .section-mark { color: #b6a66f; }
+[data-theme="dark"] .language-panel,
+[data-theme="dark"] .contact-links a { border-color: #58616a; background: #282e35; }
+[data-theme="dark"] .contact-links a:hover { background: #353d46; }
+[data-theme="dark"] .skills-panel,
+[data-theme="dark"] .contact-form-panel { background: #272e34; border-color: #59616b; }
+[data-theme="dark"] .panel-title { border-bottom-color: #5a626b; }
+[data-theme="dark"] .skills-list dt,
+[data-theme="dark"] .skills-note { color: #c9c4ae; }
+[data-theme="dark"] .skills-list dd span { border-color: #626a70; background: #1c2228; }
+[data-theme="dark"] .timeline { border-left-color: #59626a; }
+[data-theme="dark"] .timeline > li::before { background: #f2cc48; border-color: #bf9d32; }
+[data-theme="dark"] .project-category { border-color: #756a3d; background: #34342b; }
+[data-theme="dark"] .contribution { background: #292f34; }
+[data-theme="dark"] .tags li { background: #32352b; border-color: #777b5d; }
+[data-theme="dark"] .project-gallery-grid a { background: #e8e6df; border-color: #7b8389; }
+[data-theme="dark"] .experience-stamp { background: #33362d; border-color: #928345; box-shadow: 3px 3px 0 #0c1014; color: #f2cc48; }
+[data-theme="dark"] input,
+[data-theme="dark"] textarea { background: #191f25; border-color: #66717c; }
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder { color: #b3bcc5; }
+[data-theme="dark"] input:disabled,
+[data-theme="dark"] textarea:disabled { background: #2c3339; }
+[data-theme="dark"] .site-footer { background: #1d2228; border-top-color: #535c65; }
+[data-theme="dark"] .skip-link { border-color: #f2cc48; }
+@media (max-width: 1000px) {
+  .header-actions { gap: 0.45rem; }
+  .theme-toggle { font-size: 0.75rem; padding-inline: 0.5rem; }
+}
+@media (max-width: 760px) {
+  .header-inner { position: relative; }
+  .header-actions { display: block; }
+  .theme-toggle { position: absolute; right: 0; top: 0.8rem; min-height: 36px; font-size: 0.75rem; }
+}
