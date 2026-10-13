@@ -118,6 +118,20 @@ O build do front-end e os testes do back-end passaram no GitHub Actions para o c
 
 As capturas de tela e GIFs do FluxSUS ainda serão adicionados em `public/images/projects/`.
 
+### Imagens do FluxSUS
+
+Quatro wireframes do FluxSUS foram copiados do repositório acadêmico para `public/images/projects/fluxsus/`. Eles ilustram as interfaces planejadas do sistema. As capturas/GIFs do sistema em execução continuam pendentes.
+
+| Escolha de perfil | Fila de atendimento |
+| --- | --- |
+| <img src="public/images/projects/fluxsus/selecao-perfil.png" alt="Wireframe FluxSUS: escolha entre médico e paciente." width="240"> | <img src="public/images/projects/fluxsus/fila-atendimento.png" alt="Wireframe FluxSUS: posição na fila e tempo estimado de espera." width="240"> |
+
+| Cadastro de paciente | Cadastro de médico |
+| --- | --- |
+| <img src="public/images/projects/fluxsus/cadastro-paciente.png" alt="Wireframe FluxSUS: formulário vazio de cadastro do paciente." width="240"> | <img src="public/images/projects/fluxsus/cadastro-medico.png" alt="Wireframe FluxSUS: formulário vazio com dados profissionais do médico." width="240"> |
+
+[Origem e inventário das imagens](public/images/projects/fluxsus/README.md).
+
 ### Protótipos de média fidelidade
 
 As quatro seções do portfólio foram representadas para computador (1440 px) e celular (390 px), com navegação interativa, apresentação em inglês e simulações de sucesso/erro do formulário. O arquivo contém 14 telas editáveis. A paleta neutra organiza o conteúdo para a próxima etapa de estilização.
