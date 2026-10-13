@@ -4,7 +4,7 @@ Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e
 
 ## Status do projeto
 
-Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. As imagens do FluxSUS e os temas claro e escuro ainda estão pendentes.
+Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Os temas claro e escuro ainda estão pendentes.
 
 ## Links úteis
 
@@ -23,7 +23,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [x] API própria Spring Boot com validação e envio ao destinatário configurado no servidor.
 - [x] Configuração CORS e mensagens de erro sem expor detalhes internos.
 - [x] Configurar a chave do Resend e testar recebimento real.
-- [ ] Adicionar imagens/GIFs do FluxSUS em execução.
+- [x] Adicionar capturas do FluxSUS em execução com dados fictícios.
 - [x] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
 - [ ] Implementar temas claro e escuro.
 - [x] Hospedar front-end e back-end e registrar as URLs aqui.
@@ -116,11 +116,25 @@ Em 12/10/2026, o formulário do site publicado foi validado com um envio real ao
 
 O build do front-end e os testes do back-end passaram no GitHub Actions para o commit da publicação. O back-end tem testes para aceitar solicitações válidas e recusar e-mail inválido ou mensagem em branco antes de chamar o serviço de envio.
 
-As capturas de tela e GIFs do FluxSUS ainda serão adicionados em `public/images/projects/`.
+Quatro capturas reais do FluxSUS foram adicionadas em `public/images/projects/fluxsus/` e estão visíveis na seção Projetos.
+
+### FluxSUS em funcionamento
+
+Capturas realizadas em 13/10/2026 no Chrome, em uma execução local do código do FluxSUS, com API Spring Boot ativa e banco temporário H2 em modo MariaDB. Todos os dados são fictícios. O check-in usou o botão **Simular QR Válido**, já existente no projeto para apresentações; não foi testado um leitor de câmera real.
+
+O fluxo demonstrado foi: cadastro do paciente → painel → ficha preliminar gravada pela API → check-in de apresentação → posição na fila → cadastro e painel do médico, com o mesmo paciente aguardando atendimento. O build e o teste de contexto do FluxSUS passaram no ambiente local de demonstração. Isso não comprova uma implantação hospitalar nem a execução com MariaDB.
+
+| Perfil de acesso | Painel do paciente |
+| --- | --- |
+| <img src="public/images/projects/fluxsus/selecao-perfil-execucao.jpg" alt="FluxSUS em execução: seleção de perfil." width="240"> | <img src="public/images/projects/fluxsus/painel-paciente-execucao.jpg" alt="FluxSUS em execução: painel do paciente fictício." width="240"> |
+
+| Acompanhamento da fila | Painel do médico |
+| --- | --- |
+| <img src="public/images/projects/fluxsus/fila-atendimento-execucao.jpg" alt="FluxSUS em execução: posição na fila após ficha e check-in de demonstração." width="240"> | <img src="public/images/projects/fluxsus/painel-medico-execucao.jpg" alt="FluxSUS em execução: painel médico com paciente fictício na fila." width="240"> |
 
 ### Imagens do FluxSUS
 
-Quatro wireframes do FluxSUS foram copiados do repositório acadêmico para `public/images/projects/fluxsus/`. Eles ilustram as interfaces planejadas do sistema. As capturas/GIFs do sistema em execução continuam pendentes.
+Quatro wireframes do FluxSUS foram copiados do repositório acadêmico para `public/images/projects/fluxsus/`. Eles ilustram as interfaces planejadas do sistema e permanecem na galeria de protótipos.
 
 | Escolha de perfil | Fila de atendimento |
 | --- | --- |
