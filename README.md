@@ -4,7 +4,7 @@ Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e
 
 ## Status do projeto
 
-Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. As imagens do projeto, protótipos do Figma e temas claro e escuro ainda estão pendentes.
+Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. As imagens do FluxSUS e os temas claro e escuro ainda estão pendentes.
 
 ## Links úteis
 
@@ -12,7 +12,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [Site publicado](https://matheus-tahan-sab-portfolio.vercel.app)
 - [API de contato](https://matheus-tahan-sab-portfolio-api.onrender.com)
 - [Verificação de saúde da API](https://matheus-tahan-sab-portfolio-api.onrender.com/health)
-- Protótipos no Figma: pendentes; veja [docs/prototypes](docs/prototypes/README.md).
+- [Protótipos no Figma](https://www.figma.com/design/zzuu2TrioEYT8kJfKlPSAM) — versões para computador e celular; veja [telas e capturas](docs/prototypes/README.md).
 
 ## Funcionalidades principais
 
@@ -24,7 +24,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [x] Configuração CORS e mensagens de erro sem expor detalhes internos.
 - [x] Configurar a chave do Resend e testar recebimento real.
 - [ ] Adicionar imagens/GIFs do FluxSUS em execução.
-- [ ] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
+- [x] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
 - [ ] Implementar temas claro e escuro.
 - [x] Hospedar front-end e back-end e registrar as URLs aqui.
 
@@ -117,6 +117,16 @@ Em 12/10/2026, o formulário do site publicado foi validado com um envio real ao
 O build do front-end e os testes do back-end passaram no GitHub Actions para o commit da publicação. O back-end tem testes para aceitar solicitações válidas e recusar e-mail inválido ou mensagem em branco antes de chamar o serviço de envio.
 
 As capturas de tela e GIFs do FluxSUS ainda serão adicionados em `public/images/projects/`.
+
+### Protótipos de média fidelidade
+
+As quatro seções do portfólio foram representadas para computador (1440 px) e celular (390 px), com navegação interativa, apresentação em inglês e simulações de sucesso/erro do formulário. O arquivo contém 14 telas editáveis. A paleta neutra organiza o conteúdo para a próxima etapa de estilização.
+
+[Explorar o arquivo no Figma](https://www.figma.com/design/zzuu2TrioEYT8kJfKlPSAM) · [Ver o inventário e as capturas](docs/prototypes/README.md)
+
+<img src="docs/prototypes/desktop-contato.png" alt="Wireframe da seção Contato no computador, com links e formulário." width="720">
+
+<img src="docs/prototypes/mobile-sobre.png" alt="Wireframe da seção Sobre mim no celular, com apresentação e habilidades." width="240">
 
 ## Autor
 
