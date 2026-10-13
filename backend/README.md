@@ -1,37 +1,37 @@
 # API de contato do portfólio
 
-Back-end em Java 17 e Spring Boot. O endpoint POST /api/contact recebe nome, e-mail e mensagem, valida os campos e envia uma mensagem de texto para um destinatário fixo configurado no servidor. A resposta 204 indica que o SMTP aceitou a solicitação. GET /health verifica se a API está disponível.
+Back-end em Java 17 e Spring Boot. `POST /api/contact` recebe nome, e-mail e mensagem, valida os campos e chama a API HTTPS do Resend para enviar a mensagem ao destinatário fixo configurado no servidor. `204 No Content` significa que o provedor aceitou o envio; `GET /health` verifica se a API está disponível.
 
 ## Executar localmente
 
-Pré-requisitos: Java 17 e Maven 3.9 ou superior.
+Pré-requisitos: Java 17 e Maven 3.9 ou superior. Na pasta `backend`, configure as variáveis e inicie a API:
 
-Na pasta backend, configure as variáveis de ambiente e execute:
+```sh
+export RESEND_API_KEY="re_sua_chave"
+export RESEND_FROM="onboarding@resend.dev"
+export CONTACT_TO="sabmatheus24@gmail.com"
+export CORS_ALLOWED_ORIGINS="http://localhost:5173"
+mvn spring-boot:run
+```
 
-    export MAIL_USERNAME="seu-gmail@gmail.com"
-    export MAIL_PASSWORD="sua-senha-de-app-do-google"
-    export CONTACT_TO="sabmatheus24@gmail.com"
-    export CORS_ALLOWED_ORIGINS="http://localhost:5173"
-    mvn spring-boot:run
-
-Nunca use a senha normal da conta Google. Ative a verificação em duas etapas e crie uma senha de app. Não grave credenciais no Git ou no .env versionado.
+Crie uma chave de envio no painel do Resend e guarde-a apenas como variável de ambiente. O remetente de teste `onboarding@resend.dev` só pode enviar para o endereço associado à sua conta Resend. Para receber mensagens em outro endereço, verifique um domínio seu no Resend e configure `RESEND_FROM` com um endereço desse domínio.
 
 Teste a saúde:
 
-    curl http://localhost:8080/health
+```sh
+curl http://localhost:8080/health
+```
 
-Teste o formulário:
+Teste o formulário (a API key deve estar configurada e o destinatário deve ser permitido pelo Resend):
 
-    curl -i -X POST http://localhost:8080/api/contact \
-      -H 'Content-Type: application/json' \
-      -d '{"name":"Teste","email":"visitante@example.com","message":"Mensagem de teste"}'
+```sh
+curl -i -X POST http://localhost:8080/api/contact \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Teste","email":"visitante@example.com","message":"Mensagem de teste"}'
+```
 
-## Front-end
+## Front-end e hospedagem
 
-Na raiz do projeto React, ajuste VITE_API_URL para a origem da API. Localmente o padrão é http://localhost:8080. Em produção, configure essa variável na Vercel e faça novo deploy. Configure CORS_ALLOWED_ORIGINS no back-end com a origem exata do front-end publicado.
+Na raiz do projeto, configure `VITE_API_URL` com a origem pública da API. Localmente o padrão é `http://localhost:8080`. No serviço do back-end, configure `RESEND_API_KEY`, `RESEND_FROM`, `CONTACT_TO` e `CORS_ALLOWED_ORIGINS`; não publique a API key no Git. O Dockerfile permite hospedar a API em serviços de containers, como Render. O front-end pode continuar na Vercel.
 
-## Hospedagem
-
-O Dockerfile desta pasta permite hospedar a API em um serviço que aceite containers (por exemplo, Render). Configure MAIL_USERNAME, MAIL_PASSWORD, CONTACT_TO e CORS_ALLOWED_ORIGINS como variáveis privadas do serviço. O host injeta PORT automaticamente. Não compartilhe nem publique a senha de app.
-
-O front-end pode continuar na Vercel. São dois serviços, então a URL pública da API e os domínios CORS precisam ser registrados nas variáveis de ambiente de cada plataforma.
+`CORS_ALLOWED_ORIGINS` deve conter a origem exata do site publicado (sem caminho final); durante desenvolvimento use `http://localhost:5173`. Depois de configurar as URLs nas duas plataformas, envie uma mensagem real e confirme que ela chegou à caixa de entrada.

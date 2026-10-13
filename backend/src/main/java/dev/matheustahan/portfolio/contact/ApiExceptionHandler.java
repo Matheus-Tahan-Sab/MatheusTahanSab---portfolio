@@ -3,7 +3,6 @@ package dev.matheustahan.portfolio.contact;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,8 +16,8 @@ public class ApiExceptionHandler {
         ));
     }
 
-    @ExceptionHandler(MailException.class)
-    public ResponseEntity<Map<String, String>> handleMailFailure(MailException exception) {
+    @ExceptionHandler(EmailDeliveryException.class)
+    public ResponseEntity<Map<String, String>> handleMailFailure(EmailDeliveryException exception) {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Map.of(
             "error", "O serviço de e-mail está temporariamente indisponível. Tente novamente mais tarde."
         ));

@@ -11,7 +11,7 @@ export default function Contact() {
     if (sending) return;
     const form = event.currentTarget;
     const data = new FormData(form);
-    const values = Object.fromEntries(['name', 'email', 'message'].map((key) => [key, String(data.get(key) || '').trim()]));
+    const values = Object.fromEntries(['name', 'email', 'message', 'website'].map((key) => [key, String(data.get(key) || '').trim()]));
     if (!values.name || !values.email || !values.message) {
       setStatus('Preencha todos os campos, sem usar apenas espaços.');
       return;

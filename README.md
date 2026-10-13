@@ -4,7 +4,7 @@ Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e
 
 ## Status do projeto
 
-Front-end em React + Vite e API de contato em Java 21 + Spring Boot. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. O envio depende de configurar credenciais SMTP no ambiente do back-end. As imagens do projeto, protótipos do Figma e hospedagem ainda estão pendentes.
+Front-end em React + Vite e API de contato em Java 17 + Spring Boot. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. O envio depende de configurar a chave do Resend no ambiente do back-end. As imagens do projeto, protótipos do Figma e hospedagem ainda estão pendentes.
 
 ## Links úteis
 
@@ -20,7 +20,7 @@ Front-end em React + Vite e API de contato em Java 21 + Spring Boot. O conteúdo
 - [x] Links de e-mail, WhatsApp, Discord e GitHub.
 - [x] API própria Spring Boot com validação e envio ao destinatário configurado no servidor.
 - [x] Configuração CORS e mensagens de erro sem expor detalhes internos.
-- [ ] Configurar credenciais SMTP de app e testar recebimento real.
+- [ ] Configurar a chave do Resend e testar recebimento real.
 - [ ] Adicionar imagens/GIFs do FluxSUS em execução.
 - [ ] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
 - [ ] Implementar temas claro e escuro.
@@ -29,13 +29,13 @@ Front-end em React + Vite e API de contato em Java 21 + Spring Boot. O conteúdo
 ## Tecnologias utilizadas
 
 - Front-end: JavaScript, HTML, CSS, React, React DOM, Vite.
-- Back-end: Java 17, Spring Boot 3.4.5, Spring Web, Spring Mail, Bean Validation e Maven.
+- Back-end: Java 17, Spring Boot 3.4.5, Spring Web, Bean Validation, Maven e API HTTPS do Resend.
 - Testes do back-end: JUnit, Spring Boot Test e MockMvc.
 - Hospedagem prevista: Vercel para o front-end e um serviço com Docker para o back-end.
 
 ## Arquitetura
 
-O React envia nome, e-mail e mensagem via JSON para POST /api/contact. A API valida os campos, fixa o endereço de destino por configuração de servidor e envia uma mensagem de texto via Gmail SMTP. O visitante não escolhe o destinatário, evitando que a API funcione como relay aberto. Não há banco de dados. Veja [docs/architecture.md](docs/architecture.md) e [backend/README.md](backend/README.md).
+O React envia nome, e-mail e mensagem via JSON para POST /api/contact. A API valida os campos, fixa o endereço de destino por configuração de servidor e envia uma mensagem de texto pela API HTTPS do Resend. O visitante não escolhe o destinatário, evitando que a API funcione como relay aberto. Não há banco de dados. Veja [docs/architecture.md](docs/architecture.md) e [backend/README.md](backend/README.md).
 
 ## Estrutura de pastas
 
@@ -69,7 +69,7 @@ Abra o endereço mostrado no terminal, geralmente http://localhost:5173. O front
 
 ### Back-end
 
-Consulte [backend/README.md](backend/README.md). O back-end precisa das variáveis MAIL_USERNAME, MAIL_PASSWORD e CONTACT_TO. Nunca coloque senhas no código ou no Git.
+Consulte [backend/README.md](backend/README.md). O back-end precisa das variáveis RESEND_API_KEY, RESEND_FROM e CONTACT_TO. Nunca coloque a chave no código ou no Git.
 
 ### Build
 
@@ -85,15 +85,15 @@ Para executar testes e empacotar a API, entre em backend e rode:
 | Variável | Onde | Uso |
 | --- | --- | --- |
 | VITE_API_URL | Front-end | URL base da API Spring Boot. |
-| MAIL_USERNAME | Back-end | Conta Gmail usada para enviar. |
-| MAIL_PASSWORD | Back-end | Senha de app do Gmail, guardada no host. |
+| RESEND_API_KEY | Back-end | Chave secreta de envio do Resend, guardada no host. |
+| RESEND_FROM | Back-end | Remetente autorizado; `onboarding@resend.dev` para teste ou endereço do domínio verificado. |
 | CONTACT_TO | Back-end | Destinatário fixo, padrão sabmatheus24@gmail.com. |
 | CORS_ALLOWED_ORIGINS | Back-end | Origem do front-end autorizada a chamar a API. |
 | PORT | Back-end | Porta fornecida automaticamente pela hospedagem. |
 
 ## Deploy
 
-O front-end pode ser hospedado na Vercel e o back-end em um host de containers, como Render. Depois de criar os dois serviços, configure VITE_API_URL na Vercel, MAIL_USERNAME, MAIL_PASSWORD, CONTACT_TO e CORS_ALLOWED_ORIGINS no serviço do back-end. Defina CORS_ALLOWED_ORIGINS com a origem exata do site publicado. O deploy só deve ser considerado funcional após testar um envio real e confirmar a chegada na caixa de entrada.
+O front-end pode ser hospedado na Vercel e o back-end em um host de containers, como Render. Depois de criar os dois serviços, configure VITE_API_URL na Vercel e RESEND_API_KEY, RESEND_FROM, CONTACT_TO e CORS_ALLOWED_ORIGINS no serviço do back-end. Defina CORS_ALLOWED_ORIGINS com a origem exata do site publicado. O deploy só deve ser considerado funcional após testar um envio real e confirmar a chegada na caixa de entrada.
 
 ## Demonstração e verificações
 
