@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import Section from '../components/ui/Section.jsx';
 import { profile } from '../data/profile.js';
-import { isEmailConfigured, sendContactMessage } from '../services/email.js';
+import { sendContactMessage } from '../services/email.js';
 
 export default function Contact() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
   async function handleSubmit(event) {
     event.preventDefault();
-    if (sending || !isEmailConfigured) return;
+    if (sending) return;
     const form = event.currentTarget;
     const data = new FormData(form);
     const values = Object.fromEntries(['name', 'email', 'message'].map((key) => [key, String(data.get(key) || '').trim()]));
@@ -37,15 +37,15 @@ export default function Contact() {
         <li><a href={profile.github}>GitHub</a></li>
       </ul>
       <h3>Envie uma mensagem</h3>
-      {!isEmailConfigured && <p id="email-setup">O envio pelo formulário está temporariamente indisponível. Você pode usar os contatos acima.</p>}
-      <form onSubmit={handleSubmit} aria-describedby={!isEmailConfigured ? 'email-setup' : undefined}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="contact-name">Nome</label>
         <input id="contact-name" name="name" autoComplete="name" required maxLength={100} disabled={sending} />
         <label htmlFor="contact-email">E-mail</label>
         <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} />
         <label htmlFor="contact-message">Mensagem</label>
         <textarea id="contact-message" name="message" rows={6} required maxLength={5000} disabled={sending} />
-        <button type="submit" disabled={sending || !isEmailConfigured}>{sending ? 'Enviando…' : 'Enviar mensagem'}</button>
+        <input className="contact-honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        <button type="submit" disabled={sending}>{sending ? 'Enviando…' : 'Enviar mensagem'}</button>
         <p role="status" aria-live="polite">{status}</p>
       </form>
     </Section>

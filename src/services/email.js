@@ -1,24 +1,14 @@
-const config = {
-  service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-};
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
-export const isEmailConfigured = Object.values(config).every((value) => Boolean(value?.trim()));
-
-export async function sendContactMessage({ name, email, message }) {
-  if (!isEmailConfigured) throw new Error('Serviço de e-mail não configurado.');
+export async function sendContactMessage({ name, email, message, website = '' }) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
   try {
-    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    const response = await fetch(`${apiUrl.replace(/\/$/, '')}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
-      body: JSON.stringify({
-        ...config,
-        template_params: { from_name: name, reply_to: email, message },
-      }),
+      body: JSON.stringify({ name, email, message, website }),
     });
     if (!response.ok) throw new Error('Não foi possível enviar. Tente novamente ou use o e-mail direto.');
   } finally {

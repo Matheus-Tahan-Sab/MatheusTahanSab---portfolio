@@ -1,16 +1,15 @@
 # Organização do projeto
 
-A base usa React e Vite, com navegação por âncoras em uma única página. A pasta pages separa cada seção; não há necessidade de roteador nesta etapa.
+A aplicação usa React e Vite no front-end e uma API Spring Boot separada para o formulário de contato. O React navega por âncoras em uma página única e envia nome, e-mail e mensagem para POST /api/contact. O back-end valida os campos e envia o texto para um destinatário fixo usando Gmail SMTP. Não há banco de dados.
 
 - main.jsx inicia o React e carrega o CSS global.
 - App.jsx reúne cabeçalho, seções e rodapé.
 - components/layout guarda elementos estruturais; components/ui guarda elementos reutilizáveis.
 - pages contém as quatro seções do enunciado.
 - data contém os dados pessoais, projetos e experiências, separados da apresentação.
-- services receberá integrações externas, começando pelo envio de e-mail.
-- assets contém recursos importados pelo JavaScript; public contém arquivos servidos diretamente.
-- docs/prototypes guarda as evidências do Figma.
+- services mantém a chamada HTTP do formulário à API Spring Boot.
+- backend/ contém a API Spring Boot, validação, CORS e integração de e-mail.
+- assets contém recursos importados nos componentes; public contém arquivos servidos diretamente.
+- docs/prototypes guarda o link do Figma e exportações dos protótipos.
 
-Ainda não há back-end próprio, banco de dados ou envio de e-mail. A solução do formulário será definida e documentada na etapa de implementação; o enunciado cita EmailJS como possibilidade. Caso seja necessário um back-end próprio, sua pasta e configuração serão adicionadas quando a arquitetura for definida.
-
-A prioridade atual é a estrutura funcional. Temas claro/escuro, identidade visual e efeitos serão implementados depois.
+As credenciais do Gmail e a origem autorizada do front-end são variáveis do servidor. Nunca são armazenadas no Git. O back-end não expõe um destinatário arbitrário: todas as mensagens são enviadas para CONTACT_TO.

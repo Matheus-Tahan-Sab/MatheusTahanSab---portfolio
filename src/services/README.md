@@ -1,3 +1,3 @@
-# Serviços externos
+# Serviço HTTP do formulário
 
-email.js concentra a integração com EmailJS. Consulte [a configuração](../../docs/email-setup.md). Nenhuma chave privada deve ser colocada no front-end. O envio real ainda precisa ser configurado e verificado na conta do autor.
+email.js envia nome, e-mail e mensagem à API Spring Boot em POST /api/contact. A URL base pode ser definida com VITE_API_URL; localmente o padrão é http://localhost:8080. A API e suas variáveis privadas estão em backend/.

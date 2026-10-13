@@ -33,6 +33,7 @@ footer { padding-block: 1rem; }
 .experience-list { padding-left: 1.2rem; }
 .muted { color: #505866; font-size: 0.9rem; }
 form { display: grid; gap: 0.6rem; max-width: 38rem; }
+.contact-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 input, textarea, button { font: inherit; }
 input, textarea { width: 100%; min-width: 0; border: 1px solid #858c99; border-radius: 4px; padding: 0.6rem; background: #fff; color: #202124; }
 textarea { resize: vertical; }
