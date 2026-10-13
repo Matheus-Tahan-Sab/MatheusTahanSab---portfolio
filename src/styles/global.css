@@ -335,37 +335,36 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
   .theme-toggle { position: absolute; right: 0; top: 0.8rem; min-height: 36px; font-size: 0.75rem; }
 }
 
-/* Companheiros em espaços próprios: não cobrem o conteúdo nem o formulário. */
-.pokemon-companion { display: flex; align-items: center; gap: 0.8rem; min-height: 108px; }
-.pokemon-caption { font-weight: 700; font-size: 0.9rem; }
-.pokemon-caption small { color: var(--muted); font-size: 0.7rem; font-weight: 500; }
-.pokemon-sprite { display: block; width: 96px; height: 96px; }
-.pokemon-sprite img { width: 96px; height: 96px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 5px 0 #20302320); }
-.pokemon-interaction { border: 2px dashed #7b8967; border-radius: 50%; background: #c6d3ab30; padding: 0; cursor: pointer; }
-.pokemon-interaction:hover { background: #c6d3ab70; }
-.pokemon-interaction .pokemon-sprite { animation: pokemon-breathe 3s ease-in-out infinite; }
-.pokemon-interaction .pokemon-sprite[data-jump="true"] { animation: pokemon-jump 600ms ease-out, pokemon-breathe 3s 600ms ease-in-out infinite; }
-.pokemon-swampert { margin-bottom: 1.5rem; padding: 0.5rem 1rem; background: #519ebc15; border-left: 3px solid #519ebc; }
-.pokemon-swampert .pokemon-sprite { animation: pokemon-breathe 3.8s ease-in-out infinite; }
-.pokemon-footer-stage { padding-top: 1rem; }
-.pokemon-trail { position: relative; overflow: hidden; height: 142px; border-bottom: 2px dashed #7b896766; }
-.pokemon-gengar { position: absolute; width: 140px; flex-direction: column; gap: 0; left: 0; animation: gengar-roam 18s linear infinite alternate; }
-.pokemon-gengar .pokemon-sprite { animation: gengar-float 2s ease-in-out infinite; }
-[data-theme="dark"] .pokemon-gengar img { filter: drop-shadow(0 0 10px #b16bff99); }
-.motion-toggle { margin: 0.8rem 0; padding: 0.5rem 0.75rem; border: 1px solid var(--muted); border-radius: 4px; background: var(--paper); color: var(--ink); cursor: pointer; font-size: 0.8rem; min-height: 40px; }
+/* Sprites de caminhada: camada decorativa fixa e sem captura de cliques. */
+.pokemon-roaming { position: fixed; inset: 0; z-index: 15; overflow: hidden; pointer-events: none; }
+.pokemon-walker { position: absolute; left: 8px; bottom: 12px; width: 64px; height: 96px; --journey: 30s; --start: -8s; animation: pokemon-roam var(--journey) var(--start) linear infinite; }
+.pokemon-walk-sprite { display: block; width: 64px; height: 96px; image-rendering: pixelated; background-repeat: no-repeat; background-size: 256px 768px; background-position: 0 -192px; filter: drop-shadow(0 3px 2px #19232b40); animation: pokemon-steps 600ms steps(4) infinite, pokemon-direction var(--journey) var(--start) step-end infinite; }
+.walker-swampert .pokemon-walk-sprite { background-image: url('/images/pokemon/swampert-Walk-Anim.png'); }
+.walker-lucario { bottom: 108px; --journey: 24s; --start: -17s; animation-name: lucario-roam; }
+.walker-lucario .pokemon-walk-sprite { background-image: url('/images/pokemon/lucario-Walk-Anim.png'); animation-duration: 400ms, var(--journey); }
+.walker-gengar { bottom: 204px; height: 80px; --journey: 36s; --start: -5s; animation-name: gengar-roam; }
+.walker-gengar .pokemon-walk-sprite { height: 80px; background-size: 256px 640px; background-image: url('/images/pokemon/gengar-Walk-Anim.png'); animation-name: pokemon-steps, gengar-direction; }
+[data-theme="dark"] .walker-gengar .pokemon-walk-sprite { filter: drop-shadow(0 0 7px #b16bff99); }
+.motion-toggle { position: fixed; bottom: 12px; right: 12px; z-index: 16; padding: 0.5rem 0.75rem; border: 1px solid var(--muted); border-radius: 4px; background: var(--paper); color: var(--ink); cursor: pointer; font-size: 0.75rem; min-height: 40px; box-shadow: 0 2px 6px #0002; }
+@keyframes pokemon-steps { to { background-position-x: -256px; } }
+@keyframes pokemon-direction { 0%, 100% { background-position-y: -192px; } 50% { background-position-y: -576px; } }
+@keyframes gengar-direction { 0%, 100% { background-position-y: -160px; } 50% { background-position-y: -480px; } }
+@keyframes pokemon-roam { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(calc(100vw - 80px)); } }
+@keyframes lucario-roam { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(calc(100vw - 80px), -8vh); } }
+@keyframes gengar-roam { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(calc(100vw - 80px), -22vh); } }
 .theme-transition { position: fixed; inset: 0; z-index: 100; pointer-events: none; display: grid; place-items: center; animation: ball-arrival 750ms ease-in-out both; }
 .theme-ball { position: relative; display: block; width: 96px; height: 96px; border: 6px solid #18212a; border-radius: 50%; background: linear-gradient(#e84748 0 46%, #18212a 46% 54%, #fff8e7 54%); box-shadow: 0 0 0 12px #ffffff44, 0 0 40px #fff5bd88; }
 .theme-ball i { position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; background: #fff8e7; border: 6px solid #18212a; border-radius: 50%; transform: translate(-50%, -50%); }
 .ultra-ball { background: linear-gradient(90deg, transparent 18%, #f2cc48 18% 32%, transparent 32% 68%, #f2cc48 68% 82%, transparent 82%) top / 100% 46% no-repeat, linear-gradient(#272d34 0 46%, #18212a 46% 54%, #fff8e7 54%); }
-@keyframes pokemon-breathe { 50% { transform: translateY(-4px); } }
-@keyframes pokemon-jump { 40% { transform: translateY(-22px) rotate(-5deg); } 70% { transform: translateY(0) rotate(3deg); } }
-@keyframes gengar-float { 50% { transform: translateY(-7px) rotate(3deg); } }
-@keyframes gengar-roam { to { left: calc(100% - 140px); } }
 @keyframes ball-arrival { 0% { opacity: 0; transform: scale(0.25) rotate(-120deg); } 40% { opacity: 1; transform: scale(1.4) rotate(0); } 65% { opacity: 1; transform: scale(1.4) rotate(20deg); } 100% { opacity: 0; transform: scale(0.3) rotate(160deg); } }
-[data-motion="paused"] .pokemon-companion *, [data-motion="paused"] .pokemon-gengar { animation-play-state: paused !important; }
+[data-motion="paused"] .pokemon-roaming * { animation-play-state: paused !important; }
 [data-motion="paused"] .theme-transition { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .pokemon-companion, .pokemon-companion *, .theme-transition { animation: none !important; }
-  .theme-transition { display: none; }
+  .pokemon-world, .theme-transition { display: none; }
+  .pokemon-roaming * { animation: none !important; }
 }
-@media (max-width: 480px) { .pokemon-lucario { flex-wrap: wrap; gap: 0.5rem; } .pokemon-caption { font-size: 0.8rem; } }
+@media (max-width: 480px) {
+  .pokemon-walker { --journey: 20s; }
+  .walker-lucario { --journey: 17s; }
+  .walker-gengar { --journey: 25s; }
+}

@@ -1,4 +1,3 @@
-import PokemonCompanion from '../components/ui/PokemonCompanion.jsx';
 import Section from '../components/ui/Section.jsx';
 import { projects } from '../data/projects.js';
 
@@ -32,7 +31,6 @@ export default function Projects() {
   const orderedProjects = [...projects].sort((a, b) => a.date.localeCompare(b.date));
   return (
     <Section id="projetos" title="Projetos" number="02" caption="Projetos registrados">
-      <PokemonCompanion name="Swampert" number="260" variant="swampert" />
       <ol className="timeline">
         {orderedProjects.map((project, index) => (
           <li key={project.id}>

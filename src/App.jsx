@@ -1,3 +1,4 @@
+import PokemonCompanion from './components/ui/PokemonCompanion.jsx';
 import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
 import Hero from './components/layout/Hero.jsx';
@@ -19,6 +20,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <PokemonCompanion />
     </>
   );
 }

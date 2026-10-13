@@ -1,5 +1,3 @@
-import PokemonCompanion from '../ui/PokemonCompanion.jsx';
-
 function PixelTrainer() {
   return (
     <svg className="pixel-trainer" viewBox="0 0 32 32" aria-hidden="true" shapeRendering="crispEdges">
@@ -28,7 +26,6 @@ export default function Hero() {
           <a className="button" href="#projetos">Explorar projetos <span aria-hidden="true">↗</span></a>
           <a className="button button-secondary" href="#contato">Vamos conversar</a>
         </div>
-        <PokemonCompanion name="Lucario" number="448" variant="lucario" interactive />
         <p className="hero-availability"><span aria-hidden="true">◆</span> Em busca de uma oportunidade de estágio</p>
       </div>
       <div className="trainer-device">

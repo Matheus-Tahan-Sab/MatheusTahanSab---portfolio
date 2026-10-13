@@ -53,6 +53,6 @@ O formulário mantém a integração real. A API atualmente autoriza a origem do
 
 ## Companheiros Pokémon
 
-Lucario fica na apresentação e pula ao clique ou Enter; Swampert acompanha os projetos com movimento suave; Gengar flutua e percorre um espaço próprio no rodapé, com brilho no tema escuro. Os três aparecem nos dois temas. A troca de tema exibe uma Pokébola ou Ultra Ball por 750 ms, sem bloquear cliques.
+Swampert, Lucario e Gengar percorrem a tela de um lado para o outro em uma camada fixa, visível durante a rolagem. Sprites de caminhada com quatro quadros e direções direita/esquerda substituem as poses estáticas junto às seções. Cada Pokémon tem um ritmo e trajeto próprios; a camada não captura cliques. O botão flutuante pausa movimento, passos e mudanças de direção e salva a preferência. `prefers-reduced-motion` oculta a camada.
 
-Sprites PNG locais da coleção PokéAPI, com origem e créditos em `public/images/pokemon/README.md`. As animações usam CSS e não acrescentam dependências ou consultas à API. O botão do rodapé pausa os movimentos e salva a preferência; `prefers-reduced-motion` desativa as animações automaticamente.
+Sprites locais de caminhada de PMDCollab/SpriteCollab, com metadados e créditos em `public/images/pokemon/`. A transição de tema Pokébola/Ultra Ball permanece igual. Sem novas dependências ou consultas a APIs.
