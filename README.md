@@ -2,6 +2,12 @@
 
 Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e Integração de Aplicações Web. O projeto apresenta formação, projetos, experiências e formas de contato.
 
+## Prévia visual — Pokédex retrô
+
+Esta branch `feat/pokedex-retro` contém uma proposta de interface inspirada em aparelhos e jogos retrô: paleta vermelha e creme, painéis verdes, tipografia pixelada, avatar vetorial original e navegação numerada. O conteúdo acadêmico e as capturas do FluxSUS foram mantidos.
+
+O endereço de produção continua usando a branch `main`. Esta proposta deve ser avaliada pela prévia da Vercel ou por execução local antes de integrar à versão principal. Veja [decisões e verificações](docs/pokedex-retro.md).
+
 ## Status do projeto
 
 Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Os temas claro e escuro ainda estão pendentes.

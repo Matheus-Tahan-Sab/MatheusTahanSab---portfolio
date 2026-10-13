@@ -3,13 +3,17 @@ import { experiences } from '../data/experiences.js';
 
 export default function Experiences() {
   return (
-    <Section id="experiencias" title="Experiências acadêmicas">
+    <Section id="experiencias" title="Experiências" number="03" caption="Minha jornada até aqui">
       <ul className="experience-list">
         {experiences.map((experience) => (
           <li key={experience.id}>
-            <h3>{experience.role}</h3>
-            <p><strong>{experience.institution}</strong> · {experience.period}</p>
-            <p>{experience.description}</p>
+            <div className="experience-stamp" aria-hidden="true">ES</div>
+            <div className="experience-details">
+              <p className="content-label">{experience.institution}</p>
+              <h3>{experience.role}</h3>
+              <p className="experience-period">{experience.period}</p>
+              <p>{experience.description}</p>
+            </div>
           </li>
         ))}
       </ul>

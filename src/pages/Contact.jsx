@@ -39,25 +39,34 @@ export default function Contact() {
     }
   }
   return (
-    <Section id="contato" title="Contato">
-      <ul className="contact-links">
-        <li><a href={`mailto:${profile.email}`}><ContactIcon type="email" /> {profile.email}</a></li>
-        <li><a href={profile.whatsapp}><ContactIcon type="whatsapp" /> WhatsApp</a></li>
-        <li><a href={profile.discord}><ContactIcon type="discord" /> Discord</a></li>
-        <li><a href={profile.github}><ContactIcon type="github" /> GitHub</a></li>
-      </ul>
-      <h3>Envie uma mensagem</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="contact-name">Nome</label>
-        <input id="contact-name" name="name" autoComplete="name" required maxLength={100} disabled={sending} />
-        <label htmlFor="contact-email">E-mail</label>
-        <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} />
-        <label htmlFor="contact-message">Mensagem</label>
-        <textarea id="contact-message" name="message" rows={6} required maxLength={5000} disabled={sending} />
-        <input className="contact-honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-        <button type="submit" disabled={sending}>{sending ? 'Enviando…' : 'Enviar mensagem'}</button>
-        <p role="status" aria-live="polite">{status}</p>
-      </form>
+    <Section id="contato" title="Contato" number="04" caption="Abra um novo diálogo">
+      <div className="contact-layout">
+        <div className="contact-copy">
+          <h3>Vamos conversar?</h3>
+          <p>Tem uma oportunidade, uma ideia ou quer trocar experiências sobre desenvolvimento? Entre em contato.</p>
+          <ul className="contact-links">
+            <li><a href={'mailto:' + profile.email}><ContactIcon type="email" /><span><small>E-mail</small>{profile.email}</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href={profile.whatsapp}><ContactIcon type="whatsapp" /><span>WhatsApp</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href={profile.discord}><ContactIcon type="discord" /><span>Discord</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href={profile.github}><ContactIcon type="github" /><span>GitHub</span><span aria-hidden="true">↗</span></a></li>
+          </ul>
+          <p className="contact-note"><span aria-hidden="true">✦</span> Aberto a aprender, colaborar e construir.</p>
+        </div>
+        <div className="contact-form-panel">
+          <div className="panel-title"><h3>Envie uma mensagem</h3><span aria-hidden="true">✉</span></div>
+          <form onSubmit={handleSubmit} aria-busy={sending}>
+            <label htmlFor="contact-name">Nome</label>
+            <input id="contact-name" name="name" autoComplete="name" placeholder="Como posso chamar você?" required maxLength={100} disabled={sending} />
+            <label htmlFor="contact-email">E-mail</label>
+            <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="voce@exemplo.com" required maxLength={254} disabled={sending} />
+            <label htmlFor="contact-message">Mensagem</label>
+            <textarea id="contact-message" name="message" rows={5} placeholder="Conte um pouco sobre sua ideia…" required maxLength={5000} disabled={sending} />
+            <input className="contact-honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            <button className="button" type="submit" disabled={sending}>{sending ? 'Enviando…' : 'Enviar mensagem'}<span aria-hidden="true">↗</span></button>
+            <p className="form-status" role="status" aria-live="polite">{status}</p>
+          </form>
+        </div>
+      </div>
     </Section>
   );
 }
