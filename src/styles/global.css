@@ -335,36 +335,35 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
   .theme-toggle { position: absolute; right: 0; top: 0.8rem; min-height: 36px; font-size: 0.75rem; }
 }
 
-/* Sprites de caminhada: camada decorativa fixa e sem captura de cliques. */
+/* Companheiros opcionais: caminhada discreta junto à borda inferior. */
 .pokemon-roaming { position: fixed; inset: 0; z-index: 15; overflow: hidden; pointer-events: none; }
-.pokemon-walker { position: absolute; left: 8px; bottom: 12px; width: 64px; height: 96px; --journey: 30s; --start: -8s; animation: pokemon-roam var(--journey) var(--start) linear infinite; }
-.pokemon-walk-sprite { display: block; width: 64px; height: 96px; image-rendering: pixelated; background-repeat: no-repeat; background-size: 256px 768px; background-position: 0 -192px; filter: drop-shadow(0 3px 2px #19232b40); animation: pokemon-steps 600ms steps(4) infinite, pokemon-direction var(--journey) var(--start) step-end infinite; }
+.pokemon-walker { position: absolute; left: 6px; bottom: 0; width: 48px; height: 72px; --journey: 64s; --start: -12s; animation: pokemon-roam var(--journey) var(--start) linear infinite; }
+.pokemon-walk-sprite { display: block; width: 48px; height: 72px; image-rendering: pixelated; background-repeat: no-repeat; background-size: 192px 576px; background-position: 0 -144px; filter: drop-shadow(0 2px 1px #19232b30); animation: pokemon-steps 800ms steps(4) infinite, pokemon-direction var(--journey) var(--start) step-end infinite; }
 .walker-swampert .pokemon-walk-sprite { background-image: url('/images/pokemon/swampert-Walk-Anim.png'); }
-.walker-lucario { bottom: 108px; --journey: 24s; --start: -17s; animation-name: lucario-roam; }
-.walker-lucario .pokemon-walk-sprite { background-image: url('/images/pokemon/lucario-Walk-Anim.png'); animation-duration: 400ms, var(--journey); }
-.walker-gengar { bottom: 204px; height: 80px; --journey: 36s; --start: -5s; animation-name: gengar-roam; }
-.walker-gengar .pokemon-walk-sprite { height: 80px; background-size: 256px 640px; background-image: url('/images/pokemon/gengar-Walk-Anim.png'); animation-name: pokemon-steps, gengar-direction; }
-[data-theme="dark"] .walker-gengar .pokemon-walk-sprite { filter: drop-shadow(0 0 7px #b16bff99); }
+.walker-lucario { --journey: 58s; --start: -40s; }
+.walker-lucario .pokemon-walk-sprite { background-image: url('/images/pokemon/lucario-Walk-Anim.png'); animation-duration: 650ms, var(--journey); }
+.walker-gengar { height: 60px; --journey: 72s; --start: -4s; }
+.walker-gengar .pokemon-walk-sprite { height: 60px; background-size: 192px 480px; background-image: url('/images/pokemon/gengar-Walk-Anim.png'); animation-name: pokemon-steps, gengar-direction; }
+[data-theme="dark"] .walker-gengar .pokemon-walk-sprite { filter: drop-shadow(0 0 3px #b16bff66); }
 .motion-toggle { position: fixed; bottom: 12px; right: 12px; z-index: 16; padding: 0.5rem 0.75rem; border: 1px solid var(--muted); border-radius: 4px; background: var(--paper); color: var(--ink); cursor: pointer; font-size: 0.75rem; min-height: 40px; box-shadow: 0 2px 6px #0002; }
-@keyframes pokemon-steps { to { background-position-x: -256px; } }
-@keyframes pokemon-direction { 0%, 100% { background-position-y: -192px; } 50% { background-position-y: -576px; } }
-@keyframes gengar-direction { 0%, 100% { background-position-y: -160px; } 50% { background-position-y: -480px; } }
-@keyframes pokemon-roam { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(calc(100vw - 80px)); } }
-@keyframes lucario-roam { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(calc(100vw - 80px), -8vh); } }
-@keyframes gengar-roam { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(calc(100vw - 80px), -22vh); } }
+.site-footer { padding-bottom: 80px; }
+@keyframes pokemon-steps { to { background-position-x: -192px; } }
+@keyframes pokemon-direction { 0%, 100% { background-position-y: -144px; } 50% { background-position-y: -432px; } }
+@keyframes gengar-direction { 0%, 100% { background-position-y: -120px; } 50% { background-position-y: -360px; } }
+@keyframes pokemon-roam { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(calc(100vw - 60px)); } }
+.pokemon-world[data-form-focused="true"] .pokemon-roaming * { animation-play-state: paused !important; }
+.pokemon-world[data-form-focused="true"] .pokemon-roaming { visibility: hidden; }
 .theme-transition { position: fixed; inset: 0; z-index: 100; pointer-events: none; display: grid; place-items: center; animation: ball-arrival 750ms ease-in-out both; }
 .theme-ball { position: relative; display: block; width: 96px; height: 96px; border: 6px solid #18212a; border-radius: 50%; background: linear-gradient(#e84748 0 46%, #18212a 46% 54%, #fff8e7 54%); box-shadow: 0 0 0 12px #ffffff44, 0 0 40px #fff5bd88; }
 .theme-ball i { position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; background: #fff8e7; border: 6px solid #18212a; border-radius: 50%; transform: translate(-50%, -50%); }
 .ultra-ball { background: linear-gradient(90deg, transparent 18%, #f2cc48 18% 32%, transparent 32% 68%, #f2cc48 68% 82%, transparent 82%) top / 100% 46% no-repeat, linear-gradient(#272d34 0 46%, #18212a 46% 54%, #fff8e7 54%); }
 @keyframes ball-arrival { 0% { opacity: 0; transform: scale(0.25) rotate(-120deg); } 40% { opacity: 1; transform: scale(1.4) rotate(0); } 65% { opacity: 1; transform: scale(1.4) rotate(20deg); } 100% { opacity: 0; transform: scale(0.3) rotate(160deg); } }
-[data-motion="paused"] .pokemon-roaming * { animation-play-state: paused !important; }
-[data-motion="paused"] .theme-transition { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .pokemon-world, .theme-transition { display: none; }
   .pokemon-roaming * { animation: none !important; }
 }
 @media (max-width: 480px) {
-  .pokemon-walker { --journey: 20s; }
-  .walker-lucario { --journey: 17s; }
-  .walker-gengar { --journey: 25s; }
+  .pokemon-walker { --journey: 38s; }
+  .walker-lucario { --journey: 34s; }
+  .walker-gengar { --journey: 44s; }
 }

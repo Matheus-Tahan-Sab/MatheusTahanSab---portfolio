@@ -16,7 +16,7 @@ export default function Header() {
     document.documentElement.dataset.theme = nextTheme;
     document.querySelector('meta[name="theme-color"]').content = nextTheme === 'dark' ? '#181c21' : '#ce3f40';
     setTheme(nextTheme);
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.documentElement.dataset.motion !== 'paused') {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setTransition(nextTheme);
       setTransitionCount(value => value + 1);
     }

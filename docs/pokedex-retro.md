@@ -53,6 +53,8 @@ O formulário mantém a integração real. A API atualmente autoriza a origem do
 
 ## Companheiros Pokémon
 
-Swampert, Lucario e Gengar percorrem a tela de um lado para o outro em uma camada fixa, visível durante a rolagem. Sprites de caminhada com quatro quadros e direções direita/esquerda substituem as poses estáticas junto às seções. Cada Pokémon tem um ritmo e trajeto próprios; a camada não captura cliques. O botão flutuante pausa movimento, passos e mudanças de direção e salva a preferência. `prefers-reduced-motion` oculta a camada.
+Swampert, Lucario e Gengar são opcionais, desligados na primeira visita. O botão “Pokémon: ligar/desligar” salva a escolha localmente em `mts-portfolio-companions-v1`; a preferência antiga de pausa não os ativa automaticamente.
 
-Sprites locais de caminhada de PMDCollab/SpriteCollab, com metadados e créditos em `public/images/pokemon/`. A transição de tema Pokébola/Ultra Ball permanece igual. Sem novas dependências ou consultas a APIs.
+Quando ligados, os três caminham exclusivamente pela borda inferior, em sprites menores (escala 1,5×) e trajetos mais lentos, sem capturar cliques. Focar qualquer campo ou botão do formulário pausa todos os quadros e trajetos e oculta os personagens temporariamente; sair do formulário retoma o passeio. `prefers-reduced-motion` oculta a camada e seu controle.
+
+Sprites locais de PMDCollab/SpriteCollab, com metadados e créditos em `public/images/pokemon/`. A transição de tema Pokébola/Ultra Ball funciona independentemente dos companheiros. Sem novas dependências ou consultas a APIs.

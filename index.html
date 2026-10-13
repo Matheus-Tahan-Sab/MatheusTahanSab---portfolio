@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#ce3f40" />
     <script>
       try {
-        document.documentElement.dataset.motion = localStorage.getItem('mts-portfolio-motion') === 'paused' ? 'paused' : 'running';
         document.documentElement.dataset.theme = localStorage.getItem('mts-portfolio-theme') === 'dark' ? 'dark' : 'light';
       } catch {
         document.documentElement.dataset.theme = 'light';
