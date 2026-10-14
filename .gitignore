@@ -8,3 +8,7 @@ dist/
 **/target/
 .DS_Store
 
+
+# Artefatos locais e renderizações de revisão
+output/
+tmp/

@@ -30,15 +30,15 @@ function ProjectGallery({ id, title, description, images }) {
 export default function Projects() {
   const orderedProjects = [...projects].sort((a, b) => a.date.localeCompare(b.date));
   return (
-    <Section id="projetos" title="Projetos">
+    <Section id="projetos" title="Projetos" number="02" caption="Projetos registrados">
       <ol className="timeline">
-        {orderedProjects.map((project) => (
+        {orderedProjects.map((project, index) => (
           <li key={project.id}>
-            <article>
-              <p><time dateTime={project.date}>{monthLabel(project.date)}</time> a <time dateTime={project.endDate}>{monthLabel(project.endDate)}</time></p>
-              <h3>{project.name}</h3>
+            <article className="project-entry">
+              <div className="project-heading"><p className="project-date"><time dateTime={project.date}>{monthLabel(project.date)}</time> a <time dateTime={project.endDate}>{monthLabel(project.endDate)}</time></p>
+              <span className="project-index">{'#' + String(index + 1).padStart(3, '0')}</span></div><h3>{project.name}<span className="project-category">Projeto acadêmico em equipe</span></h3>
               <p>{project.description}</p>
-              <p><strong>Minha contribuição:</strong> {project.contribution}</p>
+              <p className="contribution"><strong>Minha contribuição</strong>{project.contribution}</p>
               <ul className="tags" aria-label="Tecnologias utilizadas">
                 {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
               </ul>
@@ -55,7 +55,7 @@ export default function Projects() {
                 images={project.images}
               />
               {project.image && <img src={project.image} alt={project.imageAlt} loading="lazy" />}
-              <a href={project.repositoryUrl}>Ver repositório do {project.name}</a>
+              <a className="button button-secondary repo-link" href={project.repositoryUrl}>Ver repositório do {project.name} <span aria-hidden="true">↗</span></a>
               {project.privateRepository && <p className="muted">Repositório privado: acesso restrito às pessoas autorizadas.</p>}
             </article>
           </li>

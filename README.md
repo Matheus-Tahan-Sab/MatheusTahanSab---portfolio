@@ -2,9 +2,15 @@
 
 Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e Integração de Aplicações Web. O projeto apresenta formação, projetos, experiências e formas de contato.
 
+## Prévia visual — Pokédex retrô
+
+Esta branch `feat/pokedex-retro` contém uma proposta de interface inspirada em aparelhos e jogos retrô: paleta vermelha e creme, painéis verdes, tipografia pixelada, avatar vetorial original e navegação numerada. O conteúdo acadêmico e as capturas do FluxSUS foram mantidos.
+
+O endereço de produção continua usando a branch `main`. Esta proposta deve ser avaliada pela prévia da Vercel ou por execução local antes de integrar à versão principal. Veja [decisões e verificações](docs/pokedex-retro.md).
+
 ## Status do projeto
 
-Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Os temas claro e escuro ainda estão pendentes.
+Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spring Boot publicada no Render. O formulário envia e-mails pelo Resend via HTTPS, com recebimento real confirmado em 12/10/2026. O conteúdo do FluxSUS, experiência acadêmica e links de contato já estão cadastrados. Os wireframes de média fidelidade estão disponíveis no Figma. O portfólio inclui wireframes e quatro capturas reais do FluxSUS em execução local com dados fictícios. Nesta branch, o modo claro mantém a Pokédex original e o modo escuro usa a paleta da Ultra Ball, com preferência salva no navegador.
 
 ## Links úteis
 
@@ -25,7 +31,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [x] Configurar a chave do Resend e testar recebimento real.
 - [x] Adicionar capturas do FluxSUS em execução com dados fictícios.
 - [x] Criar wireframes de média fidelidade no Figma e adicionar as capturas ao README.
-- [ ] Implementar temas claro e escuro.
+- [x] Implementar temas claro e escuro na prévia Pokédex.
 - [x] Hospedar front-end e back-end e registrar as URLs aqui.
 
 ## Como usar o site
@@ -197,3 +203,9 @@ As quatro seções do portfólio foram representadas para computador (1440 px) e
 ## Licença
 
 Ainda não definida pelo autor.
+
+## Componentes disponibilizados pelo professor (branch de prévia)
+
+SkillsGlobe integra habilidades com arrasto, teclado, filtros e lista. GitHubAPI apresenta dados públicos de Matheus. CurriculumPDF abre o currículo revisado, com formação e projetos acadêmicos. WakaTimeAPI exibe tempo de programação e linguagens quando configurado no servidor. O exemplo GeminiAPI foi retirado da interface; sua rota pública está desativada.
+
+Fontes, adaptações e pendências: [integrações do professor](docs/integracoes-professor.md). Licenças MIT preservadas em [créditos](docs/credits/LICENSE-Aramuni.txt). Testes das rotas: `npm run test:integrations`. Nenhum segredo usa prefixo `VITE_`; `VITE_API_URL` continua apontando ao back-end Java do formulário.
