@@ -7,7 +7,7 @@ const CurriculumViewer = lazy(() => import('../components/CurriculumViewer/Curri
 export default function DeveloperActivity() {
   const [showCurriculum, setShowCurriculum] = useState(false);
   return <Section id="atividade" title="Além dos projetos" number="+" caption="Código e trajetória">
-    <p className="muted">Repositórios públicos e linguagens do meu perfil no GitHub.</p>
+    <p className="muted">Distribuição geral das linguagens nos meus projetos públicos do GitHub.</p>
     <Suspense fallback={<p role="status">Carregando GitHub...</p>}><GitHubPanel /></Suspense>
     <OptionalIntegrations />
     <div className="curriculum-panel">
