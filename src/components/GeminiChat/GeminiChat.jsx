@@ -28,6 +28,7 @@ const newMessage = (role, text, extra = {}) => ({ id: nextId++, role, text, ...e
 
 export default function GeminiChat() {
   const [messages, setMessages] = useState([]);
+  const [adultConfirmed, setAdultConfirmed] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const listRef = useRef(null);
@@ -105,6 +106,15 @@ export default function GeminiChat() {
     setMessages([]);
     setInput("");
   };
+
+  if (!adultConfirmed) return (
+    <section className="gemini-chat gemini-age-gate" aria-label="Assistente de IA do portfólio">
+      <h3>Pergunte sobre Matheus</h3>
+      <p>Assistente de IA destinado a visitantes maiores de 18 anos. Perguntas e respostas são enviadas ao Google Gemini e podem ser usadas pelo Google para melhorar seus modelos no nível gratuito. Não envie dados sensíveis.</p>
+      <button type="button" className="button" onClick={() => setAdultConfirmed(true)}>Tenho 18 anos ou mais - abrir assistente</button>
+      <p><a href="#contato">Você também pode usar o formulário de contato.</a></p>
+    </section>
+  );
 
   return (
     <section className="gemini-chat" aria-label={`Chat com ${ASSISTANT_NAME}`}>

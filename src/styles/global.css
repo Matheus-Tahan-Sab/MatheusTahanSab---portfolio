@@ -402,3 +402,6 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
 @media (max-width: 480px) { .skills-globe { height: 290px; } .gh-repo-title a { overflow-wrap: anywhere; } }
 .skills-globe { isolation: isolate; }
 [data-theme="dark"] .github-panel .gh-button { color: #181c21; }
+
+.gemini-age-gate { padding: 1.25rem; background: var(--paper); border: 1px solid var(--muted); }
+[data-theme="dark"] .gemini-chat { --brand: #f2cc48; --text: var(--ink); --surface: var(--paper); --surface-muted: #292f35; --border: #59616b; }
