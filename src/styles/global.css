@@ -78,8 +78,8 @@ main { padding-block: 3.4rem 4rem; }
 .device-lights span:nth-child(3) { background: #94c98d; }
 .trainer-screen { border: 9px solid #f1ecdc; outline: 2px solid var(--ink); border-radius: 5px; background-color: var(--screen); background-image: repeating-linear-gradient(0deg, #b5c39812, #b5c39812 1px, transparent 1px, transparent 4px); padding: 16px; }
 .screen-top { display: flex; justify-content: space-between; gap: 0.5rem; font: 700 0.57rem 'Courier New', monospace; letter-spacing: 0.035em; padding-bottom: 10px; border-bottom: 1px solid #a9b79d; }
-.trainer-visual { height: 140px; display: flex; justify-content: center; align-items: center; }
-.pixel-trainer { width: 135px; height: 135px; image-rendering: pixelated; }
+.trainer-visual { height: 195px; display: flex; justify-content: center; align-items: center; }
+.trainer-portrait { width: 170px; height: 170px; object-fit: cover; object-position: 50% 30%; border: 2px solid var(--ink); border-radius: 12px; box-shadow: 3px 3px 0 #27362e25; }
 .trainer-name { text-align: center; font-family: var(--pixel); font-size: 0.67rem; line-height: 1.7; margin-bottom: 5px; }
 .trainer-class { text-align: center; color: #43553f; font-size: 0.75rem; margin-bottom: 15px; }
 .trainer-types { display: flex; justify-content: center; gap: 7px; margin-bottom: 16px; }
@@ -292,8 +292,6 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
 [data-theme="dark"] .trainer-info > div { border-top-color: #646958; }
 [data-theme="dark"] .trainer-types span { color: #161a1e; border-color: #b49a42; }
 [data-theme="dark"] .trainer-types span + span { background: #424638; color: #f2efdf; border-color: #747b60; }
-[data-theme="dark"] .pixel-trainer path[fill="#d84142"] { fill: #eac644; }
-[data-theme="dark"] .pixel-trainer path[fill="#bccba1"] { fill: #606449; }
 [data-theme="dark"] .d-pad { background: #f2cc48; }
 [data-theme="dark"] .device-speaker i { background: #626047; }
 [data-theme="dark"] .control-button { border-color: #a98d36; background: #f2cc48; box-shadow: 2px 3px 0 #080b0e; }
