@@ -8,7 +8,7 @@ const percent = (value) =>
   new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(value);
 
 /**
- * Todas as linguagens detectadas pelo GitHub nos repositórios públicos sem forks.
+ * Todas as linguagens detectadas pelo GitHub em todos os repositórios públicos, incluindo forks.
  * Percentuais calculados pela soma dos bytes de código, inclusive secundárias.
  *
  * <GitHubLanguages username="joaopauloaramuni" />
@@ -30,7 +30,7 @@ export default function GitHubLanguages({ username }) {
     <section className="gh-card">
       <div className="gh-card-head">
         <h3>Linguagens</h3>
-        <span className="gh-card-note">proporção de código em {data?.repositoriesWithCode ?? 0} repositórios públicos · sem forks</span>
+        <span className="gh-card-note">proporção de código em {data?.repositoriesWithCode ?? 0} repositórios públicos · incluindo forks</span>
       </div>
 
       {languages.length === 0 ? (

@@ -142,9 +142,9 @@ async function getRepos(username, token) {
 }
 
 // Soma os bytes reconhecidos pelo GitHub, incluindo linguagens secundárias.
-// Mantém o mesmo recorte de repositórios públicos sem forks do painel.
+// Inclui todos os repositórios públicos do perfil, também os forks.
 async function getLanguages(username, token) {
-  const repos = (await getPublicRepos(username, token)).filter((repo) => !repo.fork);
+  const repos = await getPublicRepos(username, token);
   const totals = new Map();
   let repositoriesWithCode = 0;
 

@@ -51,7 +51,7 @@ test('WakaTime output never exposes project names', async () => {
   } finally { globalThis.fetch = previous; }
 });
 
-test('GitHub language percentages include secondary languages and weight code bytes across public non-fork repositories', async () => {
+test('GitHub language percentages include forks and secondary languages while excluding private repositories', async () => {
   const previous = globalThis.fetch;
   const requested = [];
   globalThis.fetch = async (url) => {
@@ -65,18 +65,20 @@ test('GitHub language percentages include secondary languages and weight code by
     ];
     else if (url.endsWith('/large/languages')) body = { Java: 900, CSS: 100 };
     else if (url.endsWith('/small/languages')) body = { Python: 90, CSS: 10 };
+    else if (url.endsWith('/copied-fork/languages')) body = { 'C++': 1100 };
     else throw new Error('Unexpected repository requested');
     return { ok: true, status: 200, json: async () => body };
   };
   try {
     const res = response(); await handleGitHub(request('GET', '/api/github?resource=languages&username=Matheus-Tahan-Sab'), res);
     assert.equal(res.statusCode, 200);
-    assert.equal(res.json.totalBytes, 1100);
-    assert.equal(res.json.repositoriesWithCode, 2);
-    assert.deepEqual(res.json.languages.map(l => [l.name, l.bytes]), [['Java', 900], ['CSS', 110], ['Python', 90]]);
-    assert.equal(res.json.languages[1].share, 0.1);
+    assert.equal(res.json.totalBytes, 2200);
+    assert.equal(res.json.repositoriesWithCode, 3);
+    assert.deepEqual(res.json.languages.map(l => [l.name, l.bytes]), [['C++', 1100], ['Java', 900], ['CSS', 110], ['Python', 90]]);
+    assert.equal(res.json.languages[2].share, 0.05);
     assert.ok(Math.abs(res.json.languages.reduce((sum, l) => sum + l.share, 0) - 1) < 1e-12);
-    assert.equal(requested.some(url => /secret-project|copied-fork/.test(url)), false);
+    assert.equal(requested.some(url => /secret-project/.test(url)), false);
+    assert.equal(requested.some(url => /copied-fork/.test(url)), true);
     assert.match(res.headers['Cache-Control'], /s-maxage=3600/);
   } finally { globalThis.fetch = previous; }
 });

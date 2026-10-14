@@ -14,7 +14,7 @@ const GITHUB_CONFIG = {
   REPOS_PER_PAGE: 3,
 
   // Esconde forks e repositórios arquivados da lista e das estatísticas
-  HIDE_FORKS: true,
+  HIDE_FORKS: false,
   HIDE_ARCHIVED: false,
 
   // Quantas linguagens aparecem no gráfico
