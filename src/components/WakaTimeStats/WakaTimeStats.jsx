@@ -248,9 +248,6 @@ export default function WakaTimeStats({
             </section>
           )}
 
-          <p className="waka-source">
-            Atividade de programação registrada pelo WakaTime.
-          </p>
         </div>
       )}
     </div>
