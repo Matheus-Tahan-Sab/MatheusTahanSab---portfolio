@@ -117,7 +117,7 @@ export default function GeminiChat() {
   );
 
   return (
-    <section className="gemini-chat" aria-label={`Chat com ${ASSISTANT_NAME}`}>
+    <section className="gemini-chat" aria-label={`Assistente de IA sobre ${ASSISTANT_NAME}`}>
       {/* ---------- Cabeçalho ---------- */}
       <header className="gemini-chat-header">
         <div className="gemini-chat-title">
@@ -125,7 +125,7 @@ export default function GeminiChat() {
             <SiGooglegemini />
           </span>
           <div>
-            <strong>Pergunte para {ASSISTANT_NAME}</strong>
+            <strong>Pergunte sobre {ASSISTANT_NAME}</strong>
             <span className="gemini-chat-status">
               <span className={loading ? "dot typing" : "dot"} aria-hidden="true" />
               {loading ? "digitando..." : "respostas geradas pelo Gemini"}

@@ -1,6 +1,6 @@
 // Adaptado dos exemplos de João Paulo Aramuni (MIT). Veja docs/credits/LICENSE-Aramuni.txt.
-// "Pergunte sobre mim": o visitante pergunta e o Gemini responde em primeira
-// pessoa, com base no texto de api/_perfil.js.
+// "Pergunte sobre Matheus": o visitante pergunta e o Gemini responde em
+// terceira pessoa, com base no texto de api/_perfil.js.
 //
 // O navegador NUNCA vê a chave: ele chama POST /api/gemini no próprio site, e
 // quem fala com o Gemini é:
@@ -9,7 +9,7 @@
 //
 // Variáveis de ambiente (SEM o prefixo VITE_, de propósito):
 //   GEMINI_API_KEY → chave do Google AI Studio (https://aistudio.google.com/apikey)
-//   GEMINI_MODEL   → opcional, troca o modelo (padrão abaixo)
+//   GEMINI_MODEL   → modelo explícito disponível no nível gratuito da conta
 //
 // Para a rota não virar uma porta aberta para gastar a sua cota:
 //   • só aceita POST com JSON pequeno (pergunta + últimas mensagens);

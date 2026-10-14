@@ -307,8 +307,7 @@ export default function WakaTimeStats({
           )}
 
           <p className="waka-source">
-            Dados do WakaTime ·{" "}
-            {data.mode === "api_key" ? "lidos com a sua API key" : "perfil público"}
+            Atividade de programação registrada pelo WakaTime.
           </p>
         </div>
       )}
