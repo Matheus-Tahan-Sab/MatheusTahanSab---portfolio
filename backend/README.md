@@ -35,3 +35,11 @@ curl -i -X POST http://localhost:8080/api/contact \
 Na raiz do projeto, configure `VITE_API_URL` com a origem pública da API. Localmente o padrão é `http://localhost:8080`. No serviço do back-end, configure `RESEND_API_KEY`, `RESEND_FROM`, `CONTACT_TO` e `CORS_ALLOWED_ORIGINS`; não publique a API key no Git. O Dockerfile permite hospedar a API em serviços de containers, como Render. O front-end pode continuar na Vercel.
 
 `CORS_ALLOWED_ORIGINS` deve conter a origem exata do site publicado (sem caminho final); durante desenvolvimento use `http://localhost:5173`. Depois de configurar as URLs nas duas plataformas, envie uma mensagem real e confirme que ela chegou à caixa de entrada.
+
+## E-mails com identidade visual
+
+A notificação para Matheus usa `emails/notification.html`, com nome, endereço e mensagem, além de uma versão em texto simples. O HTML recebido do visitante é escapado. O destinatário principal continua fixo e o Reply-To continua sendo o e-mail do visitante.
+
+`emails/confirmation.html` contém a confirmação automática para o visitante. Seu envio permanece **desativado por padrão** (`CONTACT_SEND_CONFIRMATION=false`). Para ativar, primeiro verifique um domínio próprio no Resend, configure `RESEND_FROM` com um remetente desse domínio e defina `CONTACT_SEND_CONFIRMATION=true`. O remetente de teste `resend.dev` não envia confirmações a visitantes. A confirmação não inclui a mensagem nem links fornecidos pelo visitante; respostas vão para o destinatário principal. Falha na confirmação não faz o formulário pedir reenvio de um contato já aceito.
+
+Os modelos estão preparados na branch de prévia; o serviço Render acompanha main, portanto só recebe essas alterações quando houver publicação do back-end. A prévia visual usa dados fictícios e não envia e-mails.
