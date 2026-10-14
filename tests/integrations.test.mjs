@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { handleIntegrations } from '../api/_integrations.js';
 import { handleGitHub } from '../api/_github.js';
 import { handleGemini } from '../api/_gemini.js';
+import disabledAssistant from '../api/gemini.js';
 import { handleWakaTime } from '../api/_wakatime.js';
 
 function response() {
@@ -10,11 +11,11 @@ function response() {
 }
 function request(method = 'GET', url = '/api/integrations') { return { method, url, headers: {}, socket: {} }; }
 
-test('availability exposes only booleans and requires both Gemini settings', () => {
+test('availability exposes only booleans and keeps the removed assistant disabled', () => {
   let res = response(); handleIntegrations(request(), res, { GEMINI_API_KEY: 'test-key' });
   assert.deepEqual(res.json, { gemini: false, wakatime: false });
   res = response(); handleIntegrations(request(), res, { GEMINI_API_KEY: 'test-key', GEMINI_MODEL: 'test-model', WAKATIME_API_KEY: 'test-key' });
-  assert.deepEqual(res.json, { gemini: true, wakatime: true });
+  assert.deepEqual(res.json, { gemini: false, wakatime: true });
   assert.equal(res.body.includes('test-key'), false);
 });
 
@@ -101,5 +102,16 @@ test('GitHub languages report upstream failure rather than incomplete percentage
     const res = response(); await handleGitHub(request('GET', '/api/github?resource=languages&username=Matheus-Tahan-Sab'), res);
     assert.equal(res.statusCode, 429); assert.equal(res.json.error, 'rate_limited');
     assert.equal(res.json.languages, undefined); assert.equal(res.headers['Cache-Control'], 'no-store');
+  } finally { globalThis.fetch = previous; }
+});
+
+test('removed assistant endpoint cannot forward requests to the provider', () => {
+  const previous = globalThis.fetch;
+  let called = false;
+  globalThis.fetch = () => { called = true; throw new Error('Provider must not be called'); };
+  try {
+    const res = response(); disabledAssistant(request('POST', '/api/gemini'), res);
+    assert.equal(res.statusCode, 410); assert.equal(res.json.error, 'disabled');
+    assert.equal(called, false);
   } finally { globalThis.fetch = previous; }
 });

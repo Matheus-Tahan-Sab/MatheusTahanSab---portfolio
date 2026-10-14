@@ -9,7 +9,7 @@ export function handleIntegrations(req, res, env = {}) {
   const enabled = value => typeof value === 'string' && value.trim().length > 0;
   res.statusCode = 200;
   res.end(JSON.stringify({
-    gemini: enabled(env.GEMINI_API_KEY) && /^[a-zA-Z0-9.-]+$/.test(env.GEMINI_MODEL ?? ''),
+    gemini: false,
     wakatime: enabled(env.WAKATIME_API_KEY) || enabled(env.WAKATIME_USERNAME),
   }));
 }

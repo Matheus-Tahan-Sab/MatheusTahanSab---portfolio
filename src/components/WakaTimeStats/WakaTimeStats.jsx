@@ -1,6 +1,6 @@
 // Adaptado dos exemplos de João Paulo Aramuni (MIT). Veja docs/credits/LICENSE-Aramuni.txt.
 import { useEffect, useState } from "react";
-import { FiActivity, FiAward, FiClock, FiExternalLink, FiSun, FiCode } from "react-icons/fi";
+import { FiActivity, FiAward, FiClock, FiExternalLink, FiSun } from "react-icons/fi";
 import WAKATIME_CONFIG from "../../config/wakatimeConfig";
 import { fetchWakaTimeStats } from "../../services/wakatimeService";
 import CodingNow from "./CodingNow";
@@ -24,22 +24,6 @@ import "./WakaTimeStats.css";
  * <WakaTimeStats showCodingNow={false} />
  */
 
-// Nomes que o WakaTime manda em inglês → português
-const CATEGORY_NAMES = {
-  Coding: "Programando",
-  "AI Coding": "Programando com IA",
-  "Writing Docs": "Escrevendo documentação",
-  "Writing Tests": "Escrevendo testes",
-  Debugging: "Depurando",
-  Building: "Compilando",
-  Browsing: "Navegando",
-  "Code Reviewing": "Revisando código",
-  Designing: "Design",
-  Meeting: "Reuniões",
-  Researching: "Pesquisando",
-  Learning: "Aprendendo",
-  Planning: "Planejando",
-};
 const OS_NAMES = { Mac: "macOS" };
 
 const { RANGES, DEFAULT_RANGE, PROFILE_URL, HIDDEN_LANGUAGES } =
@@ -164,8 +148,6 @@ export default function WakaTimeStats({
   const languages = (data?.languages ?? [])
     .filter((lang) => !hidden.has(lang.name))
     .map((lang) => ({ ...lang, color: languageColor(lang.name) }));
-  const topEditor = data?.editors?.[0];
-
   return (
     <div className="waka" aria-busy={status === "loading"}>
       {/* ---------- Codando agora (não depende do período) ---------- */}
@@ -219,16 +201,12 @@ export default function WakaTimeStats({
               value={formatDuration(data.dailyAverage)}
               note={data.activeDays != null ? `${formatNumber(data.activeDays)} dias ativos` : null}
             />
-            {data.today ? (
-              <Kpi icon={FiSun} label="Hoje" value={formatDuration(data.today.seconds)} note="até agora" />
-            ) : (
-              <Kpi
-                icon={FiCode}
-                label="Editor principal"
-                value={topEditor?.name ?? "—"}
-                note={topEditor ? `${formatPercent(topEditor.percent)} do tempo` : null}
-              />
-            )}
+            <Kpi
+              icon={FiSun}
+              label="Hoje"
+              value={data.today ? formatDuration(data.today.seconds) : "—"}
+              note={data.today ? "até agora" : "sem dados disponíveis"}
+            />
             <Kpi
               icon={FiAward}
               label="Melhor dia"
@@ -247,9 +225,7 @@ export default function WakaTimeStats({
                 </section>
 
                 <aside className="waka-card waka-side">
-                  <MiniList title="Editores" items={data.editors} />
                   <MiniList title="Sistemas operacionais" items={data.operatingSystems} rename={OS_NAMES} />
-                  <MiniList title="Categorias" items={data.categories} rename={CATEGORY_NAMES} />
                 </aside>
               </div>
             </>

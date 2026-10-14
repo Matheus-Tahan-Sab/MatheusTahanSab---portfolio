@@ -1,12 +1,8 @@
-// Adaptado dos exemplos de João Paulo Aramuni (MIT). Veja docs/credits/LICENSE-Aramuni.txt.
-// Vercel Function: POST /api/gemini  { message, history }
-// Lê GEMINI_API_KEY (e, opcionalmente, GEMINI_MODEL) das Environment Variables da Vercel.
-// A lógica fica em api/_gemini.js, que o vite.config.js também usa no npm run dev.
-// O tempo máximo da função (maxDuration) está no vercel.json.
-
-import { handleGemini } from "./_gemini.js";
-
+// Integração retirada do portfólio a pedido do autor.
+// A rota deixa de encaminhar perguntas ao provedor.
 export default function handler(req, res) {
-  return handleGemini(req, res, process.env);
+  res.statusCode = 410;
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.end(JSON.stringify({ error: 'disabled', message: 'Este recurso foi desativado.' }));
 }
-
