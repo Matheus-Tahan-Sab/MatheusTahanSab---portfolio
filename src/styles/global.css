@@ -400,3 +400,7 @@ form .button { margin-top: 1rem; width: 100%; justify-content: space-between; }
 @media (max-width: 480px) { .skills-globe { height: 290px; } .gh-repo-title a { overflow-wrap: anywhere; } }
 .skills-globe { isolation: isolate; }
 [data-theme="dark"] .github-panel .gh-button { color: #181c21; }
+
+.waka { --brand: var(--green); --brand-deep: var(--green); --border: #a6b59a; --surface-muted: var(--screen); }
+[data-theme="dark"] .waka { --border: #59616b; }
+[data-theme="dark"] .waka-ranges button.active { color: #181c21; }

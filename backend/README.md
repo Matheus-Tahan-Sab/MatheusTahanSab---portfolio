@@ -42,4 +42,4 @@ A notificação para Matheus usa `emails/notification.html`, com nome, endereço
 
 `emails/confirmation.html` contém a confirmação automática para o visitante. Seu envio permanece **desativado por padrão** (`CONTACT_SEND_CONFIRMATION=false`). Para ativar, primeiro verifique um domínio próprio no Resend, configure `RESEND_FROM` com um remetente desse domínio e defina `CONTACT_SEND_CONFIRMATION=true`. O remetente de teste `resend.dev` não envia confirmações a visitantes. A confirmação não inclui a mensagem nem links fornecidos pelo visitante; respostas vão para o destinatário principal. Falha na confirmação não faz o formulário pedir reenvio de um contato já aceito.
 
-Os modelos estão preparados na branch de prévia; o serviço Render acompanha main, portanto só recebe essas alterações quando houver publicação do back-end. A prévia visual usa dados fictícios e não envia e-mails.
+O serviço Render acompanha main e publica os modelos junto com a API. A prévia visual usa dados fictícios e não envia e-mails.

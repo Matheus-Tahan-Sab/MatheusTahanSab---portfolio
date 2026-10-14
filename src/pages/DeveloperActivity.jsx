@@ -12,7 +12,7 @@ export default function DeveloperActivity() {
     <OptionalIntegrations />
     <div className="curriculum-panel">
       <h3>Meu currículo</h3>
-      <p className="muted">Rascunho inicial para revisão, com minha formação e projetos acadêmicos.</p>
+      <p className="muted">Minha formação, habilidades e projetos acadêmicos em um só documento.</p>
       <button type="button" className="button button-secondary" onClick={() => setShowCurriculum(value => !value)} aria-expanded={showCurriculum} aria-controls="curriculum-content">{showCurriculum ? 'Fechar currículo' : 'Visualizar currículo'}</button>
       <div id="curriculum-content">{showCurriculum ? <Suspense fallback={<p role="status">Carregando currículo...</p>}><CurriculumViewer /></Suspense> : null}</div>
     </div>

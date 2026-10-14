@@ -9,7 +9,7 @@
 .waka {
   --waka-brand: var(--brand, #005380);
   --waka-brand-deep: var(--brand-deep, #00334f);
-  --waka-text: var(--foreground, #171717);
+  --waka-text: var(--ink, #171717);
   --waka-muted: var(--muted, #64748b);
   --waka-border: var(--border, #e2e8f0);
   --waka-surface: var(--surface-muted, #f1f5f9);
@@ -137,7 +137,7 @@
 
   padding: 1.1rem 1.2rem;
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--waka-border);
   border-radius: 12px;
@@ -195,7 +195,7 @@
 .waka-card {
   padding: 1.5rem;
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--waka-border);
   border-radius: 12px;
@@ -434,7 +434,7 @@
 
   padding: 1.1rem 1.25rem;
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--waka-border);
   border-left: 4px solid var(--waka-live);

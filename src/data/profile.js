@@ -4,6 +4,7 @@ export const profile = {
   "discord": "https://discordapp.com/users/413783538811404308",
   "whatsapp": "https://wa.me/5531989870366",
   "github": "https://github.com/Matheus-Tahan-Sab",
+  "linkedin": "https://www.linkedin.com/in/matheus-tahan-sab-0088a4443/",
   "about": {
     "pt": [
       "Sou Matheus Tahan Sab, estudante do segundo período de Engenharia de Software na PUC Minas, com interesse em desenvolvimento back-end.",

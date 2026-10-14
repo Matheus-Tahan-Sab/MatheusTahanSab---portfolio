@@ -66,7 +66,7 @@ public class ContactService {
 
         // O remetente de teste não pode enviar para visitantes. Ativação explícita
         // somente depois de configurar um remetente de domínio próprio verificado.
-        if (confirmationEnabled && !sender.toLowerCase(java.util.Locale.ROOT)
+        if (confirmationEnabled && !sender.trim().toLowerCase(java.util.Locale.ROOT)
                 .matches(".*@(?:[a-z0-9-]+\\.)*resend\\.dev>?$")) {
             Map<String, Object> confirmation = Map.of(
                 "from", sender,

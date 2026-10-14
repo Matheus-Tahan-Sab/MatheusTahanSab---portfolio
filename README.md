@@ -206,6 +206,6 @@ Ainda não definida pelo autor.
 
 ## Componentes disponibilizados pelo professor (branch de prévia)
 
-SkillsGlobe integra habilidades com arrasto, teclado, filtros e lista. GitHubAPI apresenta dados públicos de Matheus. CurriculumPDF abre o currículo próprio, ainda identificado como rascunho para revisão. WakaTimeAPI exibe tempo de programação e linguagens quando configurado no servidor. O exemplo GeminiAPI foi retirado da interface; sua rota pública está desativada.
+SkillsGlobe integra habilidades com arrasto, teclado, filtros e lista. GitHubAPI apresenta dados públicos de Matheus. CurriculumPDF abre o currículo revisado, com formação e projetos acadêmicos. WakaTimeAPI exibe tempo de programação e linguagens quando configurado no servidor. O exemplo GeminiAPI foi retirado da interface; sua rota pública está desativada.
 
 Fontes, adaptações e pendências: [integrações do professor](docs/integracoes-professor.md). Licenças MIT preservadas em [créditos](docs/credits/LICENSE-Aramuni.txt). Testes das rotas: `npm run test:integrations`. Nenhum segredo usa prefixo `VITE_`; `VITE_API_URL` continua apontando ao back-end Java do formulário.
