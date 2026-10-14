@@ -6,7 +6,7 @@
 .gemini-chat {
   --gc-brand: var(--brand, #005380);
   --gc-brand-deep: var(--brand-deep, #00334f);
-  --gc-text: var(--foreground, #171717);
+  --gc-text: var(--ink, #171717);
   --gc-muted: var(--muted, #64748b);
   --gc-border: var(--border, #e2e8f0);
   --gc-surface: var(--surface-muted, #f1f5f9);
@@ -21,7 +21,7 @@
 
   color: var(--gc-text);
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--gc-border);
   border-radius: 16px;
@@ -168,7 +168,7 @@
 
   background:
     radial-gradient(circle at 0% 0%, rgba(0, 83, 128, 0.04), transparent 40%),
-    var(--background, #f8fafc);
+    var(--paper, #f8fafc);
 
   scroll-behavior: smooth;
 }
@@ -186,7 +186,7 @@
 
   padding: 0.75rem 1rem;
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--gc-border);
   border-radius: 14px 14px 14px 4px;
@@ -298,7 +298,7 @@
 
   color: var(--gc-brand);
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid rgba(0, 83, 128, 0.25);
   border-radius: 999px;
@@ -343,7 +343,7 @@
 
   color: var(--gc-text);
 
-  background: #ffffff;
+  background: var(--paper, #ffffff);
 
   border: 1px solid var(--gc-border);
   border-radius: 10px;
