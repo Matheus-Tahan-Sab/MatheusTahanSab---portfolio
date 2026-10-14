@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <div><strong>MATHEUS TAHAN SAB</strong><p>Construindo minha jornada, um projeto por vez.</p></div>
-        <div className="footer-end"><a href="#inicio">Voltar ao início ↑</a><p>© {new Date().getFullYear()} · Portfólio acadêmico</p></div>
+        <div className="footer-end"><a href="#inicio">Voltar ao início ↑</a></div>
       </div>
     </footer>
   );
