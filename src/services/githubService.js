@@ -49,5 +49,6 @@ async function request(resource, username) {
 
 export const fetchProfile = (username) => request("profile", username);
 export const fetchRepos = (username) => request("repos", username);
+export const fetchLanguages = (username) => request("languages", username);
 export const fetchContributions = (username) => request("contributions", username);
 

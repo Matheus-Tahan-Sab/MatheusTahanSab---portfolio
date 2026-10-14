@@ -25,7 +25,7 @@ const TIMEOUT_MS = 10_000;
 // Usuário do GitHub: letras, números e hífen, até 39 caracteres
 const USERNAME_RE = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
-const RESOURCES = ["profile", "repos", "contributions"];
+const RESOURCES = ["profile", "repos", "languages", "contributions"];
 
 /* =====================================================================
    Resposta HTTP (funciona igual na Vercel e no servidor do Vite)
@@ -111,12 +111,21 @@ async function getProfile(username, token) {
   };
 }
 
+async function getPublicRepos(username, token) {
+  const repos = [];
+  for (let page = 1; ; page++) {
+    const batch = await githubRest(
+      `/users/${username}/repos?per_page=100&sort=pushed&type=owner&page=${page}`,
+      token
+    );
+    repos.push(...batch.filter((r) => !r.private));
+    if (batch.length < 100) return repos;
+  }
+}
+
 async function getRepos(username, token) {
-  const repos = await githubRest(
-    `/users/${username}/repos?per_page=100&sort=pushed&type=owner`,
-    token
-  );
-  return repos.filter((r) => !r.private).map((r) => ({
+  const repos = await getPublicRepos(username, token);
+  return repos.map((r) => ({
     id: r.id,
     name: r.name,
     description: r.description,
@@ -130,6 +139,38 @@ async function getRepos(username, token) {
     archived: r.archived,
     pushedAt: r.pushed_at,
   }));
+}
+
+// Soma os bytes reconhecidos pelo GitHub, incluindo linguagens secundárias.
+// Mantém o mesmo recorte de repositórios públicos sem forks do painel.
+async function getLanguages(username, token) {
+  const repos = (await getPublicRepos(username, token)).filter((repo) => !repo.fork);
+  const totals = new Map();
+  let repositoriesWithCode = 0;
+
+  for (let i = 0; i < repos.length; i += 3) {
+    const batch = await Promise.all(repos.slice(i, i + 3).map((repo) =>
+      githubRest(`/repos/${encodeURIComponent(username)}/${encodeURIComponent(repo.name)}/languages`, token)
+    ));
+    for (const languages of batch) {
+      let hasCode = false;
+      for (const [name, bytes] of Object.entries(languages)) {
+        if (!Number.isFinite(bytes) || bytes <= 0) continue;
+        totals.set(name, (totals.get(name) ?? 0) + bytes);
+        hasCode = true;
+      }
+      if (hasCode) repositoriesWithCode++;
+    }
+  }
+
+  const totalBytes = [...totals.values()].reduce((sum, bytes) => sum + bytes, 0);
+  return {
+    repositoriesWithCode,
+    totalBytes,
+    languages: [...totals.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([name, bytes]) => ({ name, bytes, share: bytes / totalBytes })),
+  };
 }
 
 // Calendário de contribuições (o "quadradinho verde" do perfil).
@@ -183,7 +224,7 @@ async function getContributions(username, token) {
   };
 }
 
-const HANDLERS = { profile: getProfile, repos: getRepos, contributions: getContributions };
+const HANDLERS = { profile: getProfile, repos: getRepos, languages: getLanguages, contributions: getContributions };
 
 /* =====================================================================
    Handler: GET /api/github?resource=profile&username=joaopauloaramuni
@@ -210,8 +251,11 @@ export async function handleGitHub(req, res, env = {}) {
 
   try {
     const data = await HANDLERS[resource](username, token);
-    // 10 min no cache da CDN da Vercel: cada usuário/recurso gasta 1 chamada a cada 10 min
-    return send(res, 200, data, CACHE_OK);
+    // Linguagens exige uma chamada por repositório; atualiza a cada hora.
+    const cache = resource === "languages"
+      ? "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+      : CACHE_OK;
+    return send(res, 200, data, cache);
   } catch (error) {
     if (error instanceof HttpError) {
       return send(res, error.status, { error: error.code, message: error.message });
