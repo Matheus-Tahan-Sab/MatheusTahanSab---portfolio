@@ -492,37 +492,34 @@
    LINGUAGENS
    ========================================================= */
 
-.gh-stack {
-  display: flex;
-  gap: 2px;
-
-  height: 12px;
-
-  overflow: hidden;
-
-  border-radius: 999px;
-}
-
-.gh-stack span {
-  min-width: 3px;
-}
-
-.gh-legend {
+.gh-language-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 0.6rem 1.5rem;
-
-  margin-top: 1.1rem;
-
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-.gh-legend li {
+.gh-language-head {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
   font-size: 0.875rem;
+}
+
+.gh-language-bar {
+  height: 10px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  background: var(--gh-surface);
+  border: 1px solid var(--gh-border);
+  border-radius: 999px;
+}
+
+.gh-language-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
 }
 
 .gh-legend-name {

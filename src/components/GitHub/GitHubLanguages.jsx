@@ -1,5 +1,4 @@
 // Adaptado dos exemplos de João Paulo Aramuni (MIT). Veja docs/credits/LICENSE-Aramuni.txt.
-import GITHUB_CONFIG from "../../config/githubConfig";
 import { fetchRepos } from "../../services/githubService";
 import { languageColor } from "./languageColors";
 import useGitHub, { visibleRepos } from "./useGitHub";
@@ -30,13 +29,6 @@ export default function GitHubLanguages({ username }) {
     .sort((a, b) => b[1] - a[1])
     .map(([name, count]) => ({ name, count, share: count / total, color: languageColor(name) }));
 
-  const top = languages.slice(0, GITHUB_CONFIG.MAX_LANGUAGES);
-  const rest = languages.slice(GITHUB_CONFIG.MAX_LANGUAGES);
-  if (rest.length) {
-    const count = rest.reduce((sum, l) => sum + l.count, 0);
-    top.push({ name: `Outras (${rest.length})`, count, share: count / total, color: "#cbd5e1" });
-  }
-
   return (
     <section className="gh-card">
       <div className="gh-card-head">
@@ -47,29 +39,22 @@ export default function GitHubLanguages({ username }) {
       {total === 0 ? (
         <p className="gh-empty">Nenhum repositório com linguagem definida.</p>
       ) : (
-        <>
-          <div className="gh-stack" aria-hidden="true">
-            {top.map((lang) => (
-              <span
-                key={lang.name}
-                style={{ flexGrow: lang.count, background: lang.color }}
-                title={`${lang.name}: ${lang.count}`}
-              />
-            ))}
-          </div>
-
-          <ul className="gh-legend">
-            {top.map((lang) => (
-              <li key={lang.name}>
+        <ul className="gh-language-list">
+          {languages.map((lang) => (
+            <li key={lang.name} className="gh-language-row">
+              <div className="gh-language-head">
                 <span className="gh-dot" style={{ background: lang.color }} aria-hidden="true" />
                 <span className="gh-legend-name">{lang.name}</span>
                 <span className="gh-legend-value">
-                  {lang.count} · {percent(lang.share)}
+                  {lang.count} {lang.count === 1 ? "repositório" : "repositórios"} · {percent(lang.share)}
                 </span>
-              </li>
-            ))}
-          </ul>
-        </>
+              </div>
+              <div className="gh-language-bar" aria-hidden="true">
+                <span style={{ width: `${lang.share * 100}%`, background: lang.color }} />
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );

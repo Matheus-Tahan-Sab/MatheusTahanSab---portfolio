@@ -42,7 +42,7 @@ const CATEGORY_NAMES = {
 };
 const OS_NAMES = { Mac: "macOS" };
 
-const { RANGES, DEFAULT_RANGE, PROFILE_URL, MAX_LANGUAGES, HIDDEN_LANGUAGES } =
+const { RANGES, DEFAULT_RANGE, PROFILE_URL, HIDDEN_LANGUAGES } =
   WAKATIME_CONFIG;
 
 function useWakaTime(range) {
@@ -84,24 +84,7 @@ function Kpi({ icon: Icon, label, value, note }) {
   );
 }
 
-// Barra única dividida por linguagem (parte do todo)
-function LanguageStack({ languages }) {
-  return (
-    <div className="waka-stack" aria-hidden="true">
-      {languages.map((lang) => (
-        <span
-          key={lang.name}
-          className="waka-stack-seg"
-          style={{ flexGrow: lang.seconds, background: lang.color }}
-          title={`${lang.name} · ${formatDuration(lang.seconds)} · ${formatPercent(lang.percent)}`}
-        />
-      ))}
-    </div>
-  );
-}
-
-function LanguageList({ languages, rest }) {
-  const max = languages[0]?.seconds || 1;
+function LanguageList({ languages }) {
   return (
     <ul className="waka-list">
       {languages.map((lang) => (
@@ -113,16 +96,10 @@ function LanguageList({ languages, rest }) {
             <span className="waka-pct">{formatPercent(lang.percent)}</span>
           </div>
           <div className="waka-bar" aria-hidden="true">
-            <span style={{ width: `${(lang.seconds / max) * 100}%` }} />
+            <span style={{ width: `${Math.min(100, Math.max(0, lang.percent))}%` }} />
           </div>
         </li>
       ))}
-      {rest && (
-        <li className="waka-row waka-row-rest">
-          + {rest.count} {rest.count === 1 ? "outra" : "outras"} ·{" "}
-          {formatDuration(rest.seconds)} · {formatPercent(rest.percent)}
-        </li>
-      )}
     </ul>
   );
 }
@@ -187,16 +164,6 @@ export default function WakaTimeStats({
   const languages = (data?.languages ?? [])
     .filter((lang) => !hidden.has(lang.name))
     .map((lang) => ({ ...lang, color: languageColor(lang.name) }));
-  const top = languages.slice(0, MAX_LANGUAGES);
-  const others = languages.slice(MAX_LANGUAGES);
-  const rest = others.length
-    ? {
-        count: others.length,
-        seconds: others.reduce((sum, l) => sum + l.seconds, 0),
-        percent: others.reduce((sum, l) => sum + l.percent, 0),
-      }
-    : null;
-
   const topEditor = data?.editors?.[0];
 
   return (
@@ -273,11 +240,10 @@ export default function WakaTimeStats({
           {/* ---------- Linguagens ---------- */}
           {languages.length > 0 ? (
             <>
-              <LanguageStack languages={languages} />
               <div className="waka-grid">
                 <section className="waka-card">
                   <h3>Linguagens</h3>
-                  <LanguageList languages={top} rest={rest} />
+                  <LanguageList languages={languages} />
                 </section>
 
                 <aside className="waka-card waka-side">

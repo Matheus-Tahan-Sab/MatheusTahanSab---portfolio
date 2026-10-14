@@ -182,21 +182,6 @@
    BARRA DE LINGUAGENS (parte do todo)
    ========================================================= */
 
-.waka-stack {
-  display: flex;
-  gap: 2px;
-
-  height: 12px;
-
-  overflow: hidden;
-
-  border-radius: 999px;
-}
-
-.waka-stack-seg {
-  min-width: 3px;
-}
-
 /* =========================================================
    CARDS
    ========================================================= */
