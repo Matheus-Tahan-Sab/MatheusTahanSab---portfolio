@@ -6,7 +6,8 @@ import { sendContactMessage } from '../services/email.js';
 function ContactIcon({ type }) {
   const shapes = {
     email: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
-    whatsapp: <><path d="M5 19 3 22l5-2a9 9 0 1 0-3-1Z" /><path d="M8 7c0 5 4 9 9 9l1-3-3-1-1 2-3-3 2-1-1-3Z" /></>,
+    x: <><path d="M4 3h4l12 18h-4L4 3Z" /><path d="m20 3-7 8M4 21l7-8" /></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" /></>,
     linkedin: <><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7 10v7M7 7v.1M11 17v-7M11 13c0-4 6-4 6 0v4" /></>,
     discord: <><path d="M7 5h10l4 13-5 2-1-2H9l-1 2-5-2Z" /><circle cx="9" cy="12" r="1" /><circle cx="15" cy="12" r="1" /><path d="M8 16c2 1 6 1 8 0" /></>,
     github: <><circle cx="12" cy="12" r="9" /><circle cx="9" cy="7" r="1.5" /><circle cx="15" cy="10" r="1.5" /><circle cx="9" cy="17" r="1.5" /><path d="M9 8.5v7m0-2.5c4 0 6-1 6-1.5" /></>,
@@ -47,8 +48,11 @@ export default function Contact({ editing = false }) {
           <p>{editing ? 'Me conte sobre seu canal, o estilo que você procura e o formato do vídeo. Vamos pensar juntos em uma edição que combine com você.' : 'Tem uma oportunidade, uma ideia ou quer trocar experiências sobre desenvolvimento? Entre em contato.'}</p>
           <ul className="contact-links">
             <li><a href={'mailto:' + profile.email}><ContactIcon type="email" /><span><small>E-mail</small>{profile.email}</span><span aria-hidden="true">↗</span></a></li>
-            <li><a href={profile.whatsapp}><ContactIcon type="whatsapp" /><span>WhatsApp</span><span aria-hidden="true">↗</span></a></li>
-            <li><a href={profile.discord}><ContactIcon type="discord" /><span>Discord</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href={profile.discord} target="_blank" rel="noopener noreferrer"><ContactIcon type="discord" /><span><small>Discord</small>Abrir meu perfil</span><span aria-hidden="true">↗</span></a></li>
+            {editing && <>
+              <li><a href={profile.x} target="_blank" rel="noopener noreferrer"><ContactIcon type="x" /><span><small>X</small>@sab_editar</span><span aria-hidden="true">↗</span></a></li>
+              <li><a href={profile.instagram} target="_blank" rel="noopener noreferrer"><ContactIcon type="instagram" /><span><small>Instagram</small>@sab_editar</span><span aria-hidden="true">↗</span></a></li>
+            </>}
             {!editing && <>
               <li><a href={profile.linkedin}><ContactIcon type="linkedin" /><span>LinkedIn</span><span aria-hidden="true">↗</span></a></li>
               <li><a href={profile.github}><ContactIcon type="github" /><span>GitHub</span><span aria-hidden="true">↗</span></a></li>

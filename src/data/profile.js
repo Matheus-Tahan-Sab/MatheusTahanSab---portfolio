@@ -1,8 +1,9 @@
 // Conteúdo pessoal separado da apresentação para facilitar futuras atualizações.
 export const profile = {
   "email": "sabmatheus24@gmail.com",
-  "discord": "https://discordapp.com/users/413783538811404308",
-  "whatsapp": "https://wa.me/5531989870366",
+  "discord": "https://discord.com/users/413783538811404308",
+  "x": "https://x.com/sab_editar",
+  "instagram": "https://www.instagram.com/sab_editar/",
   "github": "https://github.com/Matheus-Tahan-Sab",
   "linkedin": "https://www.linkedin.com/in/matheus-tahan-sab-0088a4443/",
   "about": {

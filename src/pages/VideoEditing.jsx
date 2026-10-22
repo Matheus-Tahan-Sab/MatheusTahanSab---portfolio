@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Section from '../components/ui/Section.jsx';
 import Contact from './Contact.jsx';
-import { profile } from '../data/profile.js';
 import { videoProjects } from '../data/videoProjects.js';
 import '../styles/video-editing.css';
 
@@ -65,7 +64,7 @@ export default function VideoEditing() {
 
     <Section id="edicao-processo" title="Como vamos trabalhar" number="03" caption="Conversa, edição e ajuste fino">
       <ol className="video-process"><li><span aria-hidden="true">01</span><div><h3>Entender a ideia</h3><p>Conversamos sobre seu canal, referências, formato e prazo. Você compartilha o material e alinhamos o que o vídeo precisa transmitir.</p></div></li><li><span aria-hidden="true">02</span><div><h3>Encontrar o ritmo</h3><p>Organizo os melhores momentos e construo a edição, combinando cortes, áudio e elementos visuais com o estilo que definimos.</p></div></li><li><span aria-hidden="true">03</span><div><h3>Refinar juntos</h3><p>Você acompanha o resultado, traz seu feedback e alinhamos os ajustes e a entrega no formato combinado.</p></div></li></ol>
-      <p className="video-process-note">Já tem uma ideia em mente? <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer">Me chama no WhatsApp ↗</a></p>
+      <p className="video-process-note">Já tem uma ideia em mente? <a href="#edicao-contato">Vamos conversar sobre ela ↗</a></p>
     </Section>
     <Contact editing />
   </div>;

@@ -33,7 +33,7 @@ Front-end em React + Vite publicado na Vercel e API de contato em Java 17 + Spri
 - [x] Apresentação pessoal em português e inglês.
 - [x] Navegação para Sobre mim, Projetos, Experiências acadêmicas e Contato.
 - [x] Timeline do FluxSUS, período, contribuição, tecnologias e repositório.
-- [x] Links de e-mail, WhatsApp, Discord e GitHub.
+- [x] Contatos de edição: e-mail, Discord, X e Instagram. Desenvolvimento também apresenta GitHub e LinkedIn.
 - [x] API própria Spring Boot com validação e envio ao destinatário configurado no servidor.
 - [x] Configuração CORS e mensagens de erro sem expor detalhes internos.
 - [x] Configurar a chave do Resend e testar recebimento real.
