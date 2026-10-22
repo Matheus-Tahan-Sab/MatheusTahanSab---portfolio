@@ -95,3 +95,5 @@
 .video-battle-toggle:hover { background: #263e31; }
 .video-battle-toggle:focus-visible { outline: 2px solid #f2cc48; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .video-battle-toggle { display: none; } }
+/* Preserva o enquadramento completo das capas dos Shorts. */
+.video-work-vertical .video-cover img { object-fit: contain; }

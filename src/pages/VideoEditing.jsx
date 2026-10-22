@@ -22,12 +22,12 @@ function WorkGallery() {
           {categories.map(item => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
         </div>
         <div className="video-work-grid">
-          {visible.map(project => <article className="video-work" key={project.id}>
+          {visible.map(project => <article className={`video-work${project.category === 'Vídeos verticais' ? ' video-work-vertical' : ''}`} key={project.id}>
             {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="video-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>
               {project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}
               <span className="video-play" aria-hidden="true">▶</span><span className="video-open">Assistir ↗</span>
             </a>}
-            <div className="video-work-copy"><p className="content-label">{project.category}</p><h3>{project.title}</h3><p>{project.description}</p></div>
+            <div className="video-work-copy"><p className="content-label">{project.category}</p><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div>
           </article>)}
         </div>
       </> : <div className="video-samples-contact">
