@@ -17,14 +17,12 @@
 .video-art-toolbar { display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.8rem; color: #d0d8c9; font: 700 0.65rem 'Courier New', monospace; letter-spacing: 0.08em; }
 .video-art-toolbar > :last-child { margin-left: auto; }
 .video-record-light { width: 7px; height: 7px; background: #f56b62; border-radius: 50%; }
-.video-art-monitor { aspect-ratio: 16 / 10; background: #303e34; border: 1px solid #79886c; padding: 1.2rem; position: relative; display: flex; align-items: center; }
-.video-art-monitor::before, .video-art-monitor::after { content: ''; position: absolute; width: 15px; height: 15px; border: solid #bac8a688; }
-.video-art-monitor::before { right: 12px; top: 12px; border-width: 2px 2px 0 0; }
-.video-art-monitor::after { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
-.video-art-monitor p { font-size: clamp(1.8rem, 3.5vw, 2.9rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.05em; margin: 0; color: #f7f4dd; }
-.video-art-monitor em { color: #f2cc48; font-style: normal; }
-.video-monitor-corner { position: absolute; top: 0.65rem; left: 0.8rem; color: #dfbba7; font: 0.6rem monospace; }
-.video-monitor-footer { position: absolute; bottom: 0.8rem; right: 1rem; font: 0.55rem monospace; color: #bac8a6; }
+.video-art-monitor { aspect-ratio: 16 / 9; background: #18211e; border: 1px solid #79886c; position: relative; overflow: hidden; }
+.video-monitor-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.video-monitor-corner { position: absolute; top: 0.6rem; left: 0.65rem; padding: 0.2rem 0.4rem; border: 1px solid #fff8; border-radius: 2px; background: #13201bd9; color: #fff9eb; font: 0.55rem monospace; letter-spacing: 0.07em; }
+.video-monitor-footer { position: absolute; bottom: 0.5rem; right: 0.5rem; padding: 0.2rem 0.35rem; background: #13201bd9; color: #e7eadf; font: 0.5rem monospace; letter-spacing: 0.04em; }
+.video-monitor-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.65rem 0.35rem 0.15rem; color: #d0d8c9; font: 0.65rem/1.5 monospace; }
+.video-monitor-controls > :first-child { color: #f2cc48; }
 .video-art-ruler { display: flex; justify-content: space-between; margin: 1rem 0 0.5rem; color: #bac6bc; font: 0.6rem monospace; padding-left: 1.6rem; }
 .video-art-tracks { position: relative; display: grid; gap: 0.4rem; }
 .video-art-track { display: flex; gap: 0.3rem; min-height: 27px; }
@@ -82,7 +80,6 @@
   .video-hero { grid-template-columns: 1fr; padding-bottom: 2.5rem; }
   .video-hero h1 { font-size: clamp(2.25rem, 9vw, 3.8rem); }
   .video-timeline-art { transform: none; max-width: 480px; width: 100%; justify-self: center; }
-  .video-art-monitor p { font-size: clamp(2rem, 9vw, 3.5rem); }
   .video-process, .video-about, .video-work-grid { grid-template-columns: 1fr; }
   .video-about { gap: 0.5rem; }
   .video-process li { display: flex; gap: 1.2rem; }
