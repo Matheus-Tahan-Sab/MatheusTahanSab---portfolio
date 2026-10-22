@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Section from '../components/ui/Section.jsx';
+import PixelBattlePreview from '../components/ui/PixelBattlePreview.jsx';
 import Contact from './Contact.jsx';
 import { videoProjects } from '../data/videoProjects.js';
 import '../styles/video-editing.css';
@@ -48,12 +49,12 @@ export default function VideoEditing() {
         <div className="hero-actions"><a className="button" href="#edicao-trabalhos">Ver trabalhos <span aria-hidden="true">↓</span></a><a className="video-text-link" href="#edicao-contato">Falar comigo ↗</a></div>
         <p className="video-tool-note">DaVinci Resolve <span aria-hidden="true">/</span> Vídeos longos e verticais</p>
       </div>
-      <div className="video-timeline-art" aria-hidden="true">
-        <div className="video-art-toolbar"><span className="video-record-light" /><span>SAB — EDIT ROOM</span><span>01</span></div>
-        <div className="video-art-monitor"><img className="video-monitor-image" src="/images/editor/gameplay-preview.webp" width="960" height="540" alt="" fetchPriority="high" /><span className="video-monitor-corner">PRÉVIA</span><span className="video-monitor-footer">IMAGEM ILUSTRATIVA</span></div>
-        <div className="video-monitor-controls"><span>◀◀ &nbsp; ▶ &nbsp; ▶▶</span><span>00:18 / 00:45</span><span>⛶</span></div>
-        <div className="video-art-ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
-        <div className="video-art-tracks"><div className="video-art-track"><span>V1</span><i>CENA 01</i><i>CENA 02</i><i>CENA 03</i></div><div className="video-art-track"><span>A1</span><i /><i /></div><div className="video-art-track"><span>FX</span><i>SFX</i><i>TEXTO</i></div><span className="video-playhead" /></div>
+      <div className="video-timeline-art">
+        <div className="video-art-toolbar" aria-hidden="true"><span className="video-record-light" /><span>SAB — EDIT ROOM</span><span>01</span></div>
+        <div className="video-art-monitor"><PixelBattlePreview /></div>
+        <div className="video-monitor-controls" aria-hidden="true"><span>◀◀ &nbsp; ▶ &nbsp; ▶▶</span><span>00:18 / 00:45</span><span>⛶</span></div>
+        <div className="video-art-ruler" aria-hidden="true"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
+        <div className="video-art-tracks" aria-hidden="true"><div className="video-art-track"><span>V1</span><i>CENA 01</i><i>CENA 02</i><i>CENA 03</i></div><div className="video-art-track"><span>A1</span><i /><i /></div><div className="video-art-track"><span>FX</span><i>SFX</i><i>TEXTO</i></div><span className="video-playhead" /></div>
       </div>
     </section>
 

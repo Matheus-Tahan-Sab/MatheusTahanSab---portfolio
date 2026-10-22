@@ -1,7 +1,10 @@
-# Prévia de gameplay na abertura
+# Batalha em pixel art na abertura
 
-A abertura da página de edição apresenta uma breve biografia sob “Sobre Mim”. A simulação de editor à direita usa uma imagem estática ilustrativa, identificada na própria tela, com uma barra de reprodução decorativa e a linha do tempo existente. Não é um vídeo reproduzível nem um trabalho de cliente.
+A abertura da área de edição apresenta “Sobre Mim” e uma simulação de editor. Dentro do monitor, Swampert e Gengar trocam ataques em um GIF de oito segundos, sem som e com repetição contínua. O botão Pausar troca a animação por um quadro estático; Reproduzir reinicia o GIF. A preferência `prefers-reduced-motion: reduce` carrega somente o quadro estático por meio de `<picture>`.
 
-Imagem: `public/images/editor/gameplay-preview.webp`, 960 × 540. Pode ser substituída por um frame de um vídeo real editado pelo Sab.
+- `public/images/editor/pokemon-battle.gif`: animação em 320 × 180, 15 quadros por segundo, ampliada com pixels nítidos no site.
+- `public/images/editor/pokemon-battle-poster.webp`: quadro estático.
+- `src/components/ui/PixelBattlePreview.jsx`: imagem responsiva e pausa.
+- `scripts/generate-battle-preview.mjs`: geração reproduzível com Canvas, Playwright/Chromium e ffmpeg. São ferramentas de autoria, sem dependências extras para o site. Executar a partir da raiz com `node scripts/generate-battle-preview.mjs`; `BATTLE_CHROMIUM_PATH` permite usar um Chromium já instalado.
 
-Criada com a ferramenta integrada de geração de imagens e convertida para WebP. Prompt: “Production raster image to serve as a paused gameplay video frame inside a video editor mockup on a Pokémon-themed personal video-editing portfolio. Wide 16:9 pixel art with classic handheld 2D Pokémon RPG aesthetic. Pokémon battle in a grassy clearing beside a forest and a small lake, daytime. Rear view of blue Swampert in lower-left foreground facing a purple Gengar in upper-right middle ground. Lush grass, flowers, trees, water and mountains. No dialogue boxes, HUD, text, subtitles, logos, playback controls, editing timeline or monitor frame. Only the gameplay scene, edge-to-edge. Nostalgic game look, not photorealistic or 3D.”
+O cenário, as barras e os efeitos foram desenhados em Canvas. Os dois sprites estáticos são os arquivos de Pokémon já presentes no projeto, originários da PokéAPI (Black/White); veja `public/images/pokemon/README.md`. A imagem é uma animação ilustrativa, não uma amostra de trabalho para cliente. A imagem estática anterior `gameplay-preview.webp` permanece disponível para uma eventual troca.
