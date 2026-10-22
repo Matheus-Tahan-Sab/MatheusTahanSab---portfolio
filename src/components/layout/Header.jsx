@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AdventureCrest from '../ui/AdventureCrest.jsx';
+import { getPortfolioTheme } from '../../config/portfolioTheme.js';
 
 const navigation = [
   { href: '#sobre', label: 'Sobre mim' },
@@ -8,25 +8,16 @@ const navigation = [
   { href: '#contato', label: 'Contato' },
 ];
 
-const editingNavigation = [
-  { href: '#edicao-trabalhos', label: 'Trabalhos' },
-  { href: '#edicao-servicos', label: 'O que eu edito' },
-  { href: '#edicao-processo', label: 'Processo' },
-  { href: '#edicao-contato', label: 'Contato' },
-];
-
-export default function Header({ editing = false }) {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+export default function Header() {
+  const [theme, setTheme] = useState(() => getPortfolioTheme(false));
   const [transition, setTransition] = useState(null);
   const [transitionCount, setTransitionCount] = useState(0);
   function toggleTheme() {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]').content = editing
-      ? (nextTheme === 'dark' ? '#0c1b18' : '#163e32')
-      : (nextTheme === 'dark' ? '#181c21' : '#ce3f40');
+    document.querySelector('meta[name="theme-color"]').content = nextTheme === 'dark' ? '#181c21' : '#ce3f40';
     setTheme(nextTheme);
-    if (!editing && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setTransition(nextTheme);
       setTransitionCount(value => value + 1);
     }
@@ -38,14 +29,14 @@ export default function Header({ editing = false }) {
   }
   return (
     <header className="site-header">
-      {!editing && transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
+      {transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
       <div className="container header-inner">
-        <a className="brand" href={editing ? '#edicao' : '#inicio'} aria-label="Matheus Tahan Sab — início">
-          {editing ? <AdventureCrest className="brand-crest" /> : <span className="device-light" aria-hidden="true" />}
-          <span className="brand-copy"><strong>{editing ? 'SAB' : 'MTS'}<span>.</span></strong><small>{editing ? 'ESTÚDIO DE EDIÇÃO' : 'PORTFÓLIO / #001'}</small></span>
+        <a className="brand" href="#inicio" aria-label="Matheus Tahan Sab — início">
+          <span className="device-light" aria-hidden="true" />
+          <span className="brand-copy"><strong>MTS<span>.</span></strong><small>PORTFÓLIO / #001</small></span>
         </a>
         <div className="header-actions"><nav className="main-nav" aria-label="Navegação principal">
-          {(editing ? editingNavigation : navigation).map((item, index) => (
+          {navigation.map((item, index) => (
             <a href={item.href} key={item.href}><span aria-hidden="true">{'0' + (index + 1)}</span>{item.label}</a>
           ))}
         </nav>
@@ -57,8 +48,8 @@ export default function Header({ editing = false }) {
         </button></div>
       </div>
       <nav className="portfolio-switch container" aria-label="Áreas do portfólio">
-        <a href="#inicio" aria-current={!editing ? 'page' : undefined}><span aria-hidden="true">&lt;/&gt;</span> Desenvolvimento</a>
-        <a href="#edicao" aria-current={editing ? 'page' : undefined}><span aria-hidden="true">▶</span> Edição de vídeo</a>
+        <a href="#inicio" aria-current="page"><span aria-hidden="true">&lt;/&gt;</span> Desenvolvimento</a>
+        <a href="#edicao"><span aria-hidden="true">▶</span> Edição de vídeo</a>
       </nav>
     </header>
   );

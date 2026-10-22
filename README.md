@@ -2,11 +2,11 @@
 
 ## Edição de vídeo
 
-A navegação superior alterna entre Desenvolvimento e Edição de vídeo. O endereço direto da apresentação de edição é `/#edicao`, por exemplo: https://matheus-tahan-sab-portfolio.vercel.app/#edicao. Links diretos às seções e o histórico do navegador também mantêm a área selecionada.
+A área de edição tem página própria em `/#edicao`: https://matheus-tahan-sab-portfolio.vercel.app/#edicao. O seletor na área de desenvolvimento leva à edição; o link no rodapé da edição retorna ao desenvolvimento. Links diretos às seções e o histórico do navegador também mantêm a área selecionada.
 
-A área de edição tem uma identidade inspirada em Zelda: floresta, espada, ruínas, tons verdes e dourados e títulos com serifa. A ilustração é SVG local e acompanha os temas claro e escuro. O cabeçalho, os painéis e o ícone da aba mudam junto com a área selecionada; o visual de desenvolvimento permanece independente. As animações decorativas respeitam a preferência por movimento reduzido.
+A identidade de edição se inspira em Majora's Mask, com roxo, verde, máscara e lua em SVG, além da foto real do editor. O layout tem cabeçalho, apresentação, galeria e contatos próprios e não usa os painéis da área dev. A edição abre no modo escuro e salva sua preferência em `sab-editor-theme`, independentemente do tema de desenvolvimento em `mts-portfolio-theme`.
 
-Essa área apresenta o Sab, os formatos de edição, o processo de trabalho e os contatos. O formulário compartilha a API existente e identifica as mensagens de edição no corpo do e-mail.
+Essa área apresenta o Sab brevemente e segue direto para os trabalhos. O contato acontece por e-mail, Discord, X e Instagram, com ícones próprios. O formulário com a API existente permanece na área de desenvolvimento.
 
 Os trabalhos são cadastrados em `src/data/videoProjects.js`, usando `id`, `title`, `category`, `description` e `href` (link público). `thumbnail` é opcional; `src` permite um MP4/WebM reproduzido no próprio site. As categorias podem ser `Vídeos longos`, `Vídeos verticais` ou `Highlights`. Cadastre somente trabalhos autorizados para exposição pública. Enquanto não houver vídeos cadastrados, a página oferece contato para solicitar amostras, sem exibir projetos fictícios.
 

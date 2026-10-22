@@ -6,13 +6,15 @@
     <meta name="theme-color" content="#ce3f40" />
     <script>
       document.documentElement.dataset.portfolio = location.hash.startsWith('#edicao') ? 'editing' : 'development';
+      const editingPage = document.documentElement.dataset.portfolio === 'editing';
       try {
-        document.documentElement.dataset.theme = localStorage.getItem('mts-portfolio-theme') === 'dark' ? 'dark' : 'light';
+        const savedTheme = localStorage.getItem(editingPage ? 'sab-editor-theme' : 'mts-portfolio-theme');
+        document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : (editingPage ? 'dark' : 'light');
       } catch {
-        document.documentElement.dataset.theme = 'light';
+        document.documentElement.dataset.theme = editingPage ? 'dark' : 'light';
       }
       document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.portfolio === 'editing'
-        ? (document.documentElement.dataset.theme === 'dark' ? '#0c1b18' : '#163e32')
+        ? (document.documentElement.dataset.theme === 'dark' ? '#100e19' : '#f2eee7')
         : (document.documentElement.dataset.theme === 'dark' ? '#181c21' : '#ce3f40');
     </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
