@@ -1,5 +1,13 @@
 # Matheus Tahan Sab — Portfólio
 
+## Edição de vídeo
+
+A navegação superior alterna entre Desenvolvimento e Edição de vídeo. O endereço direto da apresentação de edição é `/#edicao`, por exemplo: https://matheus-tahan-sab-portfolio.vercel.app/#edicao. Links diretos às seções e o histórico do navegador também mantêm a área selecionada.
+
+Essa área apresenta o Sab, os formatos de edição, o processo de trabalho e os contatos. O formulário compartilha a API existente e identifica as mensagens de edição no corpo do e-mail.
+
+Os trabalhos são cadastrados em `src/data/videoProjects.js`, usando `id`, `title`, `category`, `description` e `href` (link público). `thumbnail` é opcional; `src` permite um MP4/WebM reproduzido no próprio site. As categorias podem ser `Vídeos longos`, `Vídeos verticais` ou `Highlights`. Cadastre somente trabalhos autorizados para exposição pública. Enquanto não houver vídeos cadastrados, a página oferece contato para solicitar amostras, sem exibir projetos fictícios.
+
 Portfólio profissional desenvolvido para o Laboratório 01 de Desenvolvimento e Integração de Aplicações Web. O projeto apresenta formação, projetos, experiências e formas de contato.
 
 ## Prévia visual — Pokédex retrô

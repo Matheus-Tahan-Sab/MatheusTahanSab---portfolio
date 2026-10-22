@@ -14,7 +14,7 @@ function ContactIcon({ type }) {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{shapes[type]}</svg>;
 }
 
-export default function Contact() {
+export default function Contact({ editing = false }) {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
   async function handleSubmit(event) {
@@ -30,7 +30,7 @@ export default function Contact() {
     setSending(true);
     setStatus('Enviando mensagem…');
     try {
-      await sendContactMessage(values);
+      await sendContactMessage(editing ? { ...values, message: '[Edição de vídeo]\n\n' + values.message } : values);
       setStatus('Mensagem enviada com sucesso!');
       form.reset();
     } catch {
@@ -40,19 +40,21 @@ export default function Contact() {
     }
   }
   return (
-    <Section id="contato" title="Contato" number="04" caption="Abra um novo diálogo">
+    <Section id={editing ? 'edicao-contato' : 'contato'} title="Contato" number="04" caption={editing ? 'Vamos criar seu próximo vídeo' : 'Abra um novo diálogo'}>
       <div className="contact-layout">
         <div className="contact-copy">
           <h3>Vamos conversar?</h3>
-          <p>Tem uma oportunidade, uma ideia ou quer trocar experiências sobre desenvolvimento? Entre em contato.</p>
+          <p>{editing ? 'Me conte sobre seu canal, o estilo que você procura e o formato do vídeo. Vamos pensar juntos em uma edição que combine com você.' : 'Tem uma oportunidade, uma ideia ou quer trocar experiências sobre desenvolvimento? Entre em contato.'}</p>
           <ul className="contact-links">
             <li><a href={'mailto:' + profile.email}><ContactIcon type="email" /><span><small>E-mail</small>{profile.email}</span><span aria-hidden="true">↗</span></a></li>
             <li><a href={profile.whatsapp}><ContactIcon type="whatsapp" /><span>WhatsApp</span><span aria-hidden="true">↗</span></a></li>
             <li><a href={profile.discord}><ContactIcon type="discord" /><span>Discord</span><span aria-hidden="true">↗</span></a></li>
-            <li><a href={profile.linkedin}><ContactIcon type="linkedin" /><span>LinkedIn</span><span aria-hidden="true">↗</span></a></li>
-            <li><a href={profile.github}><ContactIcon type="github" /><span>GitHub</span><span aria-hidden="true">↗</span></a></li>
+            {!editing && <>
+              <li><a href={profile.linkedin}><ContactIcon type="linkedin" /><span>LinkedIn</span><span aria-hidden="true">↗</span></a></li>
+              <li><a href={profile.github}><ContactIcon type="github" /><span>GitHub</span><span aria-hidden="true">↗</span></a></li>
+            </>}
           </ul>
-          <p className="contact-note"><span aria-hidden="true">✦</span> Aberto a aprender, colaborar e construir.</p>
+          <p className="contact-note"><span aria-hidden="true">✦</span> {editing ? 'Edição com atenção à sua identidade e ao seu público.' : 'Aberto a aprender, colaborar e construir.'}</p>
         </div>
         <div className="contact-form-panel">
           <div className="panel-title"><h3>Envie uma mensagem</h3><span aria-hidden="true">✉</span></div>
@@ -62,7 +64,7 @@ export default function Contact() {
             <label htmlFor="contact-email">E-mail</label>
             <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="voce@exemplo.com" required maxLength={254} disabled={sending} />
             <label htmlFor="contact-message">Mensagem</label>
-            <textarea id="contact-message" name="message" rows={5} placeholder="Conte um pouco sobre sua ideia…" required maxLength={5000} disabled={sending} />
+            <textarea id="contact-message" name="message" rows={5} placeholder={editing ? 'Conte sobre seu canal, formato, referências e prazo…' : 'Conte um pouco sobre sua ideia…'} required maxLength={editing ? 5000 - '[Edição de vídeo]\n\n'.length : 5000} disabled={sending} />
             <input className="contact-honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             <button className="button" type="submit" disabled={sending}>{sending ? 'Enviando…' : 'Enviar mensagem'}<span aria-hidden="true">↗</span></button>
             <p className="form-status" role="status" aria-live="polite">{status}</p>
