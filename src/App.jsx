@@ -22,6 +22,12 @@ export default function App() {
     return () => window.removeEventListener('hashchange', syncPage);
   }, []);
   useEffect(() => {
+    document.documentElement.dataset.portfolio = editing ? 'editing' : 'development';
+    document.querySelector('link[rel="icon"]').href = editing ? '/favicon-adventure.svg' : '/favicon.svg';
+    const dark = document.documentElement.dataset.theme === 'dark';
+    document.querySelector('meta[name="theme-color"]').content = editing
+      ? (dark ? '#0c1b18' : '#163e32')
+      : (dark ? '#181c21' : '#ce3f40');
     document.title = editing ? 'Sab | Edição de vídeo' : 'Matheus Tahan Sab | Portfólio';
     document.querySelector('meta[name="description"]').content = editing
       ? 'Sab: edição de gameplays, vídeos longos, highlights e vídeos verticais. Conheça meu trabalho e vamos conversar sobre seu próximo vídeo.'

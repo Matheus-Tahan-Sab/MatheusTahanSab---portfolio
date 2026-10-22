@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AdventureCrest from '../ui/AdventureCrest.jsx';
 
 const navigation = [
   { href: '#sobre', label: 'Sobre mim' },
@@ -21,9 +22,11 @@ export default function Header({ editing = false }) {
   function toggleTheme() {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]').content = nextTheme === 'dark' ? '#181c21' : '#ce3f40';
+    document.querySelector('meta[name="theme-color"]').content = editing
+      ? (nextTheme === 'dark' ? '#0c1b18' : '#163e32')
+      : (nextTheme === 'dark' ? '#181c21' : '#ce3f40');
     setTheme(nextTheme);
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!editing && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setTransition(nextTheme);
       setTransitionCount(value => value + 1);
     }
@@ -35,11 +38,11 @@ export default function Header({ editing = false }) {
   }
   return (
     <header className="site-header">
-      {transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
+      {!editing && transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
       <div className="container header-inner">
         <a className="brand" href={editing ? '#edicao' : '#inicio'} aria-label="Matheus Tahan Sab — início">
-          <span className="device-light" aria-hidden="true" />
-          <span className="brand-copy"><strong>MTS<span>.</span></strong><small>PORTFÓLIO / #001</small></span>
+          {editing ? <AdventureCrest className="brand-crest" /> : <span className="device-light" aria-hidden="true" />}
+          <span className="brand-copy"><strong>{editing ? 'SAB' : 'MTS'}<span>.</span></strong><small>{editing ? 'ESTÚDIO DE EDIÇÃO' : 'PORTFÓLIO / #001'}</small></span>
         </a>
         <div className="header-actions"><nav className="main-nav" aria-label="Navegação principal">
           {(editing ? editingNavigation : navigation).map((item, index) => (

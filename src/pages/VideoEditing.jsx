@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Section from '../components/ui/Section.jsx';
 import Contact from './Contact.jsx';
+import AdventureScene from '../components/ui/AdventureScene.jsx';
+import AdventureCrest from '../components/ui/AdventureCrest.jsx';
 import { videoProjects } from '../data/videoProjects.js';
-import '../styles/video-editing.css';
 
 const services = [
   { number: '01', format: 'VÍDEOS LONGOS', title: 'Gameplays com história.', text: 'Seleciono os momentos que fazem o vídeo acontecer e construo o ritmo com cortes, humor e contexto. A ideia é manter a personalidade de quem está jogando.', tags: ['YouTube', 'Gameplays', 'Vlogs'] },
@@ -41,18 +42,13 @@ export default function VideoEditing() {
   return <div className="video-portfolio">
     <section className="video-hero" id="edicao" aria-labelledby="video-title">
       <div>
-        <p className="eyebrow"><span className="status-dot" aria-hidden="true" /> SAB / EDITOR DE VÍDEO</p>
+        <p className="eyebrow"><AdventureCrest className="video-hero-crest" /> SAB / EDITOR DE VÍDEO</p>
         <h1 id="video-title">Seu conteúdo.<br />Seu estilo.<br /><span>Meu próximo corte.</span></h1>
         <p className="video-intro">Sou o Sab, editor de vídeo e apaixonado por jogos. Transformo material bruto em vídeos com ritmo, humor e personalidade — sem perder o que faz o conteúdo ser seu.</p>
         <div className="hero-actions"><a className="button" href="#edicao-contato">Vamos criar um vídeo <span aria-hidden="true">↗</span></a><a className="video-text-link" href="#edicao-servicos">Conheça meu trabalho ↓</a></div>
         <p className="video-tool-note">DaVinci Resolve <span aria-hidden="true">/</span> Vídeos longos e verticais</p>
       </div>
-      <div className="video-timeline-art" aria-hidden="true">
-        <div className="video-art-toolbar"><span className="video-record-light" /><span>SAB — EDIT ROOM</span><span>01</span></div>
-        <div className="video-art-monitor"><span className="video-monitor-corner">REC</span><p>A história<br />ganha <em>ritmo.</em></p><span className="video-monitor-footer">CORTE · SOM · PERSONALIDADE</span></div>
-        <div className="video-art-ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
-        <div className="video-art-tracks"><div className="video-art-track"><span>V1</span><i>CENA 01</i><i>CENA 02</i><i>CENA 03</i></div><div className="video-art-track"><span>A1</span><i /><i /></div><div className="video-art-track"><span>FX</span><i>SFX</i><i>TEXTO</i></div><span className="video-playhead" /></div>
-      </div>
+      <AdventureScene />
     </section>
 
     <WorkGallery />

@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ce3f40" />
     <script>
+      document.documentElement.dataset.portfolio = location.hash.startsWith('#edicao') ? 'editing' : 'development';
       try {
         document.documentElement.dataset.theme = localStorage.getItem('mts-portfolio-theme') === 'dark' ? 'dark' : 'light';
       } catch {
         document.documentElement.dataset.theme = 'light';
       }
-      document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#181c21' : '#ce3f40';
+      document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.portfolio === 'editing'
+        ? (document.documentElement.dataset.theme === 'dark' ? '#0c1b18' : '#163e32')
+        : (document.documentElement.dataset.theme === 'dark' ? '#181c21' : '#ce3f40');
     </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="description" content="Portfólio de desenvolvimento de Matheus Tahan Sab." />

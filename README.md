@@ -4,6 +4,8 @@
 
 A navegação superior alterna entre Desenvolvimento e Edição de vídeo. O endereço direto da apresentação de edição é `/#edicao`, por exemplo: https://matheus-tahan-sab-portfolio.vercel.app/#edicao. Links diretos às seções e o histórico do navegador também mantêm a área selecionada.
 
+A área de edição tem uma identidade inspirada em Zelda: floresta, espada, ruínas, tons verdes e dourados e títulos com serifa. A ilustração é SVG local e acompanha os temas claro e escuro. O cabeçalho, os painéis e o ícone da aba mudam junto com a área selecionada; o visual de desenvolvimento permanece independente. As animações decorativas respeitam a preferência por movimento reduzido.
+
 Essa área apresenta o Sab, os formatos de edição, o processo de trabalho e os contatos. O formulário compartilha a API existente e identifica as mensagens de edição no corpo do e-mail.
 
 Os trabalhos são cadastrados em `src/data/videoProjects.js`, usando `id`, `title`, `category`, `description` e `href` (link público). `thumbnail` é opcional; `src` permite um MP4/WebM reproduzido no próprio site. As categorias podem ser `Vídeos longos`, `Vídeos verticais` ou `Highlights`. Cadastre somente trabalhos autorizados para exposição pública. Enquanto não houver vídeos cadastrados, a página oferece contato para solicitar amostras, sem exibir projetos fictícios.
