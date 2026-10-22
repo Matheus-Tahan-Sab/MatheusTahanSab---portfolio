@@ -1,91 +1,71 @@
 import { useState } from 'react';
-import { SiDiscord, SiInstagram, SiX } from 'react-icons/si';
-import { PiArrowUpRight, PiEnvelopeSimple, PiFilmStrip, PiMoonStars, PiPlayFill, PiSun } from 'react-icons/pi';
-import MajoraMask from '../components/ui/MajoraMask.jsx';
-import { getPortfolioTheme } from '../config/portfolioTheme.js';
-import { profile } from '../data/profile.js';
+import Section from '../components/ui/Section.jsx';
+import Contact from './Contact.jsx';
 import { videoProjects } from '../data/videoProjects.js';
+import '../styles/video-editing.css';
 
-function EditorHeader() {
-  const [theme, setTheme] = useState(() => getPortfolioTheme(true));
-  function toggleTheme() {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    document.querySelector('meta[name="theme-color"]').content = next === 'dark' ? '#100e19' : '#f2eee7';
-    try { localStorage.setItem('sab-editor-theme', next); } catch { /* A escolha funciona sem armazenamento. */ }
-  }
-  return <header className="editor-header">
-    <div className="editor-wrap editor-header-inner">
-      <a className="editor-brand" href="#edicao" aria-label="Sab — início"><MajoraMask className="editor-brand-mask" /><span>sab<span className="editor-brand-dot">.</span><small>edição de vídeo</small></span></a>
-      <nav className="editor-nav" aria-label="Navegação do portfólio de edição"><a href="#edicao-trabalhos">Trabalhos</a><a href="#edicao-contato">Contato</a></nav>
-      <button className="editor-theme" type="button" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'} title={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}>{theme === 'dark' ? <PiSun aria-hidden="true" /> : <PiMoonStars aria-hidden="true" />}</button>
-    </div>
-  </header>;
-}
+const services = [
+  { number: '01', format: 'VÍDEOS LONGOS', title: 'Gameplays com história.', text: 'Seleciono os momentos que fazem o vídeo acontecer e construo o ritmo com cortes, humor e contexto. A ideia é manter a personalidade de quem está jogando.', tags: ['YouTube', 'Gameplays', 'Vlogs'] },
+  { number: '02', format: 'VÍDEOS VERTICAIS', title: 'Uma ideia. Um bom corte.', text: 'Transformo momentos e ideias em vídeos diretos, com legendas, enquadramento e edição pensados para quem assiste pelo celular.', tags: ['Shorts', 'Reels', 'TikTok'] },
+  { number: '03', format: 'HIGHLIGHTS E CLIPES', title: 'Os momentos que ficam.', text: 'Jogadas, conversas e situações engraçadas ganham uma edição que valoriza o timing, as reações e o que torna aquele momento especial.', tags: ['Lives', 'Humor', 'Melhores momentos'] },
+];
 
-function MoonDivider() {
-  return <div className="editor-divider" aria-hidden="true"><span /><b>✦</b><i>☽</i><MajoraMask className="editor-divider-mask" /><i>☾</i><b>✦</b><span /></div>;
-}
-
-function NightScene() {
-  return <div className="editor-scene" aria-hidden="true">
-    <img className="editor-scenery" src="/images/editor/clock-town-night.webp" alt="" width="1536" height="1024" fetchPriority="high" />
-    <div className="editor-scene-shade" />
-    <div className="editor-fog editor-fog-one" /><div className="editor-fog editor-fog-two" />
-    <div className="editor-fairies">{Array.from({ length: 12 }, (_, i) => <span key={i} style={{ '--x': `${7 + (i * 23) % 89}%`, '--y': `${20 + (i * 17) % 65}%`, '--delay': `${i * -.8}s`, '--duration': `${5 + i % 4}s` }} />)}</div>
-  </div>;
-}
-
-function EditingWorks() {
+function WorkGallery() {
   const [category, setCategory] = useState('Todos');
   const categories = ['Todos', ...new Set(videoProjects.map(project => project.category))];
   const visible = category === 'Todos' ? videoProjects : videoProjects.filter(project => project.category === category);
-  return <section className="editor-works editor-wrap" id="edicao-trabalhos" aria-labelledby="editor-works-title">
-    <div className="editor-section-title"><div><p className="editor-kicker">PORTFÓLIO</p><h2 id="editor-works-title">Meus trabalhos</h2></div><span className="editor-section-star" aria-hidden="true">✧</span></div>
-    {videoProjects.length ? <>
-      <div className="editor-filters" role="group" aria-label="Filtrar trabalhos por formato">{categories.map(item => <button type="button" key={item} aria-pressed={item === category} onClick={() => setCategory(item)}>{item}</button>)}</div>
-      <div className="editor-work-grid">{visible.map(project => <article className="editor-work" key={project.id}>
-        {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="editor-work-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>{project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}<span className="editor-work-play"><PiPlayFill aria-hidden="true" /></span><span className="editor-work-open">Assistir <PiArrowUpRight aria-hidden="true" /></span></a>}
-        <div className="editor-work-caption"><p>{project.category}</p><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div>
-      </article>)}</div>
-    </> : <div className="editor-work-empty"><PiFilmStrip aria-hidden="true" /><div><p>Estou organizando as amostras de edição por aqui.</p><a href={'mailto:' + profile.email}>Enquanto isso, pode me pedir uma amostra por e-mail <PiArrowUpRight aria-hidden="true" /></a></div></div>}
-  </section>;
-}
-
-function EditingContacts() {
-  return <section className="editor-contact" id="edicao-contato" aria-labelledby="editor-contact-title"><div className="editor-wrap">
-    <div className="editor-contact-top"><div><p className="editor-kicker">CONTATO</p><h2 id="editor-contact-title">Pode me chamar.</h2><p>Se já tiver referências, prazo ou material gravado, pode mandar junto.</p></div><span className="editor-contact-sigil" aria-hidden="true">✧</span></div>
-    <a className="editor-email" href={'mailto:' + profile.email}><PiEnvelopeSimple aria-hidden="true" /><span>{profile.email}</span><PiArrowUpRight aria-hidden="true" /></a>
-    <div className="editor-socials">
-      <a className="editor-social editor-discord" href={profile.discord} target="_blank" rel="noopener noreferrer"><span className="editor-social-icon"><SiDiscord aria-hidden="true" /></span><span><strong>Discord</strong><small>Abrir meu perfil</small></span><PiArrowUpRight aria-hidden="true" /></a>
-      <a className="editor-social editor-x" href={profile.x} target="_blank" rel="noopener noreferrer"><span className="editor-social-icon"><SiX aria-hidden="true" /></span><span><strong>X</strong><small>@sab_editar</small></span><PiArrowUpRight aria-hidden="true" /></a>
-      <a className="editor-social editor-instagram" href={profile.instagram} target="_blank" rel="noopener noreferrer"><span className="editor-social-icon"><SiInstagram aria-hidden="true" /></span><span><strong>Instagram</strong><small>@sab_editar</small></span><PiArrowUpRight aria-hidden="true" /></a>
-    </div>
-  </div></section>;
+  return (
+    <Section id="edicao-trabalhos" title="Trabalhos" number="01" caption="Do material bruto ao vídeo final">
+      {videoProjects.length ? <>
+        <div className="video-filters" role="group" aria-label="Filtrar trabalhos por formato">
+          {categories.map(item => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
+        </div>
+        <div className="video-work-grid">
+          {visible.map(project => <article className="video-work" key={project.id}>
+            {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="video-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>
+              {project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}
+              <span className="video-play" aria-hidden="true">▶</span><span className="video-open">Assistir ↗</span>
+            </a>}
+            <div className="video-work-copy"><p className="content-label">{project.category}</p><h3>{project.title}</h3><p>{project.description}</p></div>
+          </article>)}
+        </div>
+      </> : <div className="video-samples-contact">
+        <span className="video-samples-icon" aria-hidden="true">▶</span>
+        <div><p className="content-label">Uma edição que combina com seu conteúdo</p><h3>Vamos conversar sobre o seu próximo vídeo?</h3><p>Me conte o formato e o estilo que você procura. Você também pode pedir amostras de edição diretamente pelo contato.</p><a className="button button-secondary" href="#edicao-contato">Conversar com o Sab <span aria-hidden="true">↗</span></a></div>
+      </div>}
+    </Section>
+  );
 }
 
 export default function VideoEditing() {
-  return <div className="editor-shell">
-    <NightScene />
-    <EditorHeader />
-    <main className="editor-main" id="conteudo" tabIndex={-1}>
-      <section className="editor-hero editor-wrap" id="edicao" aria-labelledby="editor-title">
-        <div className="editor-hero-copy">
-          <p className="editor-kicker">EDIÇÃO DE VÍDEO <span className="editor-kicker-line" aria-hidden="true" /></p>
-          <h1 id="editor-title">Oi, eu sou o <span>Sab.</span></h1>
-          <p>Sou Matheus. Edito gameplays, clipes de lives e vídeos para redes sociais.</p>
-          <div className="editor-hero-actions"><a className="editor-primary" href="#edicao-trabalhos">Ver trabalhos <PiArrowUpRight aria-hidden="true" /></a><a className="editor-text-link" href="#edicao-contato">Falar comigo <PiEnvelopeSimple aria-hidden="true" /></a></div>
-        </div>
-        <div className="editor-portrait-area">
-          <div className="editor-photo-frame"><img className="editor-photo" src="/images/profile/matheus-tahan-sab.png" alt="Matheus Tahan Sab, editor de vídeo" width="499" height="792" fetchPriority="high" /></div>
-          <img className="editor-carved-frame" src="/images/editor/moon-portrait-frame.webp" width="800" height="800" alt="" aria-hidden="true" />
-        </div>
-      </section>
-      <div className="editor-wrap"><MoonDivider /></div>
-      <EditingWorks />
-      <EditingContacts />
-    </main>
-    <footer className="editor-footer editor-wrap"><p>© {new Date().getFullYear()} Sab · Edição de vídeo</p><a href="#inicio">Portfólio de desenvolvimento <PiArrowUpRight aria-hidden="true" /></a></footer>
+  return <div className="video-portfolio">
+    <section className="video-hero" id="edicao" aria-labelledby="video-title">
+      <div>
+        <p className="eyebrow"><span className="status-dot" aria-hidden="true" /> SAB / EDITOR DE VÍDEO</p>
+        <h1 id="video-title">Seu conteúdo.<br />Seu estilo.<br /><span>Meu próximo corte.</span></h1>
+        <p className="video-intro">Sou o Sab, editor de vídeo e apaixonado por jogos. Transformo material bruto em vídeos com ritmo, humor e personalidade — sem perder o que faz o conteúdo ser seu.</p>
+        <div className="hero-actions"><a className="button" href="#edicao-contato">Vamos criar um vídeo <span aria-hidden="true">↗</span></a><a className="video-text-link" href="#edicao-servicos">Conheça meu trabalho ↓</a></div>
+        <p className="video-tool-note">DaVinci Resolve <span aria-hidden="true">/</span> Vídeos longos e verticais</p>
+      </div>
+      <div className="video-timeline-art" aria-hidden="true">
+        <div className="video-art-toolbar"><span className="video-record-light" /><span>SAB — EDIT ROOM</span><span>01</span></div>
+        <div className="video-art-monitor"><span className="video-monitor-corner">REC</span><p>A história<br />ganha <em>ritmo.</em></p><span className="video-monitor-footer">CORTE · SOM · PERSONALIDADE</span></div>
+        <div className="video-art-ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
+        <div className="video-art-tracks"><div className="video-art-track"><span>V1</span><i>CENA 01</i><i>CENA 02</i><i>CENA 03</i></div><div className="video-art-track"><span>A1</span><i /><i /></div><div className="video-art-track"><span>FX</span><i>SFX</i><i>TEXTO</i></div><span className="video-playhead" /></div>
+      </div>
+    </section>
+
+    <WorkGallery />
+
+    <Section id="edicao-servicos" title="O que eu edito" number="02" caption="O formato muda. A atenção aos detalhes fica.">
+      <div className="video-services">{services.map(service => <article key={service.number} className="video-service"><p className="content-label"><span>{service.number}</span> {service.format}</p><h3>{service.title}</h3><p>{service.text}</p><ul className="video-tags" aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
+      <div className="video-about"><p className="content-label">POR TRÁS DOS CORTES</p><div><h3>Pode me chamar de Sab.</h3><p>Sou Matheus Tahan Sab. Gosto de jogos, de boas histórias e daqueles momentos que ficam ainda melhores com a edição certa. Trabalho com DaVinci Resolve e gosto de explorar cortes dinâmicos, textos, sons e humor quando eles fazem sentido para o vídeo.</p><p>Antes de editar, procuro entender o estilo do canal, a identidade de quem cria e o público que vai assistir. Cada projeto tem seu próprio ritmo.</p></div></div>
+    </Section>
+
+    <Section id="edicao-processo" title="Como vamos trabalhar" number="03" caption="Conversa, edição e ajuste fino">
+      <ol className="video-process"><li><span aria-hidden="true">01</span><div><h3>Entender a ideia</h3><p>Conversamos sobre seu canal, referências, formato e prazo. Você compartilha o material e alinhamos o que o vídeo precisa transmitir.</p></div></li><li><span aria-hidden="true">02</span><div><h3>Encontrar o ritmo</h3><p>Organizo os melhores momentos e construo a edição, combinando cortes, áudio e elementos visuais com o estilo que definimos.</p></div></li><li><span aria-hidden="true">03</span><div><h3>Refinar juntos</h3><p>Você acompanha o resultado, traz seu feedback e alinhamos os ajustes e a entrega no formato combinado.</p></div></li></ol>
+      <p className="video-process-note">Já tem uma ideia em mente? <a href="#edicao-contato">Vamos conversar sobre ela ↗</a></p>
+    </Section>
+    <Contact editing />
   </div>;
 }

@@ -1,5 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { getPortfolioTheme } from './config/portfolioTheme.js';
+import { useEffect, useState } from 'react';
 import VideoEditing from './pages/VideoEditing.jsx';
 import PokemonCompanion from './components/ui/PokemonCompanion.jsx';
 import DeveloperActivity from './pages/DeveloperActivity.jsx';
@@ -22,17 +21,10 @@ export default function App() {
     window.addEventListener('hashchange', syncPage);
     return () => window.removeEventListener('hashchange', syncPage);
   }, []);
-  useLayoutEffect(() => {
-    document.documentElement.dataset.portfolio = editing ? 'editing' : 'development';
-    document.documentElement.dataset.theme = getPortfolioTheme(editing);
-    document.querySelector('link[rel="icon"]').href = editing ? '/favicon-editor.svg' : '/favicon.svg';
-    const dark = document.documentElement.dataset.theme === 'dark';
-    document.querySelector('meta[name="theme-color"]').content = editing
-      ? (dark ? '#100e19' : '#f2eee7')
-      : (dark ? '#181c21' : '#ce3f40');
+  useEffect(() => {
     document.title = editing ? 'Sab | Edição de vídeo' : 'Matheus Tahan Sab | Portfólio';
     document.querySelector('meta[name="description"]').content = editing
-      ? 'Sab, editor de vídeo. Gameplays, shorts e clipes. Trabalhos e contatos.'
+      ? 'Sab: edição de gameplays, vídeos longos, highlights e vídeos verticais. Conheça meu trabalho e vamos conversar sobre seu próximo vídeo.'
       : 'Portfólio de desenvolvimento de Matheus Tahan Sab.';
     const frame = requestAnimationFrame(() => {
       const target = document.getElementById(window.location.hash.slice(1));
@@ -43,19 +35,19 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-      {editing ? <VideoEditing /> : <>
-        <Header />
-        <main id="conteudo" className="container" tabIndex={-1}>
+      <Header editing={editing} />
+      <main id="conteudo" className="container" tabIndex={-1}>
+        {editing ? <VideoEditing /> : <>
           <Hero />
           <About />
           <Projects />
           <Experiences />
           <DeveloperActivity />
           <Contact />
-        </main>
-        <Footer />
-        <PokemonCompanion />
-      </>}
+        </>}
+      </main>
+      <Footer editing={editing} />
+      {!editing && <PokemonCompanion />}
     </>
   );
 }
