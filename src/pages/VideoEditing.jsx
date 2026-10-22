@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Section from '../components/ui/Section.jsx';
 import PixelBattlePreview from '../components/ui/PixelBattlePreview.jsx';
 import Contact from './Contact.jsx';
@@ -11,31 +10,33 @@ const services = [
   { number: '03', format: 'HIGHLIGHTS E CLIPES', title: 'Os momentos que ficam.', text: 'Jogadas, conversas e situações engraçadas ganham uma edição que valoriza o timing, as reações e o que torna aquele momento especial.', tags: ['Lives', 'Humor', 'Melhores momentos'] },
 ];
 
+function WorkCard({ project }) {
+  const short = project.category === 'Vídeos verticais';
+  return <article className={`video-work${short ? ' video-work-vertical' : ''}`}>
+    {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="video-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>
+      {project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}
+      <span className="video-play" aria-hidden="true">▶</span><span className="video-open">Assistir ↗</span>
+    </a>}
+    <div className="video-work-copy"><p className="content-label">{short ? 'Shorts' : project.category}</p><h4>{project.title}</h4>{project.description && <p>{project.description}</p>}</div>
+  </article>;
+}
+
 function WorkGallery() {
-  const [category, setCategory] = useState('Todos');
-  const categories = ['Todos', ...new Set(videoProjects.map(project => project.category))];
-  const visible = category === 'Todos' ? videoProjects : videoProjects.filter(project => project.category === category);
-  return (
-    <Section id="edicao-trabalhos" title="Trabalhos" number="01" caption="Do material bruto ao vídeo final">
-      {videoProjects.length ? <>
-        <div className="video-filters" role="group" aria-label="Filtrar trabalhos por formato">
-          {categories.map(item => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
-        </div>
-        <div className="video-work-grid">
-          {visible.map(project => <article className={`video-work${project.category === 'Vídeos verticais' ? ' video-work-vertical' : ''}`} key={project.id}>
-            {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="video-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>
-              {project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}
-              <span className="video-play" aria-hidden="true">▶</span><span className="video-open">Assistir ↗</span>
-            </a>}
-            <div className="video-work-copy"><p className="content-label">{project.category}</p><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div>
-          </article>)}
-        </div>
-      </> : <div className="video-samples-contact">
-        <span className="video-samples-icon" aria-hidden="true">▶</span>
-        <div><p className="content-label">Uma edição que combina com seu conteúdo</p><h3>Vamos conversar sobre o seu próximo vídeo?</h3><p>Me conte o formato e o estilo que você procura. Você também pode pedir amostras de edição diretamente pelo contato.</p><a className="button button-secondary" href="#edicao-contato">Conversar com o Sab <span aria-hidden="true">↗</span></a></div>
-      </div>}
-    </Section>
-  );
+  const categories = [...new Set(videoProjects.map(project => project.category))];
+  return <Section id="edicao-trabalhos" title="Trabalhos" number="01" caption="Do material bruto ao vídeo final">
+    {videoProjects.length ? <div className="video-work-groups">{categories.map((category, index) => {
+      const projects = videoProjects.filter(project => project.category === category);
+      const title = category === 'Vídeos verticais' ? 'Vídeos curtos' : category;
+      const headingId = `video-work-group-${index}`;
+      return <section className="video-work-group" aria-labelledby={headingId} key={category}>
+        <div className="video-work-group-heading"><h3 id={headingId}>{title}</h3><span>{projects.length} {projects.length === 1 ? 'vídeo' : 'vídeos'}</span></div>
+        <div className={`video-work-grid${projects.length === 1 ? ' video-work-grid-single' : ''}`}>{projects.map(project => <WorkCard project={project} key={project.id} />)}</div>
+      </section>;
+    })}</div> : <div className="video-samples-contact">
+      <span className="video-samples-icon" aria-hidden="true">▶</span>
+      <div><p className="content-label">Uma edição que combina com seu conteúdo</p><h3>Vamos conversar sobre o seu próximo vídeo?</h3><p>Me conte o formato e o estilo que você procura. Você também pode pedir amostras de edição diretamente pelo contato.</p><a className="button button-secondary" href="#edicao-contato">Conversar com o Sab <span aria-hidden="true">↗</span></a></div>
+    </div>}
+  </Section>;
 }
 
 export default function VideoEditing() {
