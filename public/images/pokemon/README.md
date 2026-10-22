@@ -13,3 +13,5 @@ Cada arquivo é preservado integralmente; o CSS seleciona os quadros, com escala
 As poses estáticas anteriores da PokéAPI permanecem arquivadas nestas três imagens: swampert.png, lucario.png, gengar.png. Origem https://github.com/PokeAPI/sprites, `sprites/pokemon/versions/generation-v/black-white/{260,448,94}.png`.
 
 Animações CSS respeitam pausa e movimento reduzido; não requerem API externa.
+
+A prévia de batalha também usa `swampert-back.png`, sprite de costas da PokéAPI: https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-v/black-white/back/260.png. Ele posiciona Swampert voltado para o oponente.

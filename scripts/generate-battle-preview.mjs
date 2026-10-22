@@ -9,7 +9,9 @@ import { execFileSync } from 'node:child_process';
 
 const output = new URL('../public/images/editor/', import.meta.url);
 const sprites = {};
-for (const name of ['swampert', 'gengar']) sprites[name] = `data:image/png;base64,${(await readFile(new URL(`../public/images/pokemon/${name}.png`, import.meta.url))).toString('base64')}`;
+for (const [name, file] of [['swampert', 'swampert-back'], ['gengar', 'gengar']]) {
+  sprites[name] = `data:image/png;base64,${(await readFile(new URL(`../public/images/pokemon/${file}.png`, import.meta.url))).toString('base64')}`;
+}
 const frames = await mkdtemp(join(tmpdir(), 'sab-battle-'));
 const browser = await chromium.launch({
   ...(process.env.BATTLE_CHROMIUM_PATH ? { executablePath: process.env.BATTLE_CHROMIUM_PATH } : {}),
