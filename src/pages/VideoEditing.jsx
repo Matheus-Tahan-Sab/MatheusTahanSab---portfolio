@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SiDiscord, SiInstagram, SiX } from 'react-icons/si';
-import { PiArrowDown, PiArrowUpRight, PiEnvelopeSimple, PiFilmStrip, PiMoonStars, PiPlayFill, PiSun } from 'react-icons/pi';
+import { PiArrowUpRight, PiEnvelopeSimple, PiFilmStrip, PiMoonStars, PiPlayFill, PiSun } from 'react-icons/pi';
 import MajoraMask from '../components/ui/MajoraMask.jsx';
 import { getPortfolioTheme } from '../config/portfolioTheme.js';
 import { profile } from '../data/profile.js';
@@ -24,14 +24,17 @@ function EditorHeader() {
   </header>;
 }
 
-function MoonGlyph() {
-  return <svg className="editor-moon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-    <circle cx="60" cy="60" r="55" fill="var(--edit-moon)" stroke="var(--edit-line)" />
-    <path d="M78 8a55 55 0 0 0 0 104A55 55 0 0 1 78 8Z" fill="#342943" opacity=".2" />
-    <g fill="var(--edit-moon-shadow)"><circle cx="26" cy="42" r="7" /><circle cx="81" cy="24" r="5" /><circle cx="90" cy="77" r="8" /><circle cx="39" cy="92" r="5" /></g>
-    <path d="m32 51 19 5-4 11-14-5-1-11Zm56 0-19 5 4 11 14-5 1-11Z" fill="var(--edit-moon-shadow)" />
-    <path d="m60 58-7 15h14l-7-15ZM39 81q21 12 42 0M48 85v5m8-2v5m8-5v5m8-8v5" stroke="var(--edit-moon-shadow)" strokeWidth="2" strokeLinecap="round" fill="none" />
-  </svg>;
+function MoonDivider() {
+  return <div className="editor-divider" aria-hidden="true"><span /><b>✦</b><i>☽</i><MajoraMask className="editor-divider-mask" /><i>☾</i><b>✦</b><span /></div>;
+}
+
+function NightScene() {
+  return <div className="editor-scene" aria-hidden="true">
+    <img className="editor-scenery" src="/images/editor/clock-town-night.webp" alt="" width="1536" height="1024" fetchPriority="high" />
+    <div className="editor-scene-shade" />
+    <div className="editor-fog editor-fog-one" /><div className="editor-fog editor-fog-two" />
+    <div className="editor-fairies">{Array.from({ length: 12 }, (_, i) => <span key={i} style={{ '--x': `${7 + (i * 23) % 89}%`, '--y': `${20 + (i * 17) % 65}%`, '--delay': `${i * -.8}s`, '--duration': `${5 + i % 4}s` }} />)}</div>
+  </div>;
 }
 
 function EditingWorks() {
@@ -39,7 +42,7 @@ function EditingWorks() {
   const categories = ['Todos', ...new Set(videoProjects.map(project => project.category))];
   const visible = category === 'Todos' ? videoProjects : videoProjects.filter(project => project.category === category);
   return <section className="editor-works editor-wrap" id="edicao-trabalhos" aria-labelledby="editor-works-title">
-    <div className="editor-section-title"><div><p className="editor-kicker">PORTFÓLIO</p><h2 id="editor-works-title">Algumas edições</h2></div><span className="editor-section-star" aria-hidden="true">✧</span></div>
+    <div className="editor-section-title"><div><p className="editor-kicker">PORTFÓLIO</p><h2 id="editor-works-title">Meus trabalhos</h2></div><span className="editor-section-star" aria-hidden="true">✧</span></div>
     {videoProjects.length ? <>
       <div className="editor-filters" role="group" aria-label="Filtrar trabalhos por formato">{categories.map(item => <button type="button" key={item} aria-pressed={item === category} onClick={() => setCategory(item)}>{item}</button>)}</div>
       <div className="editor-work-grid">{visible.map(project => <article className="editor-work" key={project.id}>
@@ -64,12 +67,22 @@ function EditingContacts() {
 
 export default function VideoEditing() {
   return <div className="editor-shell">
+    <NightScene />
     <EditorHeader />
     <main className="editor-main" id="conteudo" tabIndex={-1}>
       <section className="editor-hero editor-wrap" id="edicao" aria-labelledby="editor-title">
-        <div className="editor-hero-copy"><p className="editor-kicker"><span aria-hidden="true">✦</span> EDITOR DE VÍDEO</p><h1 id="editor-title">Oi, eu sou<br />o <span>Sab.</span></h1><p>Sou Matheus, mas pode me chamar de Sab. Trabalho com edição de vídeos e uso o DaVinci Resolve.</p><p>Gosto principalmente de editar gameplays e momentos engraçados. Também faço shorts, clipes de lives e outros formatos.</p><div className="editor-hero-actions"><a className="editor-primary" href="#edicao-trabalhos">Ver meus trabalhos <PiArrowDown aria-hidden="true" /></a><a className="editor-text-link" href="#edicao-contato">Falar comigo <PiArrowUpRight aria-hidden="true" /></a></div></div>
-        <div className="editor-portrait-area"><div className="editor-orbit" aria-hidden="true" /><MoonGlyph /><div className="editor-photo-frame"><img className="editor-photo" src="/images/profile/matheus-tahan-sab.png" alt="Matheus Tahan Sab, editor de vídeo" width="499" height="792" fetchPriority="high" /></div><MajoraMask className="editor-portrait-mask" /><span className="editor-photo-spark spark-one" aria-hidden="true">✧</span><span className="editor-photo-spark spark-two" aria-hidden="true">✦</span><p className="editor-photo-caption">MATHEUS TAHAN SAB</p></div>
+        <div className="editor-hero-copy">
+          <p className="editor-kicker">EDIÇÃO DE VÍDEO <span className="editor-kicker-line" aria-hidden="true" /></p>
+          <h1 id="editor-title">Oi, eu sou o <span>Sab.</span></h1>
+          <p>Sou Matheus. Edito gameplays, clipes de lives e vídeos para redes sociais.</p>
+          <div className="editor-hero-actions"><a className="editor-primary" href="#edicao-trabalhos">Ver trabalhos <PiArrowUpRight aria-hidden="true" /></a><a className="editor-text-link" href="#edicao-contato">Falar comigo <PiEnvelopeSimple aria-hidden="true" /></a></div>
+        </div>
+        <div className="editor-portrait-area">
+          <div className="editor-photo-frame"><img className="editor-photo" src="/images/profile/matheus-tahan-sab.png" alt="Matheus Tahan Sab, editor de vídeo" width="499" height="792" fetchPriority="high" /></div>
+          <img className="editor-carved-frame" src="/images/editor/moon-portrait-frame.webp" width="800" height="800" alt="" aria-hidden="true" />
+        </div>
       </section>
+      <div className="editor-wrap"><MoonDivider /></div>
       <EditingWorks />
       <EditingContacts />
     </main>

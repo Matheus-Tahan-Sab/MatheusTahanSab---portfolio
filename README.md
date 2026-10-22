@@ -4,7 +4,7 @@
 
 A área de edição tem página própria em `/#edicao`: https://matheus-tahan-sab-portfolio.vercel.app/#edicao. O seletor na área de desenvolvimento leva à edição; o link no rodapé da edição retorna ao desenvolvimento. Links diretos às seções e o histórico do navegador também mantêm a área selecionada.
 
-A identidade de edição se inspira em Majora's Mask, com roxo, verde, máscara e lua em SVG, além da foto real do editor. O layout tem cabeçalho, apresentação, galeria e contatos próprios e não usa os painéis da área dev. A edição abre no modo escuro e salva sua preferência em `sab-editor-theme`, independentemente do tema de desenvolvimento em `mts-portfolio-theme`.
+A identidade de edição se inspira em Majora's Mask, com cenário noturno ilustrado, lua, torre do relógio, máscara, moldura de bronze e a foto real do editor. Névoa e luzes animadas respeitam a preferência por movimento reduzido. A arte é carregada em WebP; textos, botões e galeria continuam em HTML. Veja a [direção visual e os arquivos de arte](docs/design/editor-art-direction.md). O layout tem cabeçalho, apresentação, galeria e contatos próprios e não usa os painéis da área dev. A edição abre no modo escuro e salva sua preferência em `sab-editor-theme`, independentemente do tema de desenvolvimento em `mts-portfolio-theme`.
 
 Essa área apresenta o Sab brevemente e segue direto para os trabalhos. O contato acontece por e-mail, Discord, X e Instagram, com ícones próprios. O formulário com a API existente permanece na área de desenvolvimento.
 
