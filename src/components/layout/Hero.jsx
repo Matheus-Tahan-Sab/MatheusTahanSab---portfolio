@@ -19,7 +19,7 @@ export default function Hero() {
         </div>
         <div className="trainer-screen">
           <div className="screen-top"><span>PERFIL DO DESENVOLVEDOR</span><span aria-hidden="true">▮▮▮</span></div>
-          <div className="trainer-visual"><img className="trainer-portrait" src="/images/profile/matheus-tahan-sab.png" alt="Foto de Matheus Tahan Sab" width="499" height="792" fetchPriority="high" /></div>
+          <div className="trainer-visual"><span className="trainer-monogram" aria-label="Iniciais de Matheus Tahan Sab">MTS</span></div>
           <p className="trainer-name">MATHEUS TAHAN SAB</p>
           <p className="trainer-class">Engenharia de Software</p>
           <div className="trainer-types"><span>BACK-END</span><span>ESTUDANTE</span></div>

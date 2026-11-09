@@ -8,6 +8,24 @@ const services = [
   { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], icon: '↺' },
 ];
 
+function SabController() {
+  return <svg className="sab-controller" viewBox="0 0 420 310" fill="none" aria-hidden="true">
+    <path d="M212 80C212 35 300 65 300 15" stroke="#111216" strokeWidth="9" strokeLinecap="round"/>
+    <path d="M106 89C70 90 53 126 39 178L22 244C15 275 44 296 67 276L132 220H289L353 276C376 296 405 275 397 244L379 178C365 126 351 90 315 89L106 89Z" fill="#111216" transform="translate(0 10)"/>
+    <path d="M106 89C70 90 53 126 39 178L22 244C15 275 44 296 67 276L132 220H289L353 276C376 296 405 275 397 244L379 178C365 126 351 90 315 89L106 89Z" fill="#f5f0d9" stroke="#111216" strokeWidth="8" strokeLinejoin="round"/>
+    <path d="M103 119H125V141H147V164H125V186H103V164H81V141H103V119Z" fill="#3555f5" stroke="#111216" strokeWidth="5" strokeLinejoin="round"/>
+    <circle cx="311" cy="132" r="14" fill="#ff713f" stroke="#111216" strokeWidth="5"/>
+    <circle cx="341" cy="161" r="14" fill="#3555f5" stroke="#111216" strokeWidth="5"/>
+    <circle cx="281" cy="161" r="14" fill="#3555f5" stroke="#111216" strokeWidth="5"/>
+    <circle cx="311" cy="190" r="14" fill="#ff713f" stroke="#111216" strokeWidth="5"/>
+    <rect x="171" y="133" width="75" height="44" rx="7" fill="#111216"/>
+    <path d="M201 143L222 155L201 167V143Z" fill="#ff713f"/>
+    <path d="M186 195H200M217 195H231" stroke="#111216" strokeWidth="7" strokeLinecap="round"/>
+    <path d="M58 207L50 238M365 207L373 238" stroke="#111216" strokeWidth="5" strokeLinecap="round"/>
+    <path d="M42 52L27 32M87 44L88 18M365 53L384 34" stroke="#f5f0d9" strokeWidth="7" strokeLinecap="round"/>
+  </svg>;
+}
+
 function SectionHeading({ number, label, children }) {
   return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
 }
@@ -54,11 +72,11 @@ export default function VideoEditing() {
         <h1 id="cut-hero-title">SEU VÍDEO.<br /><span>OUTRO</span><br /><em>RITMO.</em></h1>
         <p className="cut-intro">Cortes com intenção. Humor no timing certo.<br />Uma edição com a cara do seu canal.</p>
         <div className="cut-hero-actions"><a className="cut-button" href="#edicao-trabalhos">Dá o play nos trabalhos <span aria-hidden="true">↘</span></a><a className="cut-text-link" href="#edicao-contato">Vamos conversar ↗</a></div>
-        <p className="cut-hero-footnote">GAMEPLAYS / VÍDEOS LONGOS / SHORTS</p>
+        <p className="cut-hero-footnote">GAMEPLAYS / VÍDEOS LONGOS / SHORTS</p><span className="sab-hero-sticker" aria-hidden="true">CORTA.<br />ENCAIXA.<br />DÁ PLAY. ↗</span>
       </div>
       <div className="cut-art" aria-label="Composição gráfica inspirada em uma timeline de edição">
         <div className="cut-art-meta"><span>SAB / EDIT SESSION</span><span aria-hidden="true">● REC</span></div>
-        <div className="cut-art-stage" aria-hidden="true"><span className="cut-stage-cross">+</span><span className="cut-big-sab">SAB</span><span className="cut-stage-slash" /><span className="cut-stage-caption">FEITO PRA<br />DAR PLAY.</span><span className="cut-stage-cross cut-cross-end">+</span></div>
+        <div className="cut-art-stage" aria-hidden="true"><span className="cut-stage-cross">+</span><span className="cut-big-sab">SAB</span><SabController /><span className="cut-stage-slash" /><span className="cut-stage-caption">FEITO PRA<br />DAR PLAY.</span><span className="cut-stage-cross cut-cross-end">+</span></div>
         <div className="cut-art-bottom"><span>CRIATIVIDADE EM CADA CORTE.</span><span aria-hidden="true">↗</span></div>
         <div className="cut-art-timeline" aria-hidden="true"><div className="cut-time-ruler"><span>00:00</span><span>00:15</span><span>00:30</span></div><div className="cut-time-clips">{videoProjects.map(project => <div key={project.id}><img src={project.thumbnail} alt="" width="160" height="90" /><span>{project.category === 'Vídeos verticais' ? 'SHORT' : 'GAMEPLAY'}</span></div>)}</div><div className="cut-waveform" /><span className="cut-art-playhead" /></div>
         <span className="cut-tool-stamp">EDITADO NO<br /><strong>DaVinci Resolve</strong></span>
@@ -79,7 +97,7 @@ export default function VideoEditing() {
     </section>
 
     <section className="cut-section cut-about" id="edicao-sobre" aria-labelledby="cut-about-title">
-      <div className="cut-portrait"><img src="/images/profile/matheus-tahan-sab.png" alt="Matheus Tahan Sab, editor de vídeo" width="499" height="792" loading="lazy" /><div className="cut-portrait-caption"><span>MATHEUS TAHAN SAB</span><span aria-hidden="true">↗</span></div><span className="cut-portrait-tag">POR TRÁS DOS CORTES</span></div>
+      <div className="sab-identity-art" aria-label="Controle de videogame ilustrado, identidade visual do Sab"><span className="sab-identity-top">PLAYER 01 / SAB</span><span className="sab-identity-star" aria-hidden="true">✳</span><SabController /><strong>GAME ON.<br /><span>EDIT ON.</span></strong><span className="sab-identity-sticker">TIMING É TUDO.</span><div className="sab-identity-bottom"><span>GAMEPLAYS & BOAS HISTÓRIAS</span><span aria-hidden="true">↗</span></div></div>
       <div><p className="cut-label"><span>03</span> QUEM ESTÁ NA TIMELINE</p><h2 id="cut-about-title">PODE ME<br />CHAMAR DE <em>SAB.</em></h2><p>Sou Matheus Tahan Sab. Gosto de jogos, de boas histórias e daqueles momentos que ficam ainda melhores com a edição certa. Também crio vídeos com meus amigos, então conheço a vontade de transformar uma gameplay em algo que vale compartilhar.</p><p>Trabalho com DaVinci Resolve, combinando cortes, textos, sons e humor. Antes de editar, procuro entender o seu estilo e quem vai assistir. O vídeo precisa continuar com a sua cara.</p><div className="cut-about-signature"><span>Sab<span aria-hidden="true">↗</span></span><p>EDITOR DE VÍDEO<br />GAMER DO OUTRO LADO DA TELA.</p></div></div>
     </section>
 
