@@ -78,3 +78,41 @@
  .comic-intro *, .comic-intro *::before, .comic-intro *::after { animation: none !important; transition: none !important; }
  .comic-motion-toggle { display: none; }
 }
+
+/* O cenário ocupa a página inteira; a leitura mantém sua própria medida. */
+.editor-site .comic-intro {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: clamp(28px, 4vw, 70px) clamp(20px, 6vw, 150px);
+}
+.comic-intro::before {
+  background-color: #ff7949;
+  background-image: repeating-conic-gradient(from 12deg at -12% 85%, transparent 0 9deg, #20203830 9.2deg 9.8deg, transparent 10deg 18deg), radial-gradient(#17182935 1px, transparent 1.6px);
+  background-size: auto, 5px 5px;
+}
+.comic-intro::after {
+  content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(-44deg, transparent 0 13px, #fcf1cb70 14px 18px, transparent 19px 28px);
+  clip-path: polygon(86% 0,100% 0,100% 100%,95% 100%,98% 54%,83% 20%,94% 26%);
+}
+.comic-intro .comic-opening {
+  max-width: 1580px; margin-inline: auto; padding: 0; border: 0;
+  background: transparent; box-shadow: none; gap: clamp(28px, 5vw, 100px);
+  align-items: center;
+}
+.comic-intro .comic-bio {
+  background: transparent; border: 0; padding-inline: clamp(10px, 4vw, 80px);
+}
+.comic-intro .comic-motion-panel {
+  border: 4px solid #111216; box-shadow: 10px 12px 0 #111216;
+  transform: rotate(1.6deg); min-height: clamp(450px, 30vw, 620px);
+}
+.comic-intro .comic-frame-heading {max-width:1580px;margin-inline:auto}
+.comic-intro .comic-page-note {color:#362529}
+.comic-intro .comic-bottom-rail {margin-inline:calc(-1 * clamp(20px, 6vw, 150px));}
+@media(max-width:760px){
+ .editor-site .comic-intro{padding:24px 20px 32px}
+ .comic-intro .comic-bio{padding:22px 4px 12px}
+ .comic-intro .comic-motion-panel{min-height:380px;transform:rotate(1deg);box-shadow:5px 6px 0 #111216}
+ .comic-intro .comic-bottom-rail{margin-inline:-20px}
+}
