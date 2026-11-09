@@ -1,3 +1,4 @@
+import '../styles/doorman-scenes.css';
 import { useEffect, useRef, useState } from 'react';
 import Contact from './Contact.jsx';
 import EditorIntro from '../components/EditorIntro/EditorIntro.jsx';
@@ -52,22 +53,22 @@ export default function VideoEditing() {
     <EditorIntro />
 
     <section className="cut-section cut-works" id="edicao-trabalhos" aria-labelledby="cut-work-title">
-      <div className="cut-work-intro"><SectionHeading number="01" label="TRABALHOS SELECIONADOS"><span id="cut-work-title">MENOS PAPO.<br /><em>MAIS PLAY.</em></span></SectionHeading><p>Do material bruto ao vídeo que você assiste.<br />Uma seleção de trabalhos que já saíram da timeline.</p></div>
+      <div className="studio-scene scene-works"><div><SectionHeading number="02" label="Sala de projeção"><span id="cut-work-title">TRABALHOS<br /><em>EM CARTAZ.</em></span></SectionHeading><p className="studio-dialogue">Luzes baixas. Escolhe um vídeo e dá o play.</p></div><img src="/images/doorman/works.webp" alt="" loading="lazy" /></div>
       {longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
-      {shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><span className="cut-note-arrow" aria-hidden="true">↗</span><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
+      {shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
     </section>
 
     <section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
-      <SectionHeading number="02" label="O QUE EU EDITO"><span id="cut-services-title">CADA FORMATO.<br /><em>SEU PRÓPRIO RITMO.</em></span></SectionHeading>
+      <div className="studio-scene scene-services"><div><SectionHeading number="03" label="Serviços"><span id="cut-services-title">QUAL É O<br /><em>FORMATO?</em></span></SectionHeading><p className="studio-dialogue">Vai passar no celular ou na tela inteira? Vamos escolher o enquadramento.</p></div><img src="/images/doorman/services.webp" alt="" loading="lazy" /></div>
       <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
     </section>
 
     <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
-      <SectionHeading number="04" label="COMO A GENTE TRABALHA"><span id="cut-process-title">DA IDEIA<br /><em>AO ÚLTIMO CORTE.</em></span></SectionHeading>
+      <div className="studio-scene scene-process"><div><SectionHeading number="04" label="Ilha de edição"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading><p className="studio-dialogue">Já temos o formato. Puxa uma cadeira que eu te mostro a montagem.</p></div><img src="/images/doorman/process.webp" alt="" loading="lazy" /></div>
       <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
     </section>
 
-    <div className="cut-contact-intro"><p className="cut-label">PRÓXIMA CENA: O SEU PROJETO.</p><h2>BORA TIRAR<br />DO <em>BRUTO?</em> <span aria-hidden="true">↙</span></h2></div>
+    <div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2><p className="studio-dialogue">O próximo vídeo pode ser o seu. Me conta a ideia?</p></div><img src="/images/doorman/contact.webp" alt="" loading="lazy" /></div></div>
     <Contact editing />
     <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
