@@ -1,75 +1,95 @@
-import Section from '../components/ui/Section.jsx';
-import PixelBattlePreview from '../components/ui/PixelBattlePreview.jsx';
+import { useEffect, useRef, useState } from 'react';
 import Contact from './Contact.jsx';
 import { videoProjects } from '../data/videoProjects.js';
-import '../styles/video-editing.css';
 
 const services = [
-  { number: '01', format: 'VÍDEOS LONGOS', title: 'Gameplays com história.', text: 'Seleciono os momentos que fazem o vídeo acontecer e construo o ritmo com cortes, humor e contexto. A ideia é manter a personalidade de quem está jogando.', tags: ['YouTube', 'Gameplays', 'Vlogs'] },
-  { number: '02', format: 'VÍDEOS VERTICAIS', title: 'Uma ideia. Um bom corte.', text: 'Transformo momentos e ideias em vídeos diretos, com legendas, enquadramento e edição pensados para quem assiste pelo celular.', tags: ['Shorts', 'Reels', 'TikTok'] },
-  { number: '03', format: 'HIGHLIGHTS E CLIPES', title: 'Os momentos que ficam.', text: 'Jogadas, conversas e situações engraçadas ganham uma edição que valoriza o timing, as reações e o que torna aquele momento especial.', tags: ['Lives', 'Humor', 'Melhores momentos'] },
+  { format: '01 / LONG FORM', title: 'Uma gameplay. Uma história.', text: 'Dos melhores momentos ao vídeo completo: cortes, contexto e humor no ritmo do seu canal.', tags: ['YouTube', 'Gameplays', 'Vlogs'], icon: '↗' },
+  { format: '02 / SHORT FORM', title: 'Direto ao ponto.', text: 'Enquadramento, legendas e timing para transformar uma boa ideia em um vídeo que funciona no celular.', tags: ['Shorts', 'Reels', 'TikTok'], icon: '↟' },
+  { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], icon: '↺' },
 ];
 
-function WorkCard({ project }) {
-  const short = project.category === 'Vídeos verticais';
-  return <article className={`video-work${short ? ' video-work-vertical' : ''}`}>
-    {project.src ? <video controls preload="none" poster={project.thumbnail || undefined} aria-label={project.title}><source src={project.src} /><a href={project.href || project.src}>Abrir vídeo: {project.title}</a></video> : <a className="video-cover" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Assistir a ${project.title} (abre em nova aba)`}>
-      {project.thumbnail && <img src={project.thumbnail} alt="" loading="lazy" width="640" height="360" />}
-      <span className="video-play" aria-hidden="true">▶</span><span className="video-open">Assistir ↗</span>
-    </a>}
-    <div className="video-work-copy"><p className="content-label">{short ? 'Shorts' : project.category}</p><h4>{project.title}</h4>{project.description && <p>{project.description}</p>}</div>
+function SectionHeading({ number, label, children }) {
+  return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
+}
+
+function WorkCard({ project, index, onPlay }) {
+  const vertical = project.category === 'Vídeos verticais';
+  return <article className={'cut-work' + (vertical ? ' cut-work-short' : '')}>
+    <button className="cut-work-cover" onClick={() => onPlay(project)} aria-label={'Assistir: ' + project.title}>
+      <img src={project.thumbnail} alt="" loading="lazy" width={vertical ? 360 : 640} height={vertical ? 640 : 360} />
+      <span className="cut-work-top"><span>{vertical ? '9:16 / SHORT' : '16:9 / YOUTUBE'}</span><span>{String(index + 1).padStart(2, '0')}</span></span>
+      <span className="cut-play" aria-hidden="true">▶</span>
+      <span className="cut-watch">Assistir ao vídeo <span aria-hidden="true">↗</span></span>
+    </button>
+    <div className="cut-work-copy"><p className="cut-label">{project.description}</p><h4>{project.title}</h4><a href={project.href} target="_blank" rel="noopener noreferrer">Abrir no YouTube <span aria-hidden="true">↗</span></a></div>
   </article>;
 }
 
-function WorkGallery() {
-  const categories = [...new Set(videoProjects.map(project => project.category))];
-  return <Section id="edicao-trabalhos" title="Trabalhos" number="01" caption="Do material bruto ao vídeo final">
-    {videoProjects.length ? <div className="video-work-groups">{categories.map((category, index) => {
-      const projects = videoProjects.filter(project => project.category === category);
-      const title = category === 'Vídeos verticais' ? 'Vídeos curtos' : category;
-      const headingId = `video-work-group-${index}`;
-      return <section className="video-work-group" aria-labelledby={headingId} key={category}>
-        <div className="video-work-group-heading"><h3 id={headingId}>{title}</h3><span>{projects.length} {projects.length === 1 ? 'vídeo' : 'vídeos'}</span></div>
-        <div className={`video-work-grid${projects.length === 1 ? ' video-work-grid-single' : ''}`}>{projects.map(project => <WorkCard project={project} key={project.id} />)}</div>
-      </section>;
-    })}</div> : <div className="video-samples-contact">
-      <span className="video-samples-icon" aria-hidden="true">▶</span>
-      <div><p className="content-label">Uma edição que combina com seu conteúdo</p><h3>Vamos conversar sobre o seu próximo vídeo?</h3><p>Me conte o formato e o estilo que você procura. Você também pode pedir amostras de edição diretamente pelo contato.</p><a className="button button-secondary" href="#edicao-contato">Conversar com o Sab <span aria-hidden="true">↗</span></a></div>
-    </div>}
-  </Section>;
+function VideoPlayer({ project, onClose }) {
+  const dialog = useRef(null);
+  useEffect(() => {
+    if (!project) return;
+    const element = dialog.current;
+    const previousOverflow = document.body.style.overflow;
+    element.showModal();
+    document.body.style.overflow = 'hidden';
+    return () => { element.close(); document.body.style.overflow = previousOverflow; };
+  }, [project]);
+  if (!project) return null;
+  return <dialog ref={dialog} className="cut-player" aria-labelledby="cut-player-title" onClose={onClose} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
+    <div className="cut-player-heading"><h2 id="cut-player-title">{project.title}</h2><button type="button" onClick={onClose} aria-label="Fechar vídeo">✕</button></div>
+    <iframe className={project.category === 'Vídeos verticais' ? 'cut-player-vertical' : ''} src={'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(project.id)} title={project.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+    <p>Prefere assistir por lá? <a href={project.href} target="_blank" rel="noopener noreferrer">Abrir no YouTube ↗</a></p>
+  </dialog>;
 }
 
 export default function VideoEditing() {
+  const [playing, setPlaying] = useState(null);
+  const longVideos = videoProjects.filter(project => project.category !== 'Vídeos verticais');
+  const shorts = videoProjects.filter(project => project.category === 'Vídeos verticais');
   return <div className="video-portfolio">
-    <section className="video-hero" id="edicao" aria-labelledby="video-title">
-      <div>
-        <p className="eyebrow"><span className="status-dot" aria-hidden="true" /> SAB / EDITOR DE VÍDEO</p>
-        <h1 id="video-title">Sobre Mim</h1>
-        <p className="video-intro">Sou Matheus Tahan Sab, mas pode me chamar de Sab. Sou editor de vídeo, gosto de jogos e também crio vídeos com meus amigos.</p>
-        <p className="video-intro">Uso o DaVinci Resolve para editar gameplays, vídeos longos, shorts e clipes de lives.</p>
-        <div className="hero-actions"><a className="button" href="#edicao-trabalhos">Ver trabalhos <span aria-hidden="true">↓</span></a><a className="video-text-link" href="#edicao-contato">Falar comigo ↗</a></div>
-        <p className="video-tool-note">DaVinci Resolve <span aria-hidden="true">/</span> Vídeos longos e verticais</p>
+    <section className="cut-hero" id="edicao" aria-labelledby="cut-hero-title">
+      <div className="cut-hero-copy">
+        <p className="cut-label"><span className="cut-live-dot" /> SAB / EDITOR DE VÍDEO</p>
+        <h1 id="cut-hero-title">SEU VÍDEO.<br /><span>OUTRO</span><br /><em>RITMO.</em></h1>
+        <p className="cut-intro">Cortes com intenção. Humor no timing certo.<br />Uma edição com a cara do seu canal.</p>
+        <div className="cut-hero-actions"><a className="cut-button" href="#edicao-trabalhos">Dá o play nos trabalhos <span aria-hidden="true">↘</span></a><a className="cut-text-link" href="#edicao-contato">Vamos conversar ↗</a></div>
+        <p className="cut-hero-footnote">GAMEPLAYS / VÍDEOS LONGOS / SHORTS</p>
       </div>
-      <div className="video-timeline-art">
-        <div className="video-art-toolbar" aria-hidden="true"><span className="video-record-light" /><span>SAB — EDIT ROOM</span><span>01</span></div>
-        <div className="video-art-monitor"><PixelBattlePreview /></div>
-        <div className="video-monitor-controls" aria-hidden="true"><span>◀◀ &nbsp; ▶ &nbsp; ▶▶</span><span>00:18 / 00:45</span><span>⛶</span></div>
-        <div className="video-art-ruler" aria-hidden="true"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
-        <div className="video-art-tracks" aria-hidden="true"><div className="video-art-track"><span>V1</span><i>CENA 01</i><i>CENA 02</i><i>CENA 03</i></div><div className="video-art-track"><span>A1</span><i /><i /></div><div className="video-art-track"><span>FX</span><i>SFX</i><i>TEXTO</i></div><span className="video-playhead" /></div>
+      <div className="cut-art" aria-label="Composição gráfica inspirada em uma timeline de edição">
+        <div className="cut-art-meta"><span>SAB / EDIT SESSION</span><span aria-hidden="true">● REC</span></div>
+        <div className="cut-art-stage" aria-hidden="true"><span className="cut-stage-cross">+</span><span className="cut-big-sab">SAB</span><span className="cut-stage-slash" /><span className="cut-stage-caption">FEITO PRA<br />DAR PLAY.</span><span className="cut-stage-cross cut-cross-end">+</span></div>
+        <div className="cut-art-bottom"><span>CRIATIVIDADE EM CADA CORTE.</span><span aria-hidden="true">↗</span></div>
+        <div className="cut-art-timeline" aria-hidden="true"><div className="cut-time-ruler"><span>00:00</span><span>00:15</span><span>00:30</span></div><div className="cut-time-clips">{videoProjects.map(project => <div key={project.id}><img src={project.thumbnail} alt="" width="160" height="90" /><span>{project.category === 'Vídeos verticais' ? 'SHORT' : 'GAMEPLAY'}</span></div>)}</div><div className="cut-waveform" /><span className="cut-art-playhead" /></div>
+        <span className="cut-tool-stamp">EDITADO NO<br /><strong>DaVinci Resolve</strong></span>
       </div>
     </section>
 
-    <WorkGallery />
+    <div className="cut-format-strip" aria-label="Especialidades"><span>GAMEPLAYS</span><i aria-hidden="true">✳</i><span>STORYTELLING</span><i aria-hidden="true">✳</i><span>SHORTS & REELS</span><i aria-hidden="true">✳</i><span>HIGHLIGHTS</span></div>
 
-    <Section id="edicao-servicos" title="O que eu edito" number="02" caption="O formato muda. A atenção aos detalhes fica.">
-      <div className="video-services">{services.map(service => <article key={service.number} className="video-service"><p className="content-label"><span>{service.number}</span> {service.format}</p><h3>{service.title}</h3><p>{service.text}</p><ul className="video-tags" aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
-      <div className="video-about"><p className="content-label">POR TRÁS DOS CORTES</p><div><h3>Pode me chamar de Sab.</h3><p>Sou Matheus Tahan Sab. Gosto de jogos, de boas histórias e daqueles momentos que ficam ainda melhores com a edição certa. Trabalho com DaVinci Resolve e gosto de explorar cortes dinâmicos, textos, sons e humor quando eles fazem sentido para o vídeo.</p><p>Antes de editar, procuro entender o estilo do canal, a identidade de quem cria e o público que vai assistir. Cada projeto tem seu próprio ritmo.</p></div></div>
-    </Section>
+    <section className="cut-section cut-works" id="edicao-trabalhos" aria-labelledby="cut-work-title">
+      <div className="cut-work-intro"><SectionHeading number="01" label="TRABALHOS SELECIONADOS"><span id="cut-work-title">MENOS PAPO.<br /><em>MAIS PLAY.</em></span></SectionHeading><p>Do material bruto ao vídeo que você assiste.<br />Uma seleção de trabalhos que já saíram da timeline.</p></div>
+      {longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
+      {shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><span className="cut-note-arrow" aria-hidden="true">↗</span><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
+    </section>
 
-    <Section id="edicao-processo" title="Como vamos trabalhar" number="03" caption="Conversa, edição e ajuste fino">
-      <ol className="video-process"><li><span aria-hidden="true">01</span><div><h3>Entender a ideia</h3><p>Conversamos sobre seu canal, referências, formato e prazo. Você compartilha o material e alinhamos o que o vídeo precisa transmitir.</p></div></li><li><span aria-hidden="true">02</span><div><h3>Encontrar o ritmo</h3><p>Organizo os melhores momentos e construo a edição, combinando cortes, áudio e elementos visuais com o estilo que definimos.</p></div></li><li><span aria-hidden="true">03</span><div><h3>Refinar juntos</h3><p>Você acompanha o resultado, traz seu feedback e alinhamos os ajustes e a entrega no formato combinado.</p></div></li></ol>
-      <p className="video-process-note">Já tem uma ideia em mente? <a href="#edicao-contato">Vamos conversar sobre ela ↗</a></p>
-    </Section>
+    <section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
+      <SectionHeading number="02" label="O QUE EU EDITO"><span id="cut-services-title">CADA FORMATO.<br /><em>SEU PRÓPRIO RITMO.</em></span></SectionHeading>
+      <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
+    </section>
+
+    <section className="cut-section cut-about" id="edicao-sobre" aria-labelledby="cut-about-title">
+      <div className="cut-portrait"><img src="/images/profile/matheus-tahan-sab.png" alt="Matheus Tahan Sab, editor de vídeo" width="499" height="792" loading="lazy" /><div className="cut-portrait-caption"><span>MATHEUS TAHAN SAB</span><span aria-hidden="true">↗</span></div><span className="cut-portrait-tag">POR TRÁS DOS CORTES</span></div>
+      <div><p className="cut-label"><span>03</span> QUEM ESTÁ NA TIMELINE</p><h2 id="cut-about-title">PODE ME<br />CHAMAR DE <em>SAB.</em></h2><p>Sou Matheus Tahan Sab. Gosto de jogos, de boas histórias e daqueles momentos que ficam ainda melhores com a edição certa. Também crio vídeos com meus amigos, então conheço a vontade de transformar uma gameplay em algo que vale compartilhar.</p><p>Trabalho com DaVinci Resolve, combinando cortes, textos, sons e humor. Antes de editar, procuro entender o seu estilo e quem vai assistir. O vídeo precisa continuar com a sua cara.</p><div className="cut-about-signature"><span>Sab<span aria-hidden="true">↗</span></span><p>EDITOR DE VÍDEO<br />GAMER DO OUTRO LADO DA TELA.</p></div></div>
+    </section>
+
+    <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
+      <SectionHeading number="04" label="COMO A GENTE TRABALHA"><span id="cut-process-title">DA IDEIA<br /><em>AO ÚLTIMO CORTE.</em></span></SectionHeading>
+      <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
+    </section>
+
+    <div className="cut-contact-intro"><p className="cut-label">PRÓXIMA CENA: O SEU PROJETO.</p><h2>BORA TIRAR<br />DO <em>BRUTO?</em> <span aria-hidden="true">↙</span></h2></div>
     <Contact editing />
+    <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
 }

@@ -33,6 +33,20 @@ export default function Header({ editing = false }) {
       // A troca continua funcionando quando o navegador bloqueia o armazenamento.
     }
   }
+  if (editing) return (
+    <header className="editor-header">
+      <div className="container editor-header-inner">
+        <a className="editor-logo" href="#edicao" aria-label="Sab — edição de vídeo, início">SAB<span aria-hidden="true">/</span><small>VIDEO EDITOR<br />PORTFÓLIO</small></a>
+        <nav className="editor-nav" aria-label="Navegação principal">
+          <a href="#edicao-trabalhos">Trabalhos</a>
+          <a className="editor-nav-extra" href="#edicao-servicos">Serviços</a>
+          <a className="editor-nav-extra" href="#edicao-sobre">Sobre mim</a>
+          <a className="editor-nav-contact" href="#edicao-contato">Falar com o Sab ↗</a>
+          <a className="editor-dev-link" href="#inicio" aria-label="Ir para o portfólio de programação">DEV &lt;/&gt;</a>
+        </nav>
+      </div>
+    </header>
+  );
   return (
     <header className="site-header">
       {transition ? <div className="theme-transition" key={transitionCount} aria-hidden="true" onAnimationEnd={() => setTransition(null)}><span className={`theme-ball ${transition === 'dark' ? 'ultra-ball' : 'poke-ball'}`}><i /></span></div> : null}
