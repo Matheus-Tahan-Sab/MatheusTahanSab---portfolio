@@ -54,8 +54,8 @@ export default function Header({ editing = false }) {
         </button></div>
       </div>
       <nav className="portfolio-switch container" aria-label="Áreas do portfólio">
-        <a href="#inicio" aria-current={!editing ? 'page' : undefined}><span aria-hidden="true">&lt;/&gt;</span> Desenvolvimento</a>
         <a href="#edicao" aria-current={editing ? 'page' : undefined}><span aria-hidden="true">▶</span> Edição de vídeo</a>
+        <a href="#inicio" aria-current={!editing ? 'page' : undefined}><span aria-hidden="true">&lt;/&gt;</span> Desenvolvimento</a>
       </nav>
     </header>
   );

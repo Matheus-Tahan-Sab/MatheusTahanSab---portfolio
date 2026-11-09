@@ -10,12 +10,17 @@ import Projects from './pages/Projects.jsx';
 import Experiences from './pages/Experiences.jsx';
 import Contact from './pages/Contact.jsx';
 
+function isEditingPortfolio() {
+  const { hash } = window.location;
+  return !hash || hash === '#conteudo' || hash.startsWith('#edicao');
+}
+
 export default function App() {
-  const [editing, setEditing] = useState(() => window.location.hash.startsWith('#edicao'));
+  const [editing, setEditing] = useState(isEditingPortfolio);
   useEffect(() => {
     const syncPage = () => {
       if (window.location.hash !== '#conteudo') {
-        setEditing(window.location.hash.startsWith('#edicao'));
+        setEditing(isEditingPortfolio());
       }
     };
     window.addEventListener('hashchange', syncPage);
