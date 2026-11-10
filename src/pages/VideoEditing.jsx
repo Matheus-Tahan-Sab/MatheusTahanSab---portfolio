@@ -80,6 +80,16 @@ export default function VideoEditing() {
     window.addEventListener('hashchange', navigate);
     return () => { clearTimeout(exitTimer.current); window.removeEventListener('hashchange', navigate); };
   }, []);
+  useEffect(() => {
+    if (!letterOpen || room !== 'letter') return;
+    const contact = document.getElementById('edicao-contato');
+    if (!contact) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    contact.scrollIntoView({
+      behavior: reducedMotion ? 'instant' : 'smooth',
+      block: 'start',
+    });
+  }, [letterOpen, room]);
   function leaveCinema(event) {
     const link = event.target.closest('a[href]');
     if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
