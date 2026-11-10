@@ -15,6 +15,34 @@ function SectionHeading({ number, label, children }) {
   return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
 }
 
+function EditingStudio() {
+  const scene = useRef(null);
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    if (!window.IntersectionObserver) {
+      setStarted(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    observer.observe(scene.current);
+    return () => observer.disconnect();
+  }, []);
+  return <div className={'editing-suite' + (started ? ' is-playing' : '')} ref={scene}>
+    <div className="suite-art" aria-hidden="true">
+      <img className="suite-room" src="/images/doorman/seated-editor.webp" alt="" width="2098" height="749" />
+      <img className="suite-glance" src="/images/doorman/editor-glance.webp" alt="" />
+      <i className="suite-playhead" />
+    </div>
+    <div className="suite-heading"><SectionHeading number="04" label="Estúdio de montagem"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading></div>
+    <p className="suite-dialogue"><small>Doorman</small>Puxa uma cadeira. Quero ver se esse corte ficou no tempo certo.</p>
+  </div>;
+}
+
 function WorkCard({ project, index, onPlay }) {
   const vertical = project.category === 'Vídeos verticais';
   return <article className={'cut-work' + (vertical ? ' cut-work-short' : '')}>
@@ -116,7 +144,7 @@ export default function VideoEditing() {
     </section>
 
     <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
-      <div className="studio-scene scene-process"><div><SectionHeading number="04" label="Estúdio de montagem"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Trouxe os quadros do laboratório. Puxa uma cadeira! É aqui que o Sab escolhe a ordem e dá ritmo à história.</p><img src="/images/doorman/process.webp" alt="" loading="lazy" /></div></div>
+      <EditingStudio />
       <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
     </section></>}
     {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><button type="button" className="hand-letter" aria-label={letterOpen ? 'Fechar carta' : 'Receber a carta'} aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}><img src="/images/doorman/contact.webp" alt="" /></button></div></div></div>
