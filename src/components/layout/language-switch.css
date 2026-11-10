@@ -2,4 +2,20 @@
 .site-languages button { color:#fff; background:transparent; border:0; padding:.45rem .55rem; min-height:36px; cursor:pointer; font:700 .75rem monospace; }
 .site-languages button[aria-pressed="true"] { color:#141519; background:#fff3cf; }
 .site-languages button:focus-visible { outline:2px solid #ff713f; outline-offset:-3px; }
-@media(max-width:760px){.editor-header-inner .editor-nav{flex:1}.header-actions .site-languages{margin-top:.4rem}}
+
+.site-languages {
+  position: fixed;
+  z-index: 30;
+  top: max(6px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+}
+@media (max-width: 1510px) {
+  .editor-header .editor-header-inner,
+  .site-header .header-inner { padding-right: 80px; }
+}
+@media (max-width: 760px) {
+  .editor-header-inner .editor-nav { flex: 1; }
+  .site-header .header-inner { padding-right: 0; }
+  .site-header .theme-toggle { right: 72px; }
+  .site-languages button { min-height: 32px; padding: .35rem .45rem; }
+}
