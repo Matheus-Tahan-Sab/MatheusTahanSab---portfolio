@@ -89,6 +89,7 @@ export default function VideoEditing() {
     setExitLink(href);
     exitTimer.current = setTimeout(() => {
       exitTimer.current = null;
+      setExitLink('');
       window.location.assign(href);
     }, 1050);
   }
