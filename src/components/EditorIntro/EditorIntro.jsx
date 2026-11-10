@@ -62,9 +62,9 @@ export default function EditorIntro() {
       </div>
 
       {choosing && <nav className="booth-choices" aria-label="Responder ao Doorman">
-        <a ref={firstReply} href="#edicao-trabalhos" onClick={offerTicket}>Quero assistir aos vídeos</a>
-        <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
-        <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a>
+        <a ref={firstReply} href="#edicao-trabalhos" onClick={offerTicket}>Ver vídeos</a>
+        <a href="#edicao-servicos" onClick={enterCinema}>Ver serviços</a>
+        <a href="#edicao-contato" onClick={enterCinema}>Falar com o Sab</a>
       </nav>}
       {offering && !entering && <button type="button" className="booth-return"
         onClick={() => setOffering(false)}>Voltar às opções</button>}
