@@ -34,7 +34,7 @@ export default function EditorIntro() {
         <p>Edito gameplays, vídeos longos e shorts no DaVinci Resolve, com humor e o ritmo do seu canal.</p>
       </article>
       <p className="ticket-balloon" aria-live="polite">{greeting ? 'Bem-vindo ao Cine Sab!' : 'Aonde eu te levo hoje?'}</p>
-      <div className="ticket-cat" aria-hidden="true"><img src="/images/doorman/cat.webp" alt="" /></div>
+      <div className="ticket-cat" aria-hidden="true"><span className="ava-walker" /></div>
       <nav className="booth-replies" aria-label="Responder ao Doorman">
         <a href="#edicao-trabalhos" onClick={enterCinema}>Quero assistir aos vídeos</a>
         <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>

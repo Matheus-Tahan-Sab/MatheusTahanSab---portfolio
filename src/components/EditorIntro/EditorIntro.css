@@ -12,10 +12,26 @@
 .ticket-host,.ticket-guide{position:absolute;bottom:14.6%;left:43%;width:36%;height:58%;object-fit:contain;object-position:bottom;filter:drop-shadow(4px 3px 2px #23122088)}
 .ticket-guide{opacity:0}
 .ticket-balloon{position:absolute;left:39%;top:33%;max-width:18ch;background:#fff0d2;border:2px solid #271522;color:#311d26;border-radius:16px 16px 2px 16px;padding:.6rem .9rem;font-weight:700;font-size:clamp(.75rem,1.1vw,1rem)}
-.ticket-cat{position:absolute;bottom:10%;left:8%;width:11%;pointer-events:none;animation:booth-walk 24s ease-in-out infinite alternate}
-.ticket-cat img{width:100%;display:block;animation:booth-facing 48s step-end infinite}
-@keyframes booth-walk{0%,10%{left:8%}85%,100%{left:79%}}
-@keyframes booth-facing{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
+.ticket-cat {
+  --crossing: 16s;
+  --stride: 1s;
+  position: absolute;
+  bottom: 10%;
+  left: 8%;
+  width: 11%;
+  pointer-events: none;
+  animation: booth-cross var(--crossing) linear infinite alternate;
+}
+.ava-walker {
+  display: block;
+  aspect-ratio: 288 / 180;
+  background: url('/images/doorman/ava-walk.webp') left bottom / 800% 100% no-repeat;
+  animation: booth-stride var(--stride) steps(8, jump-none) infinite,
+             booth-turn calc(var(--crossing) * 2) step-end infinite;
+}
+@keyframes booth-cross { from { left: 8%; } to { left: 79%; } }
+@keyframes booth-stride { from { background-position-x: 0%; } to { background-position-x: 100%; } }
+@keyframes booth-turn { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
 .editor-site .ticket-stub{position:absolute;left:43%;bottom:3.5%;display:inline-flex;gap:1.1em;align-items:center;padding:.65em 1em;color:#321920;background:#ffe6aa;border:3px double #784422;text-decoration:none;font-weight:800;box-shadow:4px 4px #2c1318;transform:rotate(-3deg)}
 .ticket-stub b{border-left:2px dashed #805126;padding-left:1em}
 .ticket-room[data-entering=true] .ticket-set{animation:booth-pass 1.6s both}
@@ -27,7 +43,7 @@
 .cinema-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.5rem 0}
 .cinema-filter button{min-height:42px;border:1px solid #dbbc86;color:#ffecc9;background:#301c29;padding:.45rem 1rem;cursor:pointer}
 .cinema-filter button[aria-pressed=true]{background:#ffe3a3;color:#381722}
-@media(max-width:700px){.ticket-set{height:clamp(610px,110vw,740px);background-size:150% 100%;background-position:55% center}.ticket-bio{top:20%;left:4%;width:45%;padding:8px;background:#17151bdb;border-radius:3px}.editor-site .ticket-bio h1{font-size:clamp(1.9rem,7vw,3.2rem)}.ticket-bio p:last-child{line-height:1.45}.ticket-host,.ticket-guide{left:42%;width:44%;height:42%}.ticket-balloon{left:51%;top:37%;max-width:40%}.ticket-door{height:42%;width:15%;right:2%}.ticket-cat{width:19%}.editor-site .ticket-stub{left:28%}}
+@media(max-width:700px){.ticket-set{height:clamp(610px,110vw,740px);background-size:150% 100%;background-position:55% center}.ticket-bio{top:20%;left:4%;width:45%;padding:8px;background:#17151bdb;border-radius:3px}.editor-site .ticket-bio h1{font-size:clamp(1.9rem,7vw,3.2rem)}.ticket-bio p:last-child{line-height:1.45}.ticket-host,.ticket-guide{left:42%;width:44%;height:42%}.ticket-balloon{left:51%;top:37%;max-width:40%}.ticket-door{height:42%;width:15%;right:2%}.ticket-cat{width:19%;--crossing:9s}.editor-site .ticket-stub{left:28%}}
 @media(prefers-reduced-motion:reduce){.ticket-room *{animation:none!important;transition:none!important}}
 
 .ticket-set{animation:cinema-arrive 1.1s ease-out both}
