@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import './EditorIntro.css';
 
 export default function EditorIntro() {
-  const [entering, setEntering] = useState(false);
+  const [destination, setDestination] = useState('');
+  const entering = Boolean(destination);
+  const [called, setCalled] = useState(false);
+  const firstReply = useRef(null);
   const timer = useRef(null);
-  const [greeting, setGreeting] = useState(true);
   useEffect(() => {
-    const id = setTimeout(() => setGreeting(false), 1100);
-    return () => clearTimeout(id);
-  }, []);
+    if (called) firstReply.current?.focus({preventScroll: true});
+  }, [called]);
   useEffect(() => () => clearTimeout(timer.current), []);
   function enterCinema(event) {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -16,29 +17,34 @@ export default function EditorIntro() {
     event.preventDefault();
     if (timer.current !== null) return;
     const destination = event.currentTarget.hash;
-    setEntering(true);
+    setDestination(destination);
     timer.current = setTimeout(() => {
-      setEntering(false);
+      setDestination('');
       timer.current = null;
       window.location.hash = destination;
-    }, 1600);
+    }, 2100);
   }
-  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering}>
+  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called}>
     <div id="edicao-sobre" className="ticket-anchor" />
     <div className="ticket-set">
       <div className="ticket-door" aria-hidden="true"><i /></div>
-      <img className="ticket-host" src="/images/doorman/welcome.webp" alt="Doorman na bilheteria" />
-      <img className="ticket-guide" src="/images/doorman/turn.webp" alt="" />
+      <img className="ticket-host" src="/images/doorman/salute.webp" alt="Doorman na bilheteria" />
+      <img className="ticket-guide" src="/images/doorman/escort.webp" alt="" />
+      <div className="counter-edge" aria-hidden="true" />
       <article className="ticket-bio">
         <p>Cine Sab</p><h1 id="booth-title">Matheus<br/>Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
         <p>Edito gameplays, vídeos longos e shorts no DaVinci Resolve, com humor e o ritmo do seu canal.</p>
       </article>
-      <p className="ticket-balloon" aria-live="polite">{greeting ? 'Bem-vindo ao Cine Sab!' : 'Aonde eu te levo hoje?'}</p>
+      <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
+        : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
+        : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
+        : called ? 'Aonde eu te levo hoje?' : 'Um visitante! Pode tocar a campainha.'}</p>
       <div className="ticket-cat" aria-hidden="true"><span className="ava-walker" /></div>
       <nav className="booth-replies" aria-label="Responder ao Doorman">
-        <a href="#edicao-trabalhos" onClick={enterCinema}>Quero assistir aos vídeos</a>
+        {!called ? <button type="button" className="desk-bell" onClick={() => setCalled(true)}><i aria-hidden="true" />Tocar a campainha</button> : <>
+        <a ref={firstReply} href="#edicao-trabalhos" onClick={enterCinema}>Quero assistir aos vídeos</a>
         <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
-        <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a>
+        <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a></>}
       </nav>
     </div>
   </section>;

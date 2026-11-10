@@ -61,3 +61,24 @@
 .editor-site .portal-exit a{position:absolute;bottom:15%;padding:.8rem;background:#111e33;color:white}
 @media(max-width:700px){.booth-replies{gap:.35rem;bottom:1%}.editor-site .booth-replies a{font-size:.75rem;padding:.48rem}.ticket-set{min-height:650px}}
 @media(prefers-reduced-motion:reduce){.portal-exit *,.ticket-set{animation:none!important}}
+
+/* Use the painted counter as a foreground plate in the same perspective. */
+.counter-edge { position:absolute; inset:0; pointer-events:none; background:inherit; clip-path:inset(83% 0 0); }
+.ticket-set .ticket-host,.ticket-set .ticket-guide { height:74%; bottom:4%; width:28%; left:48%; transform-origin:50% 100%; }
+.ticket-room[data-called=false] .ticket-host { transform:translateX(20%) scale(.78); filter:brightness(.78); }
+.ticket-room[data-called=true] .ticket-host { animation:approach-counter .85s ease-out both; }
+@keyframes approach-counter { from {transform:translateX(20%) scale(.78);filter:brightness(.78)} 58% {transform:translateX(7%) translateY(-1%) scale(.93)} to {transform:none} }
+.ticket-room .ticket-balloon {left:35%;top:15%;max-width:22ch;}
+.ticket-room[data-entering=true] .ticket-balloon {opacity:1;}
+.ticket-room[data-entering=true] .ticket-guide {animation:cross-threshold 1.55s ease-in both;}
+.ticket-room[data-entering=true] .ticket-set {animation:follow-usher 2.1s both;}
+.ticket-room[data-entering=true] .booth-replies {visibility:hidden;}
+@keyframes cross-threshold {0% {opacity:0} 12% {opacity:1} 44% {transform:translate(38%,-3%) scale(.91)} 82% {opacity:1} 100% {opacity:0;transform:translate(97%,-14%) scale(.52)} }
+@keyframes follow-usher {0%,50% {transform:scale(1)} 75% {filter:brightness(1)} 100% {transform:scale(6);filter:brightness(1.7)} }
+.desk-bell {display:inline-flex;align-items:center;gap:.75em;padding:.6em 1.1em;background:#271921;color:#ffe0a2;border:2px solid #c19351;border-radius:3px;box-shadow:0 4px #180d10;font:inherit;font-weight:700;cursor:pointer;}
+.desk-bell i {width:1.7em;height:.9em;border-radius:100% 100% 10% 10%;background:linear-gradient(110deg,#835231,#ffde91,#956034);border-bottom:3px solid #ca995b;}
+.desk-bell:hover i,.desk-bell:focus-visible i {transform:rotate(-9deg)}
+.scene-contact .cinema-speaker img {height:clamp(220px,34vw,440px);width:100%;object-fit:contain;object-position:bottom;}
+.scene-contact button.hand-letter {display:block;border:0;background:transparent;padding:0;width:100%;cursor:pointer;}
+.hand-letter:hover img,.hand-letter:focus-visible img {transform:scale(1.035);transform-origin:bottom;}
+@media(max-width:700px){.ticket-set .ticket-host,.ticket-set .ticket-guide {left:46%;width:42%;height:58%;bottom:8%;}.ticket-room .ticket-balloon {left:51%;top:24%;max-width:46%;}.counter-edge{clip-path:inset(84% 0 0)}}
