@@ -96,7 +96,7 @@
   background:linear-gradient(267deg,#ffc56dba,#ffd39032 47%,transparent 85%);
   clip-path:polygon(81% 50%,100% 20%,100% 100%,0 100%);
 }
-.auditorium-arrival {position:absolute;inset:0;pointer-events:none;opacity:0;background:#2d1915 url('/images/doorman/auditorium.webp') center / cover no-repeat;}
+.room-arrival {position:absolute;inset:0;pointer-events:none;opacity:0;background:#2d1915 url('/images/doorman/auditorium.webp') center / cover no-repeat;}
 .ticket-room[data-offering=true] .ticket-host {opacity:0;}
 .ticket-giver {
   pointer-events:none; position:absolute; height:117%; width:auto; aspect-ratio:592 / 862; left:50%; top:30%;
@@ -127,12 +127,12 @@
   box-shadow:0 0 10px 3px #ffcf71; outline:2px solid #ffdc91;
 }
 .editor-site .admission-ticket:focus-visible {outline:none;}
-.ticket-room[data-screening=true] .ticket-set {animation:through-opening 3.4s both;transform-origin:87.4% 52%;}
-.ticket-room[data-screening=true] .projection-leaf {animation:swing-in 1.2s .12s cubic-bezier(.24,.72,.26,1) both;}
-.ticket-room[data-screening=true] .projected-light {animation:spill 1.6s .18s both;}
-.ticket-room[data-screening=true] .ticket-giver {animation:step-aside 1s both;}
-.ticket-room[data-screening=true] .ticket-guide {display:none;}
-.ticket-room[data-screening=true] .auditorium-arrival {animation:take-seat 3.4s both;}
+.ticket-room[data-portal=true] .ticket-set {animation:through-opening 3.4s both;transform-origin:87.4% 52%;}
+.ticket-room[data-portal=true] .projection-leaf {animation:swing-in 1.2s .12s cubic-bezier(.24,.72,.26,1) both;}
+.ticket-room[data-portal=true] .projected-light {animation:spill 1.6s .18s both;}
+.ticket-room[data-portal=true] .ticket-giver {animation:step-aside 1s both;}
+.ticket-room[data-portal=true] .ticket-guide {display:none;}
+.ticket-room[data-portal=true] .room-arrival {animation:take-seat 3.4s both;}
 @keyframes swing-in {to{transform:rotateY(-93deg);filter:brightness(.65)}}
 @keyframes spill {0%{opacity:0;transform:scaleX(.25)}65%,100%{opacity:.95;transform:scaleX(1)}}
 @keyframes step-aside {from{opacity:1;transform:translateX(-50%)}to{opacity:0;transform:translateX(-69%) rotate(-4deg)}}
@@ -147,7 +147,7 @@
 }
 @media(max-width:700px) {
   .booth-art {left:-45%;}
-  .ticket-room[data-screening=true] .ticket-set {transform-origin:81.7% 51%;}
+  .ticket-room[data-portal=true] .ticket-set {transform-origin:81.7% 51%;}
   .ticket-giver {left:34%;height:112%;}
   .ticket-room[data-offering=true] .ticket-balloon {left:10%; max-width:65%;}
 }
@@ -170,7 +170,7 @@
 .counter-bell:disabled {opacity:1;cursor:default;pointer-events:none;}
 .counter-bell:disabled img {animation:press-counter-bell .32s ease-out;}
 @keyframes press-counter-bell {35%{transform:scaleY(.87) rotate(-4deg)}70%{transform:rotate(3deg)}}
-.ticket-room[data-screening=true] .counter-props {animation:pass-counter 1.65s .45s both;}
+.ticket-room[data-portal=true] .counter-props {animation:pass-counter 1.65s .45s both;}
 .ticket-room .ticket-set {max-height:calc(100svh - 112px);}
 @media(max-width:700px) {
   .ticket-room {display:flex;flex-direction:column;}
@@ -211,3 +211,8 @@
   .editor-site .booth-choices a {padding:.4em .75em;}
   .booth-answer-pose {left:32%;height:58%;}
 }
+
+.ticket-room[data-darkroom=true] .projection-opening,.ticket-room[data-darkroom=true] .room-arrival {background-image:url('/images/doorman/darkroom.webp');}
+.ticket-room[data-darkroom=true] .projection-opening {background-position:82% center;}
+.ticket-room[data-darkroom=true] .room-arrival {background-position:76% center;}
+.ticket-room[data-darkroom=true] .projected-light {background:linear-gradient(267deg,#ff4636d6,#db252352 47%,transparent 85%);}

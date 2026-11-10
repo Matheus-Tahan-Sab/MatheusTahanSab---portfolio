@@ -22,3 +22,17 @@
 .cut-contact-intro .scene-contact h2 {font-size:clamp(2.8rem,6vw,6rem)}
 @media(max-width:760px){.studio-scene{grid-template-columns:minmax(0,1.4fr) minmax(75px,.8fr);padding-inline:0;gap:4px}.editor-site .studio-scene h2{font-size:clamp(1.55rem,6vw,2.9rem)}.studio-dialogue{padding:.5rem .65rem;margin-bottom:1rem}.studio-film{width:135px}.studio-door{max-width:460px;width:100%;justify-self:center}}
 @media(prefers-reduced-motion:reduce){.studio-door .door-peek{display:none}.studio-door .door-welcome{opacity:1}}
+
+/* The darkroom shares the projection room's title plaque and speaker bubble. */
+.lab-banner {width:100vw;margin-left:calc(50% - 50vw);background:linear-gradient(90deg,#1a1018ec,#381017cf),url('/images/doorman/darkroom.webp') center / cover;border-bottom:7px solid #201921;}
+.lab-banner-inner {position:relative;isolation:isolate;display:flex;align-items:center;min-height:clamp(340px,34vw,520px);max-width:1500px;margin:auto;padding:2rem clamp(20px,4vw,72px);box-sizing:border-box;}
+.lab-banner-art {position:absolute;inset:0;z-index:-1;background:url('/images/doorman/darkroom.webp') right center / auto 100% no-repeat;mask-image:linear-gradient(90deg,transparent 12%,black 49%);}
+.editor-site .lab-banner .cut-section-heading {width:48%;padding:1.3rem;border:6px double #ce9678;background:#271b23;box-shadow:8px 8px #130e16;box-sizing:border-box;}
+.lab-banner .studio-dialogue {position:absolute;right:22%;top:5%;width:min(21%,255px);margin:0;}
+.editor-site .cut-services::before {background-color:#23191e;}
+@media(max-width:700px){
+ .lab-banner-inner {display:block;min-height:0;padding:1rem 5% clamp(190px,51vw,340px);}
+ .lab-banner-art {background-size:auto clamp(195px,52vw,345px);background-position:right bottom;mask-image:none;}
+ .editor-site .lab-banner .cut-section-heading {width:100%;margin:0;padding:.6rem .9rem;border-width:4px;}
+ .lab-banner .studio-dialogue {top:auto;bottom:clamp(75px,20vw,140px);left:5%;right:auto;width:40%;font-size:.84rem;}
+}
