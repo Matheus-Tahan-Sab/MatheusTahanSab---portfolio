@@ -96,3 +96,71 @@
 .scene-contact .cinema-speaker img {height:clamp(220px,34vw,440px);width:100%;object-fit:contain;object-position:bottom;}
 .scene-contact button.hand-letter {display:block;border:0;background:transparent;padding:0;width:100%;cursor:pointer;}
 .hand-letter:hover img,.hand-letter:focus-visible img {transform:scale(1.035);transform-origin:bottom;}
+
+/* The painted door and the foreground counter share the booth plate's camera. */
+.booth-viewport { position:relative; overflow:hidden; isolation:isolate; }
+.booth-art { position:absolute; inset:0; pointer-events:none; }
+.projection-opening {
+  position:absolute; left:79.9%; top:13%; width:14.8%; height:72.5%;
+  clip-path:polygon(0 17.2%,100% 0,100% 100%,0 100%);
+  background:#38221b url('/images/doorman/auditorium.webp') center / cover no-repeat;
+  perspective:650px;
+}
+.projection-leaf {
+  position:absolute; inset:0; transform-origin:right center; backface-visibility:hidden;
+  background:url('/images/doorman/booth.webp') 93.78% 47.27% / 675.676% 137.931% no-repeat;
+}
+.projected-light {
+  position:absolute;inset:28% 4% 7% 21%;opacity:0; transform-origin:95% 90%;
+  background:linear-gradient(267deg,#ffc56dba,#ffd39032 47%,transparent 85%);
+  clip-path:polygon(81% 50%,100% 20%,100% 100%,0 100%);
+}
+.auditorium-arrival {position:absolute;inset:0;pointer-events:none;opacity:0;background:#2d1915 url('/images/doorman/auditorium.webp') center / cover no-repeat;}
+.ticket-room[data-offering=true] .ticket-host {opacity:0;}
+.ticket-giver {
+  pointer-events:none; position:absolute; height:117%; width:auto; left:50%; top:30%;
+  transform:translateX(-50%); animation:offer-ticket .45s ease-out both;
+}
+@keyframes offer-ticket {from{opacity:0;transform:translateX(-52%) rotate(-3deg)}to{opacity:1;transform:translateX(-50%)}}
+.ticket-room[data-offering=true] .ticket-balloon {left:32%;top:37%;max-width:17%;}
+.editor-site .admission-ticket {
+  position:absolute;left:59%;top:43%;display:grid;padding:.45em 1.25em .55em;
+  text-decoration:none;color:#35191a;background:#ffdf9c;border:3px double #814124;
+  box-shadow:2px 3px 0 #522321;transform:rotate(-9deg);text-align:center;line-height:1.12;
+}
+.admission-ticket small {font:italic bold .78rem Georgia,serif;}
+.admission-ticket b {font-size:clamp(.92rem,1.4vw,1.35rem);}
+.admission-ticket:focus-visible {outline:3px solid #fff;outline-offset:3px;}
+.ticket-room[data-screening=true] .ticket-set {animation:through-opening 3.4s both;transform-origin:87.4% 52%;}
+.ticket-room[data-screening=true] .projection-leaf {animation:swing-in 1.2s .12s cubic-bezier(.24,.72,.26,1) both;}
+.ticket-room[data-screening=true] .projected-light {animation:spill 1.6s .18s both;}
+.ticket-room[data-screening=true] .ticket-giver {animation:step-aside 1s both;}
+.ticket-room[data-screening=true] .ticket-guide {display:none;}
+.ticket-room[data-screening=true] .counter-edge {animation:pass-counter 1.65s .45s both;transform-origin:center 85.4%;}
+.ticket-room[data-screening=true] .ticket-cat {opacity:0;transition:opacity .6s;}
+.ticket-room[data-screening=true] .auditorium-arrival {animation:take-seat 3.4s both;}
+@keyframes swing-in {to{transform:rotateY(-93deg);filter:brightness(.65)}}
+@keyframes spill {0%{opacity:0;transform:scaleX(.25)}65%,100%{opacity:.95;transform:scaleX(1)}}
+@keyframes step-aside {from{opacity:1;transform:translateX(-50%)}to{opacity:0;transform:translateX(-69%) rotate(-4deg)}}
+@keyframes pass-counter {to{transform:translateY(19%) scale(1.18)}}
+@keyframes through-opening {0%,22%{transform:scale(1)}53%{transform:scale(1.65)}91%,100%{transform:scale(8.8)}}
+@keyframes take-seat {0%,51%{opacity:0;transform:scale(.97)}80%{opacity:1}100%{opacity:1;transform:scale(1.06)}}
+@media(min-width:701px) and (prefers-reduced-motion:no-preference) {
+  .ticket-room[data-called=false] .counter-edge {animation:counter-arrives .95s ease-out both;transform-origin:center 85.4%;}
+  .ticket-room[data-called=false] .ticket-host {animation:host-arrives .95s ease-out both;}
+  @keyframes counter-arrives {from{transform:translateY(1.8%) scale(1.045)}}
+  @keyframes host-arrives {from{transform:translateX(-50%) scale(.95);transform-origin:bottom}}
+}
+@media(max-width:700px) {
+  .booth-art {left:-45%;}
+  .ticket-room[data-screening=true] .ticket-set {transform-origin:81.7% 51%;}
+  .ticket-giver {left:34%;height:112%;}
+  .ticket-room[data-offering=true] .ticket-balloon {left:3%;top:18%;max-width:35%;}
+  .editor-site .admission-ticket {left:51%;top:42%;}
+}
+
+/* Carry the aisle and curtains into the screening room after the camera cut. */
+.editor-site .scene-works {
+  --set:linear-gradient(90deg,rgba(24,12,18,.92),rgba(24,12,18,.48) 56%,rgba(24,12,18,.22)),
+    url('/images/doorman/auditorium.webp') center 54% / cover no-repeat;
+}
