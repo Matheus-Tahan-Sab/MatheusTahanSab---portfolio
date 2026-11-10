@@ -289,7 +289,7 @@ export default function SkillsGlobe({ skills, speed = 0.10, color = "#31553f", p
                 target="_blank"
                 rel="noopener noreferrer"
                 draggable={false}
-                aria-label={`${skill.name}${skill.category === "Em aprendizado" ? " — em aprendizado" : ""} (documentação em nova aba)`}
+                aria-label={(document.documentElement.lang === 'en' ? `${skill.name} (documentation in a new tab)` : `${skill.name}${skill.category === "Em aprendizado" ? " — em aprendizado" : ""} (documentação em nova aba)`)}
               >
                 <img src={skill.icon} width="26" height="26" alt="" draggable={false} />
                 <span className="skills-globe-label">{skill.name}</span>

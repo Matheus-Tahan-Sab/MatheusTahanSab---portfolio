@@ -79,7 +79,7 @@ export default function GitHubRepos({ username }) {
                     href={repo.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Site do projeto ${repo.name}`}
+                    aria-label={(document.documentElement.lang === 'en' ? `${repo.name} website` : `Site do projeto ${repo.name}`)}
                     title="Site do projeto"
                   >
                     <FiGlobe aria-hidden="true" />

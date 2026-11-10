@@ -24,7 +24,7 @@ export default function GitHubProfileCard({ username }) {
       <img
         className="gh-avatar"
         src={profile.avatarUrl}
-        alt={`Foto de ${profile.name ?? profile.login}`}
+        alt={(document.documentElement.lang === 'en' ? `Picture of ${profile.name ?? profile.login}` : `Foto de ${profile.name ?? profile.login}`)}
         width="112"
         height="112"
       />

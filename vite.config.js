@@ -1,4 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
+import { readFileSync } from 'node:fs';
+import portfolioLanguage from './scripts/portfolio-language.mjs';
 import react from '@vitejs/plugin-react';
 import { GITHUB_PATH, handleGitHub } from './api/_github.js';
 import { WAKATIME_PATH, handleWakaTime } from './api/_wakatime.js';
@@ -15,5 +17,5 @@ function integrationsApi(env) {
   return { name: 'portfolio-integrations', configureServer(server) { server.middlewares.use(middleware); }, configurePreviewServer(server) { server.middlewares.use(middleware); } };
 }
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), integrationsApi({ ...process.env, ...loadEnv(mode, process.cwd(), '') })],
+  plugins: [react({ babel: { plugins: [[portfolioLanguage, { messages: JSON.parse(readFileSync(new URL('./i18n/en.json', import.meta.url), 'utf8')) }]] } }), integrationsApi({ ...process.env, ...loadEnv(mode, process.cwd(), '') })],
 }));

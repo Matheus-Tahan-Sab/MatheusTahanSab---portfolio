@@ -16,7 +16,7 @@ function ProjectGallery({ id, title, description, images }) {
       <div className="project-gallery-grid">
         {images.map((image) => (
           <figure key={image.src}>
-            <a href={image.src} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${image.caption} em tamanho original (nova aba)`}>
+            <a href={image.src} target="_blank" rel="noopener noreferrer" aria-label={(document.documentElement.lang === 'en' ? `Open ${image.caption} at full size (new tab)` : `Abrir ${image.caption} em tamanho original (nova aba)`)}>
               <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
             </a>
             <figcaption>{image.caption}</figcaption>
@@ -44,13 +44,13 @@ export default function Projects() {
               </ul>
               <ProjectGallery
                 id={`${project.id}-screenshots-title`}
-                title={`${project.name} em funcionamento`}
+                title={(document.documentElement.lang === 'en' ? `${project.name} in action` : `${project.name} em funcionamento`)}
                 description="Capturas da execução local com dados fictícios. O check-in por QR Code foi simulado pelo modo de apresentação do projeto."
                 images={project.screenshots}
               />
               <ProjectGallery
                 id={`${project.id}-gallery-title`}
-                title={`Protótipos do ${project.name}`}
+                title={(document.documentElement.lang === 'en' ? `${project.name} prototypes` : `Protótipos do ${project.name}`)}
                 description="Wireframes das telas planejadas para o projeto."
                 images={project.images}
               />

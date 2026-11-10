@@ -43,7 +43,7 @@ export const formatTime = (ms) =>
 export function formatAgo(ms, now = Date.now()) {
   const minutes = Math.max(0, Math.floor((now - ms) / 60000));
   if (minutes < 1) return "agora há pouco";
-  if (minutes < 60) return `há ${minutes} min`;
-  return `há ${Math.floor(minutes / 60)} h`;
+  if (minutes < 60) return (document.documentElement.lang === 'en' ? `${minutes} min ago` : `há ${minutes} min`);
+  return (document.documentElement.lang === 'en' ? `${Math.floor(minutes / 60)} h ago` : `há ${Math.floor(minutes / 60)} h`);
 }
 

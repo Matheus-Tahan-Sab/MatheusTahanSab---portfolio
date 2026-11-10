@@ -78,7 +78,7 @@ export default function GeminiChat() {
           streaming: false,
           error: true,
           text: error.message,
-          hint: ERROR_HINTS[error.code] ?? (error.retryAfter ? `Tente de novo em ${error.retryAfter} s.` : null),
+          hint: ERROR_HINTS[error.code] ?? (error.retryAfter ? (document.documentElement.lang === 'en' ? `Try again in ${error.retryAfter} s.` : `Tente de novo em ${error.retryAfter} s.`) : null),
         });
       }
     } finally {
@@ -117,7 +117,7 @@ export default function GeminiChat() {
   );
 
   return (
-    <section className="gemini-chat" aria-label={`Assistente de IA sobre ${ASSISTANT_NAME}`}>
+    <section className="gemini-chat" aria-label={(document.documentElement.lang === 'en' ? `AI assistant for ${ASSISTANT_NAME}` : `Assistente de IA sobre ${ASSISTANT_NAME}`)}>
       {/* ---------- Cabeçalho ---------- */}
       <header className="gemini-chat-header">
         <div className="gemini-chat-title">

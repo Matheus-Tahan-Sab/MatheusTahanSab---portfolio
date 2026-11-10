@@ -40,14 +40,14 @@ export default function GitHubStats({ username }) {
       icon: FiStar,
       label: "Estrelas",
       value: formatNumber(stars),
-      note: mostStarred ? `mais estrelado: ${mostStarred.name}` : null,
+      note: mostStarred ? (document.documentElement.lang === 'en' ? `most starred: ${mostStarred.name}` : `mais estrelado: ${mostStarred.name}`) : null,
     },
     { icon: FiGitBranch, label: "Forks", value: formatNumber(forks), note: "dos seus repositórios" },
     {
       icon: FiUsers,
       label: "Seguidores",
       value: formatNumber(profile.data.followers),
-      note: `seguindo ${formatNumber(profile.data.following)}`,
+      note: (document.documentElement.lang === 'en' ? `following ${formatNumber(profile.data.following)}` : `seguindo ${formatNumber(profile.data.following)}`),
     },
   ];
 

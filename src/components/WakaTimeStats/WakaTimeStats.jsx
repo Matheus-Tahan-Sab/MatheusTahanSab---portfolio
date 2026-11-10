@@ -199,7 +199,7 @@ export default function WakaTimeStats({
               icon={FiActivity}
               label="Média diária"
               value={formatDuration(data.dailyAverage)}
-              note={data.activeDays != null ? `${formatNumber(data.activeDays)} dias ativos` : null}
+              note={data.activeDays != null ? (document.documentElement.lang === 'en' ? `${formatNumber(data.activeDays)} active days` : `${formatNumber(data.activeDays)} dias ativos`) : null}
             />
             <Kpi
               icon={FiSun}
