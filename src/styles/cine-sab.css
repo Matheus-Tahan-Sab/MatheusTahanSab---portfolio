@@ -44,28 +44,3 @@
 .editor-site .cinema-speaker .studio-dialogue::after,.editor-site .studio-door .studio-bubble::after { content:''; position:absolute; bottom:-10px; left:52%; width:15px; height:15px; background:#fff2d2; border-right:2px solid #181821; border-bottom:2px solid #181821; transform:skewY(18deg) rotate(35deg); }
 .editor-site .cinema-speaker img { width:min(100%,310px); }
 @media(max-width:760px){.editor-site .studio-scene:has(.cinema-speaker){grid-template-columns:1fr;gap:1rem}.editor-site .cinema-speaker{width:min(85%,360px);justify-self:end}.editor-site .cinema-speaker img{width:min(65%,215px)}}
-
-.editing-suite { position:relative; overflow:hidden; isolation:isolate; background:#251522; }
-.suite-art { position:relative; }
-.suite-room { display:block; width:100%; height:auto; }
-.suite-glance { position:absolute; top:11.35%; left:86.18%; width:13.82%; height:40.05%; opacity:0; mask-image:linear-gradient(to bottom,transparent,#000 6%,#000 93%,transparent); }
-.suite-playhead { position:absolute; left:56%; top:52%; height:6%; width:2px; background:#fff0bc; opacity:0; }
-.suite-heading { position:absolute; left:3%; top:11%; max-width:31%; }
-.editor-site .suite-heading h2 { font-size:clamp(1.5rem,3.2vw,3.6rem); }
-.suite-dialogue { position:absolute; right:16%; top:4%; max-width:24ch; margin:0; padding:.6rem .85rem; background:#fff2d2; color:#251522; border:2px solid #251522; border-radius:1rem 1rem 0 1rem; font-size:clamp(.8rem,1.3vw,1rem); line-height:1.2; opacity:0; }
-.suite-dialogue small { display:block; color:#792037; font-weight:bold; }
-.is-playing .suite-playhead { animation:suite-cut 1.8s linear both; }
-.is-playing .suite-glance { animation:suite-reveal .16s 1.85s both; }
-.is-playing .suite-dialogue { animation:suite-reveal .22s 2.05s both; }
-@keyframes suite-cut { 0% { opacity:1; } 95% { opacity:1; } 100% { left:69%; opacity:0; } }
-@keyframes suite-reveal { from { opacity:0; } to { opacity:1; } }
-@media(max-width:760px) {
-  .editing-suite { display:flex; flex-direction:column; }
-  .suite-heading { position:static; max-width:none; padding:.8rem 1rem; order:-1; }
-  .suite-art { width:154%; align-self:flex-end; flex:none; }
-  .suite-dialogue { position:static; align-self:flex-end; max-width:34ch; margin:.65rem; }
-}
-@media(prefers-reduced-motion:reduce) {
-  .editing-suite .suite-glance,.editing-suite .suite-dialogue { animation:none; opacity:1; }
-  .editing-suite .suite-playhead { display:none; }
-}
