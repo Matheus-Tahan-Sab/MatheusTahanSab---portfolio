@@ -52,6 +52,15 @@ export default function EditorIntro() {
           aria-label="Pegar ingresso" onClick={enterCinema} />}
       </div>}
       <div className="counter-edge" aria-hidden="true" />
+      <div className="counter-props">
+        <img className="counter-rolls" src="/images/doorman/counter-rolls.webp" alt="" />
+        <img className="counter-ledger" src="/images/doorman/counter-ledger.webp" alt="" />
+        <img className="counter-curiosity" src="/images/doorman/counter-curiosity.webp" alt="" />
+        <button type="button" className="counter-bell" disabled={called}
+          aria-label="Tocar a campainha" onClick={() => setCalled(true)}>
+          <img src="/images/doorman/counter-bell.webp" alt="" />
+        </button>
+      </div>
 
       <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
         : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
@@ -60,11 +69,11 @@ export default function EditorIntro() {
     </div>
     <div className="auditorium-arrival" aria-hidden="true" />
     </div>
-      <nav className="booth-replies" aria-label="Responder ao Doorman">
-        {offering ? <button type="button" className="desk-bell" disabled={entering} onClick={() => setOffering(false)}>Voltar às opções</button> : !called ? <button type="button" className="desk-bell" onClick={() => setCalled(true)}><i aria-hidden="true" />Tocar a campainha</button> : <>
+      {called && <nav className="booth-replies" aria-label="Responder ao Doorman">
+        {offering ? <button type="button" className="desk-bell" disabled={entering} onClick={() => setOffering(false)}>Voltar às opções</button> : <>
         <a ref={firstReply} href="#edicao-trabalhos" onClick={offerTicket}>Quero assistir aos vídeos</a>
         <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
         <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a></>}
-      </nav>
+      </nav>}
   </section>;
 }
