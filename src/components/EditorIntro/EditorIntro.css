@@ -216,3 +216,26 @@
 .ticket-room[data-darkroom=true] .projection-opening {background-position:82% center;}
 .ticket-room[data-darkroom=true] .room-arrival {background-position:76% center;}
 .ticket-room[data-darkroom=true] .projected-light {background:linear-gradient(267deg,#ff4636d6,#db252352 47%,transparent 85%);}
+
+/* The contact doorway fills with blue light before the camera crosses it. */
+.ticket-room[data-contact=true] .projection-opening,
+.ticket-room[data-contact=true] .room-arrival {
+  background:radial-gradient(ellipse at 50% 46%,#e6fbff 0%,#91dfff 24%,#218ce3 56%,#123875 85%);
+}
+.ticket-room[data-contact=true] .projection-opening::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:#a7ebff;
+  clip-path:polygon(0 17.2%,100% 0,100% 100%,98% 100%,98% 2.4%,2% 19%,2% 100%,0 100%);
+  filter:drop-shadow(0 0 8px #168fff);
+}
+.ticket-room[data-contact=true] .projected-light {
+  background:linear-gradient(267deg,#68cfffdf,#247dce68 47%,transparent 85%);
+  animation:contact-spill 1.6s both;
+}
+@keyframes contact-spill {
+  from {opacity:.3;transform:scaleX(.6)}
+  to {opacity:.95;transform:scaleX(1)}
+}
+.ticket-room[data-contact=true] .projection-leaf {
+  animation:swing-in 1.2s .45s cubic-bezier(.24,.72,.26,1) both;
+}

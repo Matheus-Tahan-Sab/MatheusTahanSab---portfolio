@@ -37,9 +37,9 @@ export default function EditorIntro() {
       setDestination('');
       timer.current = null;
       window.location.hash = destination;
-    }, destination === '#edicao-contato' ? 2100 : 3400);
+    }, 3400);
   }
-  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-choosing={choosing} data-offering={offering} data-portal={destination === '#edicao-trabalhos' || destination === '#edicao-servicos'} data-darkroom={destination === '#edicao-servicos'}>
+  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-choosing={choosing} data-offering={offering} data-portal={entering} data-contact={destination === '#edicao-contato'} data-darkroom={destination === '#edicao-servicos'}>
     <div id="edicao-sobre" className="ticket-anchor" />
       <article className="ticket-bio">
         <p>Cine Sab</p><h1 id="booth-title">Matheus<br/> Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
