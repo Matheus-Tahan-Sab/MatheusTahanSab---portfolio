@@ -24,18 +24,19 @@
 .editor-site .comic-bio .comic-action {background:#771c38;color:#fff2c8;border-color:#341320;border-right:5px dotted #eac493;}
 .editor-site .comic-bottom-rail {border-block:7px dotted #eac493;background:#2c1821;color:#ffedc2;}
 .editor-site .scene-works {--set:linear-gradient(22deg,transparent 47%,#ffe6b32b 57%,transparent 80%),repeating-linear-gradient(92deg,#310f22 0,#66203c 22px,#320f22 45px);}
-.editor-site .scene-works .cut-section-heading {padding:1.3rem;border:6px double #dbad67;background:#201b25;box-shadow:8px 8px #130e16;}
-.editor-site .cut-works .cut-long-grid .cut-work {border:6px double #512437;box-shadow:7px 7px #d1a457;background:#f9eac9}
+.editor-site :is(.scene-works,.scene-services) .cut-section-heading {padding:1.3rem;border:6px double #dbad67;background:#201b25;box-shadow:8px 8px #130e16;}
+.editor-site .cut-works .cut-long-grid .cut-work,
+.editor-site .cut-services .cut-service-list > article {border:6px double #512437;box-shadow:7px 7px #d1a457;background:#f9eac9}
 .editor-site .cut-works .cut-work-short {border:4px solid #4d2634;background:#fff0d0;box-shadow:6px 6px #b78548}
-.editor-site .cut-services::before {background-color:#293a50;background-image:radial-gradient(#dca45333 1px,transparent 1.5px);background-size:5px 5px}
-.editor-site .scene-services {--set:linear-gradient(90deg,#170b1469,transparent 65%),url('/images/doorman/darkroom.webp') center / cover no-repeat;}
+.editor-site .cut-services::before {content:none;}
+.editor-site .scene-services {--set:linear-gradient(90deg,#180c18d9,#260e1973 56%,#250d141c),url('/images/doorman/darkroom.webp') center / cover no-repeat;}
 .editor-site .cut-process-section .scene-process {--set:linear-gradient(0deg,#70482e 0 12%,transparent 12.5%),repeating-linear-gradient(0deg,#24222d 0 36px,#393647 37px 39px);}
 .editor-site .cut-process {border-block:6px dotted #c4a982;padding-block:1rem;}
 .editor-site .cut-contact-intro::before,.editor-site #edicao-contato::before {background:#e8c49a radial-gradient(#54262a24 1px,transparent 1.6px);background-size:5px 5px;}
 .editor-site .scene-contact {--set:repeating-linear-gradient(125deg,transparent 0 48px,#a4543926 49px 52px);}
 .editor-site .studio-dialogue {background:#fff2d2;}
 .editor-site .cut-player {border:5px double #dfbc76;background:#21151c}
-@media(max-width:760px){.editor-site .studio-door .studio-bubble{font-size:.73rem;max-width:72%}.editor-site .scene-works .cut-section-heading{padding:.65rem;border-width:4px}.editor-site .comic-intro::after{opacity:.58;clip-path:polygon(0 0,8% 0,2% 24%,0 100%,0 0,100% 0,100% 100%,98% 24%,92% 0)}}
+@media(max-width:760px){.editor-site .studio-door .studio-bubble{font-size:.73rem;max-width:72%}.editor-site :is(.scene-works,.scene-services) .cut-section-heading{padding:.65rem;border-width:4px}.editor-site .comic-intro::after{opacity:.58;clip-path:polygon(0 0,8% 0,2% 24%,0 100%,0 0,100% 0,100% 100%,98% 24%,92% 0)}}
 
 .editor-site .cinema-speaker { display:grid; justify-items:center; align-self:end; width:100%; min-width:0; }
 .editor-site .cinema-speaker .studio-dialogue { position:relative; z-index:1; margin:0 0 1rem; padding:.7rem 1rem; max-width:30ch; }

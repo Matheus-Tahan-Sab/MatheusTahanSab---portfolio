@@ -294,7 +294,7 @@
 .cut-format-strip { position: relative; z-index: 2; margin-block: -9px 0; transform: rotate(-1.5deg); background: #f5f0d9; color: #111216; border: 3px solid #111216; box-shadow: 6px 6px 0 #3555f5; padding: 20px 30px; }
 .cut-format-strip i { color: #3555f5; font-size: 1.7rem; }
 .cut-works { position: relative; }
-.cut-works .cut-section-heading h2 em { color: #ff713f; text-shadow: 3px 3px 0 #3555f5; }
+:is(.cut-works,.cut-services) .cut-section-heading h2 em { color: #ff713f; text-shadow: 3px 3px 0 #3555f5; }
 .cut-section-heading > .cut-label { display: inline-block; background: #f5f0d9; color: #111216; padding: .45rem .7rem; border: 2px solid #111216; box-shadow: 3px 3px 0 #ff713f; transform: rotate(-2deg); }
 .cut-group-heading { border-bottom: 3px solid #f5f0d9; }
 .cut-long-grid .cut-work { background: #f5f0d9; color: #111216; border: 3px solid #111216; box-shadow: 8px 8px 0 #ff713f; padding: 18px; align-items: center; transform: rotate(-1deg); }
