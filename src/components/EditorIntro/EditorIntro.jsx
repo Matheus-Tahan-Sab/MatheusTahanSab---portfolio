@@ -6,6 +6,7 @@ export default function EditorIntro() {
   const entering = Boolean(destination);
   const [called, setCalled] = useState(false);
   const [offering, setOffering] = useState(false);
+  const choosing = called && !offering && !entering;
   const ticket = useRef(null);
   const firstReply = useRef(null);
   const timer = useRef(null);
@@ -32,7 +33,7 @@ export default function EditorIntro() {
       window.location.hash = destination;
     }, destination === '#edicao-trabalhos' ? 3400 : 2100);
   }
-  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-offering={offering} data-screening={destination === '#edicao-trabalhos'}>
+  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-choosing={choosing} data-offering={offering} data-screening={destination === '#edicao-trabalhos'}>
     <div id="edicao-sobre" className="ticket-anchor" />
       <article className="ticket-bio">
         <p>Cine Sab</p><h1 id="booth-title">Matheus<br/> Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
@@ -44,8 +45,9 @@ export default function EditorIntro() {
         <div className="projection-opening"><div className="projection-leaf" /></div>
         <div className="projected-light" />
       </div>
-      <img className="ticket-host" src="/images/doorman/welcome.webp" alt="Doorman na bilheteria" />
-      <img className="ticket-guide" src="/images/doorman/turn.webp" alt="" />
+      <img className="ticket-host" src={choosing ? '/images/doorman/thinking.webp' : '/images/doorman/welcome.webp'} alt="Doorman na bilheteria" />
+      {entering && !offering && <img className="booth-answer-pose"
+        src={destination === '#edicao-contato' ? '/images/doorman/contact.webp' : '/images/doorman/services.webp'} alt="" />}
       {offering && <div className="ticket-giver">
         <img src="/images/doorman/escort.webp" alt="" />
         {!entering && <a ref={ticket} className="admission-ticket" href="#edicao-trabalhos"
@@ -59,6 +61,13 @@ export default function EditorIntro() {
         </button>
       </div>
 
+      {choosing && <nav className="booth-choices" aria-label="Responder ao Doorman">
+        <a ref={firstReply} href="#edicao-trabalhos" onClick={offerTicket}>Quero assistir aos vídeos</a>
+        <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
+        <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a>
+      </nav>}
+      {offering && !entering && <button type="button" className="booth-return"
+        onClick={() => setOffering(false)}>Voltar às opções</button>}
       <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
         : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
         : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
@@ -66,11 +75,6 @@ export default function EditorIntro() {
     </div>
     <div className="auditorium-arrival" aria-hidden="true" />
     </div>
-      {called && <nav className="booth-replies" aria-label="Responder ao Doorman">
-        {offering ? <button type="button" className="desk-bell" disabled={entering} onClick={() => setOffering(false)}>Voltar às opções</button> : <>
-        <a ref={firstReply} href="#edicao-trabalhos" onClick={offerTicket}>Quero assistir aos vídeos</a>
-        <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
-        <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a></>}
-      </nav>}
+
   </section>;
 }
