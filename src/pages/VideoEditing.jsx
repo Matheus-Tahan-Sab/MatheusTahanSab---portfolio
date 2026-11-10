@@ -60,15 +60,9 @@ function currentRoom() {
 export default function VideoEditing() {
   const [room, setRoom] = useState(currentRoom);
   const [letterOpen, setLetterOpen] = useState(false);
-  const [exitLink, setExitLink] = useState('');
-  const exitTimer = useRef(null);
-  const [exitReady, setExitReady] = useState(false);
   useEffect(() => {
     function navigate() {
       if (window.location.hash === '#conteudo') return;
-      clearTimeout(exitTimer.current);
-      exitTimer.current = null;
-      setExitLink('');
       setPlaying(null);
       setLetterOpen(false);
       setRoom(currentRoom());
@@ -79,7 +73,7 @@ export default function VideoEditing() {
       });
     }
     window.addEventListener('hashchange', navigate);
-    return () => { clearTimeout(exitTimer.current); window.removeEventListener('hashchange', navigate); };
+    return () => window.removeEventListener('hashchange', navigate);
   }, []);
   useEffect(() => {
     if (!letterOpen || room !== 'letter') return;
@@ -91,29 +85,6 @@ export default function VideoEditing() {
       block: 'start',
     });
   }, [letterOpen, room]);
-  useEffect(() => {
-    if (room !== 'letter') return;
-    const pose = new Image();
-    pose.src = '/images/doorman/closing-frames.webp';
-  }, [room]);
-  function leaveCinema(event) {
-    const link = event.target.closest('a[href]');
-    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    event.preventDefault();
-    if (exitLink) return;
-    setExitReady(false);
-    setExitLink(link.href);
-  }
-  function startExit() {
-    if (exitTimer.current !== null || !exitLink) return;
-    const href = exitLink;
-    setExitReady(true);
-    exitTimer.current = setTimeout(() => {
-      exitTimer.current = null;
-      setExitLink('');
-      window.location.assign(href);
-    }, 1900);
-  }
   const [playing, setPlaying] = useState(null);
   const [format, setFormat] = useState('all');
   const longVideos = videoProjects.filter(project => project.category !== 'Vídeos verticais');
@@ -141,8 +112,7 @@ export default function VideoEditing() {
       <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
     </section></>}
     {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><button type="button" className="hand-letter" aria-label={letterOpen ? 'Fechar carta' : 'Receber a carta'} aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}><img src="/images/doorman/contact.webp" alt="" /></button></div></div></div>
-    {letterOpen && <Contact editing onExit={leaveCinema} />}
-    {exitLink && <div className="portal-exit" role="status"><div className="exit-doorway" data-ready={exitReady} aria-hidden="true"><img className="exit-frames" src="/images/doorman/closing-frames.webp" alt="" onLoad={startExit} onError={() => window.location.assign(exitLink)} /></div><a href={exitLink}>Continuar para o contato ↗</a></div>}
+    {letterOpen && <Contact editing />}
     </>}
     <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
