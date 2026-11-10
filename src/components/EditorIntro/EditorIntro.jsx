@@ -51,11 +51,8 @@ export default function EditorIntro() {
         {!entering && <a ref={ticket} className="admission-ticket" href="#edicao-trabalhos"
           aria-label="Pegar ingresso" onClick={enterCinema} />}
       </div>}
-      <div className="counter-edge" aria-hidden="true" />
       <div className="counter-props">
-        <img className="counter-rolls" src="/images/doorman/counter-rolls.webp" alt="" />
-        <img className="counter-ledger" src="/images/doorman/counter-ledger.webp" alt="" />
-        <img className="counter-curiosity" src="/images/doorman/counter-curiosity.webp" alt="" />
+        <img className="counter-tableau" src="/images/doorman/work-counter.webp" alt="" />
         <button type="button" className="counter-bell" disabled={called}
           aria-label="Tocar a campainha" onClick={() => setCalled(true)}>
           <img src="/images/doorman/counter-bell.webp" alt="" />
