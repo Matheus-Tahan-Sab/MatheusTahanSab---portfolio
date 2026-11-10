@@ -36,3 +36,10 @@
 .editor-site .studio-dialogue {background:#fff2d2;}
 .editor-site .cut-player {border:5px double #dfbc76;background:#21151c}
 @media(max-width:760px){.editor-site .studio-door .studio-bubble{font-size:.73rem;max-width:72%}.editor-site .scene-works .cut-section-heading{padding:.65rem;border-width:4px}.editor-site .comic-intro::after{opacity:.58;clip-path:polygon(0 0,8% 0,2% 24%,0 100%,0 0,100% 0,100% 100%,98% 24%,92% 0)}}
+
+.editor-site .cinema-speaker { display:grid; justify-items:center; align-self:end; width:100%; min-width:0; }
+.editor-site .cinema-speaker .studio-dialogue { position:relative; z-index:1; margin:0 0 1rem; padding:.7rem 1rem; max-width:30ch; }
+.editor-site .cinema-speaker .studio-dialogue small { display:block; font:700 .65rem/1.5 monospace; color:#792037; text-transform:uppercase; }
+.editor-site .cinema-speaker .studio-dialogue::after,.editor-site .studio-door .studio-bubble::after { content:''; position:absolute; bottom:-10px; left:52%; width:15px; height:15px; background:#fff2d2; border-right:2px solid #181821; border-bottom:2px solid #181821; transform:skewY(18deg) rotate(35deg); }
+.editor-site .cinema-speaker img { width:min(100%,310px); }
+@media(max-width:760px){.editor-site .studio-scene:has(.cinema-speaker){grid-template-columns:1fr;gap:1rem}.editor-site .cinema-speaker{width:min(85%,360px);justify-self:end}.editor-site .cinema-speaker img{width:min(65%,215px)}}
