@@ -10,7 +10,7 @@ const metadata = {
   'Spring Boot': ['spring', 'https://spring.io/projects/spring-boot'],
   MySQL: ['mysql', 'https://dev.mysql.com/doc/'],
   PostgreSQL: ['postgresql', 'https://www.postgresql.org/docs/'],
-  'Consultas SQL': ['sql', 'https://www.postgresql.org/docs/current/tutorial-sql.html'],
+  [document.documentElement.lang === 'en' ? 'SQL queries' : ['Consultas', 'SQL'].join(' ')]:  ['sql', 'https://www.postgresql.org/docs/current/tutorial-sql.html'],
   Git: ['git', 'https://git-scm.com/book/pt-br/v2'],
   GitHub: ['github', 'https://docs.github.com/pt'],
   React: ['react', 'https://react.dev/'],
