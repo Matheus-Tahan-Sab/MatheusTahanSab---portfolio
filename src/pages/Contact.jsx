@@ -15,7 +15,7 @@ function ContactIcon({ type }) {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{shapes[type]}</svg>;
 }
 
-export default function Contact({ editing = false }) {
+export default function Contact({ editing = false, onExit }) {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
   async function handleSubmit(event) {
@@ -46,7 +46,7 @@ export default function Contact({ editing = false }) {
         <div className="contact-copy">
           <h3>Vamos conversar?</h3>
           <p>{editing ? 'Me conte sobre seu canal, o estilo que você procura e o formato do vídeo. Vamos pensar juntos em uma edição que combine com você.' : 'Tem uma oportunidade, uma ideia ou quer trocar experiências sobre desenvolvimento? Entre em contato.'}</p>
-          <ul className="contact-links">
+          <ul className="contact-links" onClick={onExit}>
             <li><a href={'mailto:' + profile.email}><ContactIcon type="email" /><span><small>E-mail</small>{profile.email}</span><span aria-hidden="true">↗</span></a></li>
             <li><a href={profile.discord} target="_blank" rel="noopener noreferrer"><ContactIcon type="discord" /><span><small>Discord</small>Abrir meu perfil</span><span aria-hidden="true">↗</span></a></li>
             {editing && <>

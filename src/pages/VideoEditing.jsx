@@ -46,15 +46,61 @@ function VideoPlayer({ project, onClose }) {
   </dialog>;
 }
 
+function currentRoom() {
+  switch (window.location.hash) {
+    case '#edicao-trabalhos': return 'screen';
+    case '#edicao-servicos':
+    case '#edicao-processo': return 'office';
+    case '#edicao-contato':
+    case '#edicao-convite': return 'letter';
+    default: return 'booth';
+  }
+}
+
 export default function VideoEditing() {
+  const [room, setRoom] = useState(currentRoom);
+  const [letterOpen, setLetterOpen] = useState(false);
+  const [exitLink, setExitLink] = useState('');
+  const exitTimer = useRef(null);
+  useEffect(() => {
+    function navigate() {
+      if (window.location.hash === '#conteudo') return;
+      clearTimeout(exitTimer.current);
+      exitTimer.current = null;
+      setExitLink('');
+      setPlaying(null);
+      setLetterOpen(false);
+      setRoom(currentRoom());
+      requestAnimationFrame(() => {
+        const target = document.getElementById(window.location.hash.slice(1));
+        if (window.location.hash === '#edicao-contato' || !target) window.scrollTo({top:0,behavior:'instant'});
+        else target.scrollIntoView({behavior:'instant'});
+      });
+    }
+    window.addEventListener('hashchange', navigate);
+    return () => { clearTimeout(exitTimer.current); window.removeEventListener('hashchange', navigate); };
+  }, []);
+  function leaveCinema(event) {
+    const link = event.target.closest('a[href]');
+    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    event.preventDefault();
+    if (exitTimer.current !== null) return;
+    const href = link.href;
+    setExitLink(href);
+    exitTimer.current = setTimeout(() => {
+      exitTimer.current = null;
+      window.location.assign(href);
+    }, 1050);
+  }
   const [playing, setPlaying] = useState(null);
   const [format, setFormat] = useState('all');
   const longVideos = videoProjects.filter(project => project.category !== 'Vídeos verticais');
   const shorts = videoProjects.filter(project => project.category === 'Vídeos verticais');
   return <div className="video-portfolio">
-    <EditorIntro />
+    {room === 'booth' && <EditorIntro />}
+    {room !== 'booth' && <a href="#edicao" className="back-booth">← Voltar à bilheteria</a>}
 
-    <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
+    {room === 'screen' && <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
       <div className="studio-scene scene-works"><div><SectionHeading number="02" label="Sala de projeção"><span id="cut-work-title">TRABALHOS<br /><em>EM CARTAZ.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Apaguei as luzes. Qual dos vídeos do Sab você quer ver primeiro?</p><img src="/images/doorman/works.webp" alt="" loading="lazy" /></div></div>
       <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
         {[['all', 'Todos'], ['short', 'Shorts'], ['long', 'Vídeos longos']].map(([id, label]) =>
@@ -62,9 +108,8 @@ export default function VideoEditing() {
       </div>
       {format !== 'short' && longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
       {format !== 'long' && shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
-    </section>
-
-    <section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
+    </section>}
+    {room === 'office' && <><section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
       <div className="studio-scene scene-services"><div><SectionHeading number="03" label="Serviços"><span id="cut-services-title">QUAL É O<br /><em>FORMATO?</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Gostou da sessão? Aqui na cabine eu escolho a janela certa para cada vídeo.</p><img src="/images/doorman/services.webp" alt="" loading="lazy" /></div></div>
       <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
     </section>
@@ -72,10 +117,12 @@ export default function VideoEditing() {
     <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
       <div className="studio-scene scene-process"><div><SectionHeading number="04" label="Ilha de edição"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Olha, é nesta mesa que o Sab monta os vídeos. Puxa uma cadeira!</p><img src="/images/doorman/process.webp" alt="" loading="lazy" /></div></div>
       <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
-    </section>
-
-    <div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Guardei um ingresso para a sua estreia. Que vídeo vamos fazer juntos?</p><img src="/images/doorman/contact.webp" alt="" loading="lazy" /></div></div></div>
-    <Contact editing />
+    </section></>}
+    {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><img src="/images/doorman/contact.webp" alt="" loading="lazy" /></div></div></div>
+    <button type="button" className="letter-seal" aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}>{letterOpen ? 'Fechar carta' : 'Receber a carta'}</button>
+    {letterOpen && <Contact editing onExit={leaveCinema} />}
+    {exitLink && <div className="portal-exit" role="status"><div className="blue-threshold" /><img src="/images/doorman/point.webp" alt="" /><a href={exitLink}>Continuar para o contato ↗</a></div>}
+    </>}
     <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
 }
