@@ -1,0 +1,19 @@
+
+.darkroom {position:relative;isolation:isolate;width:100vw;margin-left:calc(50% - 50vw);background:#250f14;scroll-margin-top:88px;}
+.lab-scene {position:absolute;inset:0;background:url('/images/doorman/darkroom.webp') center / 100% 100% no-repeat;}
+.lab-photo {width:100%;height:100%;display:block;}
+.lab-photo image {filter:grayscale(1) sepia(.65) contrast(1.08);animation:develop-print 1.15s ease-out both;}
+@keyframes develop-print {from{opacity:.04;filter:grayscale(1) sepia(.75) contrast(.35)}to{opacity:.94}}
+.lab-panel {position:relative;box-sizing:border-box;width:43%;padding:clamp(32px,5vw,90px) 3vw clamp(28px,5vw,90px) 5vw;min-height:clamp(470px,44vw,780px);display:flex;flex-direction:column;justify-content:center;background:linear-gradient(90deg,#180c10ee,#210b11ca 72%,transparent);color:#fff2db;}
+.editor-site .lab-panel h2 {font:700 clamp(2.45rem,4.5vw,5rem)/.97 Georgia,serif;color:#ffe2b9;max-width:11ch;margin:0;}
+.lab-line {max-width:33ch;line-height:1.45;margin:1rem 0;}
+.lab-line strong {display:block;font:700 .8rem/1.5 monospace;color:#ffbaa3;}
+.lab-formats {display:flex;flex-wrap:wrap;gap:.4rem;}
+.lab-formats button {background:#32181b;color:#ffe6c7;border:1px solid #c99a80;border-radius:2px;min-height:44px;padding:.4em .78em;font:inherit;cursor:pointer;}
+.lab-formats button[aria-pressed=true] {background:#fee0b7;color:#341719;border-color:#fee0b7;}
+.lab-caption {max-width:37ch;margin-top:1.2rem;padding-left:1rem;border-left:2px solid #ed9b78;}
+.editor-site .lab-caption h3 {font:700 clamp(1.25rem,1.9vw,2rem)/1.15 Georgia,serif;margin:0;color:#ffedd2;}
+.lab-caption p {line-height:1.4;margin:.4rem 0;}
+.lab-caption ul {display:flex;flex-wrap:wrap;gap:.65em;padding:0;margin:.65em 0 0;list-style:none;color:#ffbaa3;font-size:.8rem;font-weight:700;}
+@media(max-width:760px){.lab-scene{position:relative;aspect-ratio:1672/941;}.lab-panel{width:100%;min-height:0;padding:1.25rem 6% 2rem;background:#261217;}.editor-site .lab-panel h2{max-width:none;}.lab-line{margin:.65rem 0;}.lab-caption{margin-top:.85rem;}}
+@media(prefers-reduced-motion:reduce){.lab-photo image{animation:none;}}

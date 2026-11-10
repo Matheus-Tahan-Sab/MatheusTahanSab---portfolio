@@ -1,18 +1,46 @@
 import '../styles/cine-sab.css';
 import '../styles/doorman-scenes.css';
+import '../styles/darkroom.css';
 import { useEffect, useRef, useState } from 'react';
 import Contact from './Contact.jsx';
 import EditorIntro from '../components/EditorIntro/EditorIntro.jsx';
 import { videoProjects } from '../data/videoProjects.js';
 
 const services = [
-  { format: '01 / LONG FORM', title: 'Uma gameplay. Uma história.', text: 'Dos melhores momentos ao vídeo completo: cortes, contexto e humor no ritmo do seu canal.', tags: ['YouTube', 'Gameplays', 'Vlogs'], icon: '↗' },
-  { format: '02 / SHORT FORM', title: 'Direto ao ponto.', text: 'Enquadramento, legendas e timing para transformar uma boa ideia em um vídeo que funciona no celular.', tags: ['Shorts', 'Reels', 'TikTok'], icon: '↟' },
-  { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], icon: '↺' },
+  { format: '01 / LONG FORM', title: 'Uma gameplay. Uma história.', text: 'Dos melhores momentos ao vídeo completo: cortes, contexto e humor no ritmo do seu canal.', tags: ['YouTube', 'Gameplays', 'Vlogs'], label: 'Vídeos longos', proof: '/images/projects/editing/yHIDO4bpp2U.jpg' },
+  { format: '02 / SHORT FORM', title: 'Direto ao ponto.', text: 'Enquadramento, legendas e timing para transformar uma boa ideia em um vídeo que funciona no celular.', tags: ['Shorts', 'Reels', 'TikTok'], label: 'Vídeos curtos', proof: '/images/projects/editing/qlkaqwBmt80.jpg' },
+  { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], label: 'Highlights', proof: '/images/projects/editing/5zM_icwyGdo.jpg' },
 ];
 
 function SectionHeading({ number, label, children }) {
   return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
+}
+
+function Darkroom() {
+  const [selected, setSelected] = useState(0);
+  const service = services[selected];
+  return <section className="darkroom" id="edicao-servicos" aria-labelledby="lab-title">
+    <div className="lab-scene" aria-hidden="true">
+      <svg className="lab-photo" viewBox="0 0 1672 941" preserveAspectRatio="none">
+        <defs><clipPath id="lab-paper"><polygon points="1106,508 1203,485 1208,494 1225,490 1228,480 1249,475 1246,702 1085,737" /></clipPath></defs>
+        <g clipPath="url(#lab-paper)"><rect x="1080" y="471" width="180" height="270" fill="#d8ad92"/>
+          <image key={service.proof} href={service.proof} x="1080" y="471" width="180" height="270" preserveAspectRatio="xMidYMid slice"/>
+        </g>
+      </svg>
+    </div>
+    <div className="lab-panel">
+      <h2 id="lab-title">Sala de revelação</h2>
+      <p className="lab-line"><strong>Doorman</strong>Escolha um formato. Vou revelar como o Sab edita.</p>
+      <div className="lab-formats" role="group" aria-label="Escolher formato">
+        {services.map((item, index) => <button key={item.proof} type="button" aria-pressed={selected === index}
+          onClick={() => setSelected(index)}>{item.label}</button>)}
+      </div>
+      <div className="lab-caption" aria-live="polite" aria-atomic="true">
+        <h3>{service.title}</h3><p>{service.text}</p>
+        <ul>{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+      </div>
+    </div>
+  </section>;
 }
 
 function WorkCard({ project, index, onPlay }) {
@@ -110,10 +138,7 @@ export default function VideoEditing() {
       {format !== 'short' && longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
       {format !== 'long' && shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
     </section>}
-    {room === 'office' && <><section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
-      <div className="studio-scene scene-services"><div><SectionHeading number="03" label="Serviços"><span id="cut-services-title">QUAL É O<br /><em>FORMATO?</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Gostou da sessão? Aqui na cabine eu escolho a janela certa para cada vídeo.</p><img src="/images/doorman/services.webp" alt="" loading="lazy" /></div></div>
-      <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
-    </section>
+    {room === 'office' && <><Darkroom />
 
     <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
       <div className="studio-scene scene-process"><div><SectionHeading number="04" label="Ilha de edição"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Olha, é nesta mesa que o Sab monta os vídeos. Puxa uma cadeira!</p><img src="/images/doorman/process.webp" alt="" loading="lazy" /></div></div>
