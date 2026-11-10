@@ -1,3 +1,11 @@
+@font-face {
+  font-family:'Cabin Sketch'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('/fonts/cabin-sketch-bold.ttf') format('truetype');
+}
+@font-face {
+  font-family:'Patrick Hand'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('/fonts/patrick-hand.ttf') format('truetype');
+}
 
 .ticket-room {
   width:100vw; margin-left:calc(50% - 50vw); position:relative; isolation:isolate;
@@ -23,10 +31,10 @@
     transform:perspective(40vw) rotateY(24deg) skewY(11deg);
   }
 }
-.ticket-bio p:first-child {color:#f1ce83;font:italic 700 clamp(18px,2vw,36px)/1.1 Georgia,serif;margin:0;}
-.editor-site .ticket-bio h1 {color:#f5edd5;font:700 clamp(30px,3.65vw,68px)/.99 Georgia,serif;margin:.2em 0;}
-.ticket-bio strong {font:700 clamp(10px,.73vw,14px)/1.3 monospace;letter-spacing:.08em;}
-.ticket-bio p:last-child {font-size:clamp(13px,.98vw,18px);line-height:1.4;max-width:31ch;margin:.55em 0 0;}
+.ticket-bio p:first-child {color:#f1ce83;font:700 clamp(20px,2.1vw,38px)/1.1 "Cabin Sketch",cursive;margin:0;}
+.editor-site .ticket-bio h1 {color:#f5edd5;font:700 clamp(32px,3.9vw,72px)/.99 "Cabin Sketch",cursive;margin:.2em 0;}
+.ticket-bio strong {font:400 clamp(13px,.95vw,17px)/1.3 "Patrick Hand",cursive;letter-spacing:.08em;}
+.ticket-bio p:last-child {font:400 clamp(16px,1.16vw,21px)/1.23 "Patrick Hand",cursive;max-width:31ch;margin:.55em 0 0;}
 .ticket-host,.ticket-guide {position:absolute;left:50%;bottom:12%;height:59%;width:auto;transform:translateX(-50%);pointer-events:none;}
 .ticket-guide {opacity:0;}
 .counter-edge {position:absolute;inset:0;background:inherit;clip-path:inset(85.4% 0 0);pointer-events:none;}
