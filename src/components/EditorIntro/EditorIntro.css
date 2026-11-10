@@ -70,42 +70,30 @@
   overflow:hidden;background:#120e18;isolation:isolate;
 }
 .exit-doorway {
-  position:relative;width:min(76vw,430px);height:min(78svh,740px);
-  overflow:hidden;perspective:1000px;
-  border:10px ridge #b17d41;border-bottom:4px solid #684322;
-  background:radial-gradient(ellipse at 50% 90%,#405a76,#171529 70%);
-  box-shadow:0 0 0 7px #2d1a20,0 14px 45px #0009;
+  position:relative;width:min(94vw,78svh,650px);aspect-ratio:1;
+  overflow:hidden;background:#21101f;
+  box-shadow:0 12px 50px #0008;
 }
-.exit-doorman {
-  position:absolute;height:94%;width:auto;max-width:none;bottom:0;left:-12%;
-  animation:doorman-close 1.65s .15s ease-in-out both;
+.exit-frames {
+  display:block;position:absolute;left:0;top:0;
+  width:400%;height:300%;max-width:none;
 }
-.exit-door {
-  position:absolute;inset:0;transform-origin:left center;
-  background:repeating-linear-gradient(92deg,#481a25 0,#5d2431 5%,#481a25 10%);
-  border:5px solid #9e623b;backface-visibility:hidden;
-  box-shadow:inset 0 0 25px #170d17;
-  animation:close-exit-door 1.65s .15s ease-in-out both;
+.exit-doorway[data-ready=true] .exit-frames {
+  animation:doorman-close-frames 1.65s step-end both;
 }
-.exit-door::before,.exit-door::after {
-  content:'';position:absolute;left:12%;right:12%;
-  border:6px ridge #aa7447;box-shadow:inset 0 0 15px #1d0c16;
-  background:linear-gradient(135deg,#681f31,#351620);
-}
-.exit-door::before {top:8%;height:36%;}
-.exit-door::after {bottom:8%;height:36%;}
-.exit-door-handle {
-  position:absolute;right:5%;top:49%;width:10%;height:2%;
-  background:linear-gradient(#ffe0a0,#a46b32);border-radius:8px;z-index:1;
-  box-shadow:0 3px 4px #160c15;
-}
-@keyframes close-exit-door {
-  0%,12% {transform:rotateY(-78deg);}
-  92%,100% {transform:rotateY(0deg);}
-}
-@keyframes doorman-close {
-  0%,12% {transform:translateX(0) rotate(-3deg);}
-  92%,100% {transform:translateX(35%) rotate(0);}
+@keyframes doorman-close-frames {
+  0% {transform:translate(0,0);}
+  9% {transform:translate(-25%,0);}
+  17% {transform:translate(-50%,0);}
+  25% {transform:translate(-75%,0);}
+  33% {transform:translate(0,-33.333333%);}
+  41% {transform:translate(-25%,-33.333333%);}
+  49% {transform:translate(-50%,-33.333333%);}
+  57% {transform:translate(-75%,-33.333333%);}
+  65% {transform:translate(0,-66.666667%);}
+  73% {transform:translate(-25%,-66.666667%);}
+  81% {transform:translate(-50%,-66.666667%);}
+  90%,100% {transform:translate(-75%,-66.666667%);}
 }
 .editor-site .portal-exit a {
   position:absolute;bottom:2%;padding:.6rem .9rem;
