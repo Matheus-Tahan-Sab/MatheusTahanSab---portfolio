@@ -15,12 +15,6 @@ export default function EditorIntro() {
     else if (called) firstReply.current?.focus({preventScroll: true});
   }, [called, offering]);
   useEffect(() => () => clearTimeout(timer.current), []);
-  useEffect(() => {
-    if (called) {
-      const plate = new Image();
-      plate.src = '/images/doorman/darkroom.webp';
-    }
-  }, [called]);
   function offerTicket(event) {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
@@ -37,9 +31,9 @@ export default function EditorIntro() {
       setDestination('');
       timer.current = null;
       window.location.hash = destination;
-    }, destination === '#edicao-contato' ? 2100 : 3400);
+    }, destination === '#edicao-trabalhos' ? 3400 : 2100);
   }
-  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-choosing={choosing} data-offering={offering} data-portal={destination === '#edicao-trabalhos' || destination === '#edicao-servicos'} data-darkroom={destination === '#edicao-servicos'}>
+  return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called} data-choosing={choosing} data-offering={offering} data-screening={destination === '#edicao-trabalhos'}>
     <div id="edicao-sobre" className="ticket-anchor" />
       <article className="ticket-bio">
         <p>Cine Sab</p><h1 id="booth-title">Matheus<br/> Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
@@ -75,11 +69,11 @@ export default function EditorIntro() {
       {offering && !entering && <button type="button" className="booth-return"
         onClick={() => setOffering(false)}>Voltar às opções</button>}
       <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
-        : destination === '#edicao-servicos' ? 'Por aqui. A luz vermelha já está acesa.'
+        : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
         : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
         : offering ? 'Pegue seu ingresso. Guarde esse lugar na primeira fila!' : called ? 'Aonde eu te levo hoje?' : 'Um visitante! Pode tocar a campainha.'}</p>
     </div>
-    <div className="room-arrival" aria-hidden="true" />
+    <div className="auditorium-arrival" aria-hidden="true" />
     </div>
 
   </section>;
