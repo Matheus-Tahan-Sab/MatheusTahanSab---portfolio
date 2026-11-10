@@ -46,16 +46,17 @@ export default function EditorIntro() {
       </div>
       <img className="ticket-host" src="/images/doorman/welcome.webp" alt="Doorman na bilheteria" />
       <img className="ticket-guide" src="/images/doorman/turn.webp" alt="" />
-      {offering && <img className="ticket-giver" src="/images/doorman/escort.webp" alt="" />}
+      {offering && <div className="ticket-giver">
+        <img src="/images/doorman/escort.webp" alt="" />
+        {!entering && <a ref={ticket} className="admission-ticket" href="#edicao-trabalhos"
+          aria-label="Pegar ingresso" onClick={enterCinema} />}
+      </div>}
       <div className="counter-edge" aria-hidden="true" />
 
       <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
         : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
         : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
         : offering ? 'Pegue seu ingresso. Guarde esse lugar na primeira fila!' : called ? 'Aonde eu te levo hoje?' : 'Um visitante! Pode tocar a campainha.'}</p>
-      {offering && !entering && <a ref={ticket} className="admission-ticket" href="#edicao-trabalhos" onClick={enterCinema}>
-        <small>Cine Sab</small><b>Pegar ingresso</b>
-      </a>}
     </div>
     <div className="auditorium-arrival" aria-hidden="true" />
     </div>

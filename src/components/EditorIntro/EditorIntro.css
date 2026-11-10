@@ -105,9 +105,10 @@
 .auditorium-arrival {position:absolute;inset:0;pointer-events:none;opacity:0;background:#2d1915 url('/images/doorman/auditorium.webp') center / cover no-repeat;}
 .ticket-room[data-offering=true] .ticket-host {opacity:0;}
 .ticket-giver {
-  pointer-events:none; position:absolute; height:117%; width:auto; left:50%; top:30%;
+  pointer-events:none; position:absolute; height:117%; width:auto; aspect-ratio:592 / 862; left:50%; top:30%;
   transform:translateX(-50%); animation:offer-ticket .45s ease-out both;
 }
+.ticket-giver > img {display:block;width:100%;height:100%;}
 @keyframes offer-ticket {from{opacity:0;transform:translateX(-52%) rotate(-3deg)}to{opacity:1;transform:translateX(-50%)}}
 /* Anchor the lower edge above the offering pose, including its entrance rotation.
    Wrapped lines grow upward in both languages. */
@@ -120,13 +121,18 @@
   transform:rotate(-45deg);
 }
 .editor-site .admission-ticket {
-  position:absolute;left:59%;top:43%;display:grid;padding:.45em 1.25em .55em;
-  text-decoration:none;color:#35191a;background:#ffdf9c;border:3px double #814124;
-  box-shadow:2px 3px 0 #522321;transform:rotate(-9deg);text-align:center;line-height:1.12;
+  position:absolute; left:74.1%; top:16.5%; width:17%; height:7.4%;
+  min-width:44px; min-height:44px; transform:translate(-50%,-50%) rotate(-18deg);
+  pointer-events:auto; cursor:pointer; background:transparent; border:0; box-shadow:none;
 }
-.admission-ticket small {font:italic bold .78rem Georgia,serif;}
-.admission-ticket b {font-size:clamp(.92rem,1.4vw,1.35rem);}
-.admission-ticket:focus-visible {outline:3px solid #fff;outline-offset:3px;}
+.admission-ticket::after {
+  content:''; position:absolute; inset:12% 5%; border-radius:22%;
+  pointer-events:none;
+}
+.admission-ticket:hover::after,.admission-ticket:focus-visible::after {
+  box-shadow:0 0 10px 3px #ffcf71; outline:2px solid #ffdc91;
+}
+.editor-site .admission-ticket:focus-visible {outline:none;}
 .ticket-room[data-screening=true] .ticket-set {animation:through-opening 3.4s both;transform-origin:87.4% 52%;}
 .ticket-room[data-screening=true] .projection-leaf {animation:swing-in 1.2s .12s cubic-bezier(.24,.72,.26,1) both;}
 .ticket-room[data-screening=true] .projected-light {animation:spill 1.6s .18s both;}
@@ -151,7 +157,6 @@
   .ticket-room[data-screening=true] .ticket-set {transform-origin:81.7% 51%;}
   .ticket-giver {left:34%;height:112%;}
   .ticket-room[data-offering=true] .ticket-balloon {left:10%; max-width:65%;}
-  .editor-site .admission-ticket {left:51%;top:42%;}
 }
 
 /* Carry the aisle and curtains into the screening room after the camera cut. */
