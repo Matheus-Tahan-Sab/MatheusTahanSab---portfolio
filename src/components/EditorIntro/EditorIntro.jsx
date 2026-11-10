@@ -26,26 +26,26 @@ export default function EditorIntro() {
   }
   return <section id="edicao" className="ticket-room" aria-labelledby="booth-title" data-entering={entering} data-called={called}>
     <div id="edicao-sobre" className="ticket-anchor" />
-    <div className="ticket-set">
-      <div className="ticket-door" aria-hidden="true"><i /></div>
-      <img className="ticket-host" src="/images/doorman/salute.webp" alt="Doorman na bilheteria" />
-      <img className="ticket-guide" src="/images/doorman/escort.webp" alt="" />
-      <div className="counter-edge" aria-hidden="true" />
       <article className="ticket-bio">
-        <p>Cine Sab</p><h1 id="booth-title">Matheus<br/>Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
+        <p>Cine Sab</p><h1 id="booth-title">Matheus<br/> Tahan Sab</h1><strong>EDITOR DE VÍDEO</strong>
         <p>Edito gameplays, vídeos longos e shorts no DaVinci Resolve, com humor e o ritmo do seu canal.</p>
       </article>
+    <div className="ticket-set">
+      <img className="ticket-host" src="/images/doorman/welcome.webp" alt="Doorman na bilheteria" />
+      <img className="ticket-guide" src="/images/doorman/turn.webp" alt="" />
+      <div className="counter-edge" aria-hidden="true" />
+
       <p className="ticket-balloon" aria-live="polite">{destination === '#edicao-trabalhos' ? 'Seu ingresso. A sessão já vai começar!'
         : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
         : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
         : called ? 'Aonde eu te levo hoje?' : 'Um visitante! Pode tocar a campainha.'}</p>
       <div className="ticket-cat" aria-hidden="true"><span className="ava-walker" /></div>
+    </div>
       <nav className="booth-replies" aria-label="Responder ao Doorman">
         {!called ? <button type="button" className="desk-bell" onClick={() => setCalled(true)}><i aria-hidden="true" />Tocar a campainha</button> : <>
         <a ref={firstReply} href="#edicao-trabalhos" onClick={enterCinema}>Quero assistir aos vídeos</a>
         <a href="#edicao-servicos" onClick={enterCinema}>Quero conhecer os serviços</a>
         <a href="#edicao-contato" onClick={enterCinema}>Quero falar com o Sab</a></>}
       </nav>
-    </div>
   </section>;
 }
