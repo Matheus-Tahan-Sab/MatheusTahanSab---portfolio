@@ -48,15 +48,20 @@ function VideoPlayer({ project, onClose }) {
 
 export default function VideoEditing() {
   const [playing, setPlaying] = useState(null);
+  const [format, setFormat] = useState('all');
   const longVideos = videoProjects.filter(project => project.category !== 'Vídeos verticais');
   const shorts = videoProjects.filter(project => project.category === 'Vídeos verticais');
   return <div className="video-portfolio">
     <EditorIntro />
 
-    <section className="cut-section cut-works" id="edicao-trabalhos" aria-labelledby="cut-work-title">
+    <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
       <div className="studio-scene scene-works"><div><SectionHeading number="02" label="Sala de projeção"><span id="cut-work-title">TRABALHOS<br /><em>EM CARTAZ.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Apaguei as luzes. Qual dos vídeos do Sab você quer ver primeiro?</p><img src="/images/doorman/works.webp" alt="" loading="lazy" /></div></div>
-      {longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
-      {shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
+      <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
+        {[['all', 'Todos'], ['short', 'Shorts'], ['long', 'Vídeos longos']].map(([id, label]) =>
+          <button type="button" key={id} aria-pressed={format === id} onClick={() => setFormat(id)}>{label}</button>)}
+      </div>
+      {format !== 'short' && longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
+      {format !== 'long' && shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
     </section>
 
     <section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">

@@ -1,26 +1,31 @@
-/* Continuous cinema facade, with a framed programme and a brass ticket booth. */
-.sab-foyer { --brass:#deb97b; --wine:#5d172b; width:100vw; margin-left:calc(50% - 50vw); padding:clamp(24px,4vw,68px) max(5vw,20px) 40px; isolation:isolate; position:relative; scroll-margin-top:100px; color:#fff1d4; background:radial-gradient(ellipse at 50% 0,#714a34,transparent 65%),repeating-linear-gradient(90deg,#1c171d 0 5vw,#39252b 5.1vw 5.6vw,#221b22 5.7vw 10vw); border-bottom:8px double #a78052; }
-.sab-foyer::before {content:'';position:absolute;inset:auto 0 0;height:14%;z-index:-1;background:repeating-conic-gradient(from 45deg,#30252a 0 25%,#403036 0 50%) 0 0/75px 30px;border-top:4px solid #171218}
-.foyer-building {max-width:1220px;margin:auto;scroll-margin-top:104px}
-.foyer-canopy {position:relative;z-index:1;text-align:center;border:7px double var(--brass);box-shadow:0 12px 0 #23131c,0 15px 0 #a07b4f,0 25px 38px #0007;background:radial-gradient(circle,#fff5c7 0 2px,#d69c52 3px,transparent 5px) 0 3px/24px 12px repeat-x,radial-gradient(circle,#fff5c7 0 2px,#d69c52 3px,transparent 5px) 0 calc(100% - 3px)/24px 12px repeat-x,linear-gradient(#551627,#34101c);padding:16px}
-.foyer-canopy span {display:block;text-transform:uppercase;font:700 clamp(2rem,5.2vw,5rem)/1.1 Georgia,serif;letter-spacing:.16em;color:#ffe8ad;text-shadow:0 2px #70512f,0 0 18px #efac615e}
-.foyer-lobby {display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1fr);align-items:center;gap:clamp(30px,6vw,96px);padding:45px 6% 0;background:linear-gradient(90deg,#15161a66,transparent 50%,#15161a66),repeating-linear-gradient(90deg,#33262b 0 58px,#423237 59px 61px);border-inline:8px double #8b6951}
-.foyer-program {min-width:0;margin-bottom:32px;background:#f3e4c2 radial-gradient(#62422b16 1px,transparent 1px) 0 0/4px 4px;color:#302026;border:8px double #714c37;box-shadow:0 0 0 3px #cda970,5px 7px 12px #0008;padding:clamp(20px,3vw,44px)}
-.foyer-program > p:first-child {text-transform:uppercase;font:700 .74rem monospace;letter-spacing:.16em;border-bottom:1px solid #987959;padding-bottom:12px}
-.editor-site .foyer-program h1 {font:700 clamp(2.5rem,4.8vw,5rem)/.94 Georgia,serif;letter-spacing:-.055em;color:#381b22;margin:.3em 0}
-.editor-site .foyer-program h1 em {color:#852541;font-style:italic}
-.foyer-program strong {font:.74rem monospace;letter-spacing:.12em}
-.foyer-program strong + p {margin:20px 0;font-size:.96rem;line-height:1.65}
-.editor-site .foyer-program a {color:#692339;font-weight:700}
-.foyer-kiosk {min-width:0;position:relative;align-self:end;border:7px double var(--brass);border-radius:45% 45% 0 0 / 10% 10% 0 0;background:var(--wine);box-shadow:8px 10px 20px #0008}
-.foyer-plaque {text-align:center;text-transform:uppercase;font:700 clamp(1rem,2vw,1.7rem) Georgia,serif;letter-spacing:.15em;color:#ffe0a9;padding:22px 8px 12px;border-bottom:5px double var(--brass)}
-.foyer-window {height:clamp(270px,24vw,390px);position:relative;margin:0 12px;overflow:hidden;background:repeating-linear-gradient(92deg,#461427 0,#802942 24px,#411529 49px);border-inline:5px ridge #c8a16c}
-.foyer-window img {position:absolute;bottom:-3%;height:91%;width:82%;right:-3%;object-fit:contain;object-position:bottom}
-.foyer-window::after {content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 15%,#fff1 15% 19%,transparent 19% 23%,#fff1 23% 24%,transparent 24%);border-bottom:2px solid #eee4}
-.foyer-speech {position:absolute;top:12px;left:10px;max-width:48%;padding:9px 13px;background:#fff4da;color:#2c1821;border:2px solid #281520;border-radius:14px 14px 2px 14px;font-weight:700;font-size:clamp(.73rem,1vw,.96rem);line-height:1.35;box-shadow:3px 3px #25141c}
-.foyer-counter {position:relative;text-align:center;background:linear-gradient(#ad7a53,#684430);border-block:4px ridge var(--brass);margin:0 -12px;padding:10px 12px;box-shadow:0 5px 7px #0007}
-.editor-site .foyer-ticket {display:inline-flex;align-items:center;min-height:45px;background:#ffe5a9;color:#381b22;border:2px solid #603324;outline:1px solid #f3c577;box-shadow:3px 4px #30161b;font-weight:800;text-decoration:none;transform:rotate(-3deg);transition:transform .2s}
-.foyer-ticket span,.foyer-ticket b {padding:7px 15px}.foyer-ticket b{border-left:2px dashed #92623d}
-.editor-site .foyer-ticket:is(:hover,:focus-visible){transform:translateY(-3px) rotate(0deg);outline:3px solid white}
-.foyer-apron {padding:8px;text-align:center;background:repeating-linear-gradient(90deg,#581b2b 0 16px,#70253a 17px 20px);color:var(--brass);font-size:1.4rem}
-@media(max-width:760px){.foyer-lobby{grid-template-columns:1fr;gap:24px;padding:30px 6% 0}.foyer-program{margin:0}.foyer-kiosk{width:min(100%,410px);justify-self:center}.foyer-window{height:250px}.foyer-canopy{padding:19px 4px}.foyer-speech{max-width:52%}}
+.ticket-room{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;background:#251515;isolation:isolate;scroll-margin-top:90px}
+.ticket-anchor{position:absolute;top:0;scroll-margin-top:90px}
+.ticket-set{position:relative;height:clamp(540px,55vw,850px);background:url('/images/doorman/booth.webp') center/100% 100% no-repeat;transform-origin:88% 62%}
+.ticket-bio{position:absolute;left:6%;top:25%;width:min(30%,405px);color:#ffeace;text-shadow:0 2px 4px #100809;background:radial-gradient(ellipse,#181719cc,transparent 80%)}
+.ticket-bio p:first-child{font:italic 700 clamp(1.4rem,3vw,3rem) Georgia,serif;color:#ffdc96;margin:0}
+.editor-site .ticket-bio h1{font:700 clamp(2.7rem,5vw,5rem)/.96 Georgia,serif;color:#fff1ce;margin:.25em 0}
+.ticket-bio strong{font:.75rem monospace;letter-spacing:.14em}.ticket-bio p:last-child{font-size:clamp(.86rem,1.2vw,1.1rem);max-width:34ch;margin:1rem 0}
+.ticket-door{position:absolute;right:4%;bottom:15%;height:52%;width:13%;perspective:650px;background:#ffa33c;border:3px solid #8a562e;box-shadow:0 0 9px 2px #ff8a23,inset 0 0 26px #ffe4a6}
+.ticket-door i{display:block;height:100%;position:relative;margin:2px;background:repeating-linear-gradient(92deg,#452526 0 10px,#502d29 11px 13px);border:7px ridge #602f28;transform-origin:right}
+.ticket-door i:before{content:'';position:absolute;inset:8% 12%;border:4px ridge #754731}
+.ticket-door i:after{content:'';position:absolute;left:8%;top:55%;width:10px;height:10px;border-radius:50%;background:#e5b364}
+.ticket-host,.ticket-guide{position:absolute;bottom:14.6%;left:43%;width:36%;height:58%;object-fit:contain;object-position:bottom;filter:drop-shadow(4px 3px 2px #23122088)}
+.ticket-guide{opacity:0}
+.ticket-balloon{position:absolute;left:39%;top:33%;max-width:18ch;background:#fff0d2;border:2px solid #271522;color:#311d26;border-radius:16px 16px 2px 16px;padding:.6rem .9rem;font-weight:700;font-size:clamp(.75rem,1.1vw,1rem)}
+.ticket-cat{position:absolute;bottom:10%;left:8%;width:11%;pointer-events:none;animation:booth-walk 24s ease-in-out infinite alternate}
+.ticket-cat img{width:100%;display:block;animation:booth-facing 48s step-end infinite}
+@keyframes booth-walk{0%,10%{left:8%}85%,100%{left:79%}}
+@keyframes booth-facing{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
+.editor-site .ticket-stub{position:absolute;left:43%;bottom:3.5%;display:inline-flex;gap:1.1em;align-items:center;padding:.65em 1em;color:#321920;background:#ffe6aa;border:3px double #784422;text-decoration:none;font-weight:800;box-shadow:4px 4px #2c1318;transform:rotate(-3deg)}
+.ticket-stub b{border-left:2px dashed #805126;padding-left:1em}
+.ticket-room[data-entering=true] .ticket-set{animation:booth-pass 1.6s both}
+.ticket-room[data-entering=true] .ticket-door i{transform:rotateY(88deg);transition:transform .65s .4s}
+.ticket-room[data-entering=true] .ticket-host,.ticket-room[data-entering=true] .ticket-balloon{opacity:0}
+.ticket-room[data-entering=true] .ticket-guide{animation:booth-guide 1s forwards}
+@keyframes booth-guide{0%{opacity:1}80%,100%{opacity:1;transform:translateX(60%) scale(.7);transform-origin:bottom right}}
+@keyframes booth-pass{0%,42%{transform:scale(1)}100%{transform:scale(10)}}
+.cinema-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.5rem 0}
+.cinema-filter button{min-height:42px;border:1px solid #dbbc86;color:#ffecc9;background:#301c29;padding:.45rem 1rem;cursor:pointer}
+.cinema-filter button[aria-pressed=true]{background:#ffe3a3;color:#381722}
+@media(max-width:700px){.ticket-set{height:clamp(610px,110vw,740px);background-size:150% 100%;background-position:55% center}.ticket-bio{top:20%;left:4%;width:45%;padding:8px;background:#17151bdb;border-radius:3px}.editor-site .ticket-bio h1{font-size:clamp(1.9rem,7vw,3.2rem)}.ticket-bio p:last-child{line-height:1.45}.ticket-host,.ticket-guide{left:42%;width:44%;height:42%}.ticket-balloon{left:51%;top:37%;max-width:40%}.ticket-door{height:42%;width:15%;right:2%}.ticket-cat{width:19%}.editor-site .ticket-stub{left:28%}}
+@media(prefers-reduced-motion:reduce){.ticket-room *{animation:none!important;transition:none!important}}
