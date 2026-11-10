@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import './EditorIntro.css';
 
 export default function EditorIntro() {
+  const [highlightTicket, setHighlightTicket] = useState(false);
   return (
     <section className="sab-foyer" id="edicao" aria-labelledby="foyer-name">
       <div className="foyer-building" id="edicao-sobre">
@@ -16,11 +18,11 @@ export default function EditorIntro() {
           <div className="foyer-kiosk">
             <div className="foyer-plaque">Bilheteria</div>
             <div className="foyer-window">
-              <img src="/images/doorman/welcome.webp" alt="O Doorman cumprimenta você atrás do vidro da bilheteria." />
+              <img src={highlightTicket ? "/images/doorman/point.webp" : "/images/doorman/welcome.webp"} alt="O Doorman cumprimenta você atrás do vidro da bilheteria." />
               <p className="foyer-speech">Boa sessão! Seu ingresso está no balcão.</p>
             </div>
             <div className="foyer-counter">
-              <a className="foyer-ticket" href="#edicao-trabalhos"><span>Retirar ingresso</span><b aria-hidden="true">➜</b></a>
+              <a className="foyer-ticket" onMouseEnter={() => setHighlightTicket(true)} onMouseLeave={() => setHighlightTicket(false)} onFocus={() => setHighlightTicket(true)} onBlur={() => setHighlightTicket(false)} href="#edicao-trabalhos"><span>Retirar ingresso</span><b aria-hidden="true">➜</b></a>
             </div>
             <div className="foyer-apron" aria-hidden="true"><i>✦</i></div>
           </div>
