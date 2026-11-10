@@ -44,18 +44,6 @@
   background:#fff1d4;color:#301d23;font-weight:700;line-height:1.3;font-size:clamp(13px,1.05vw,19px);
 }
 .ticket-balloon::after {content:'';position:absolute;left:-8px;bottom:5px;width:12px;height:10px;background:#fff1d4;border-left:2px solid #301d23;border-bottom:2px solid #301d23;transform:skewY(-25deg);}
-.ticket-cat {--crossing:14s;--stride:.84s;position:absolute;bottom:7.5%;width:11%;left:17%;pointer-events:none;animation:booth-cross var(--crossing) linear infinite alternate;}
-@keyframes booth-cross {from{left:17%}to{left:76%}}
-.ava-walker {
-  display: block;
-  aspect-ratio: 288 / 180;
-  background: url('/images/doorman/ava-walk.webp') left bottom / 800% 100% no-repeat;
-  animation: booth-stride var(--stride) steps(8, jump-none) infinite,
-             booth-turn calc(var(--crossing) * 2) step-end infinite;
-}
-@keyframes booth-stride { from { background-position-x: 0%; } to { background-position-x: 100%; } }
-@keyframes booth-turn { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
-
 .booth-replies {display:flex;justify-content:center;flex-wrap:wrap;gap:.65rem;padding:.65rem 3%;background:#251819;border-top:1px solid #a57a49;}
 .ticket-room[data-entering=true] .ticket-host,.ticket-room[data-entering=true] .ticket-balloon,.ticket-room[data-entering=true] .ticket-bio {opacity:0}
 .ticket-room[data-entering=true] .ticket-guide {animation:guide-to-door 1.5s both;}
@@ -71,7 +59,6 @@
   .ticket-set {height:clamp(290px,58vw,405px);background-size:145% 100%;background-position:right center;transform-origin:84% 60%;}
   .ticket-host,.ticket-guide {left:32%;height:58%;}
   .ticket-balloon {left:calc(32% + 8vw);top:37%;max-width:26%;font-size:clamp(12px,2.9vw,15px);}
-  .ticket-cat {width:18%;--crossing:9s}
   .booth-replies {gap:.4rem;}
 }
 @media(prefers-reduced-motion:reduce){.ticket-room *{animation:none!important;transition:none!important}}
@@ -122,7 +109,16 @@
   transform:translateX(-50%); animation:offer-ticket .45s ease-out both;
 }
 @keyframes offer-ticket {from{opacity:0;transform:translateX(-52%) rotate(-3deg)}to{opacity:1;transform:translateX(-50%)}}
-.ticket-room[data-offering=true] .ticket-balloon {left:32%;top:37%;max-width:17%;}
+/* Anchor the lower edge above the offering pose, including its entrance rotation.
+   Wrapped lines grow upward in both languages. */
+.ticket-room[data-offering=true] .ticket-balloon {
+  top:auto; bottom:74%; left:40%; max-width:min(26%,26ch);
+  border-radius:14px 14px 14px 4px;
+}
+.ticket-room[data-offering=true] .ticket-balloon::after {
+  left:24%; bottom:-7px; width:10px; height:10px;
+  transform:rotate(-45deg);
+}
 .editor-site .admission-ticket {
   position:absolute;left:59%;top:43%;display:grid;padding:.45em 1.25em .55em;
   text-decoration:none;color:#35191a;background:#ffdf9c;border:3px double #814124;
@@ -137,7 +133,6 @@
 .ticket-room[data-screening=true] .ticket-giver {animation:step-aside 1s both;}
 .ticket-room[data-screening=true] .ticket-guide {display:none;}
 .ticket-room[data-screening=true] .counter-edge {animation:pass-counter 1.65s .45s both;transform-origin:center 85.4%;}
-.ticket-room[data-screening=true] .ticket-cat {opacity:0;transition:opacity .6s;}
 .ticket-room[data-screening=true] .auditorium-arrival {animation:take-seat 3.4s both;}
 @keyframes swing-in {to{transform:rotateY(-93deg);filter:brightness(.65)}}
 @keyframes spill {0%{opacity:0;transform:scaleX(.25)}65%,100%{opacity:.95;transform:scaleX(1)}}
@@ -155,7 +150,7 @@
   .booth-art {left:-45%;}
   .ticket-room[data-screening=true] .ticket-set {transform-origin:81.7% 51%;}
   .ticket-giver {left:34%;height:112%;}
-  .ticket-room[data-offering=true] .ticket-balloon {left:3%;top:18%;max-width:35%;}
+  .ticket-room[data-offering=true] .ticket-balloon {left:10%; max-width:65%;}
   .editor-site .admission-ticket {left:51%;top:42%;}
 }
 

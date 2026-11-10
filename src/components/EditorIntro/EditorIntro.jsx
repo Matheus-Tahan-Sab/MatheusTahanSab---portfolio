@@ -53,7 +53,6 @@ export default function EditorIntro() {
         : destination === '#edicao-servicos' ? 'Por aqui. Vou abrir o escritório.'
         : destination === '#edicao-contato' ? 'Tenho uma carta para você. Me acompanhe.'
         : offering ? 'Pegue seu ingresso. Guarde esse lugar na primeira fila!' : called ? 'Aonde eu te levo hoje?' : 'Um visitante! Pode tocar a campainha.'}</p>
-      <div className="ticket-cat" aria-hidden="true"><span className="ava-walker" /></div>
       {offering && !entering && <a ref={ticket} className="admission-ticket" href="#edicao-trabalhos" onClick={enterCinema}>
         <small>Cine Sab</small><b>Pegar ingresso</b>
       </a>}
