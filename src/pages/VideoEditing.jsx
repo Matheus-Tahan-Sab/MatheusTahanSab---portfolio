@@ -90,6 +90,11 @@ export default function VideoEditing() {
       block: 'start',
     });
   }, [letterOpen, room]);
+  useEffect(() => {
+    if (room !== 'letter') return;
+    const pose = new Image();
+    pose.src = '/images/doorman/closing.webp';
+  }, [room]);
   function leaveCinema(event) {
     const link = event.target.closest('a[href]');
     if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -101,7 +106,7 @@ export default function VideoEditing() {
       exitTimer.current = null;
       setExitLink('');
       window.location.assign(href);
-    }, 1050);
+    }, 1900);
   }
   const [playing, setPlaying] = useState(null);
   const [format, setFormat] = useState('all');
@@ -131,7 +136,7 @@ export default function VideoEditing() {
     </section></>}
     {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><button type="button" className="hand-letter" aria-label={letterOpen ? 'Fechar carta' : 'Receber a carta'} aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}><img src="/images/doorman/contact.webp" alt="" /></button></div></div></div>
     {letterOpen && <Contact editing onExit={leaveCinema} />}
-    {exitLink && <div className="portal-exit" role="status"><div className="blue-threshold" /><img src="/images/doorman/point.webp" alt="" /><a href={exitLink}>Continuar para o contato ↗</a></div>}
+    {exitLink && <div className="portal-exit" role="status"><div className="exit-doorway" aria-hidden="true"><img className="exit-doorman" src="/images/doorman/closing.webp" alt="" /><div className="exit-door"><span className="exit-door-handle" /></div></div><a href={exitLink}>Continuar para o contato ↗</a></div>}
     </>}
     <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
