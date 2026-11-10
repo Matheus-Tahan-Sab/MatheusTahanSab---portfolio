@@ -18,9 +18,20 @@ const editingNavigation = [
 function LanguageSwitch() {
   const english = document.documentElement.lang === 'en';
   function switchLanguage(language) {
+    if (language === (english ? 'en' : 'pt')) return;
+    const headerBottom = document.querySelector('header').getBoundingClientRect().bottom;
+    const sections = Array.from(document.querySelectorAll('main section[id], main .cut-contact-intro[id]'));
+    const anchor = sections.filter(section => section.getBoundingClientRect().top <= headerBottom + 1).pop();
+    const readingPosition = {
+      anchor: anchor?.id,
+      offset: anchor?.getBoundingClientRect().top,
+      y: window.scrollY
+    };
     const url = new URL(window.location.href);
     url.searchParams.set('lang', language);
-    window.location.assign(url.href);
+    history.replaceState({ ...history.state, readingPosition }, '', url);
+    history.scrollRestoration = 'manual';
+    window.location.reload();
   }
   return <div className="site-languages" role="group" aria-label={english ? 'Language' : 'Idioma'}>
     {['pt', 'en'].map(language => <button type="button" key={language} lang={language}
@@ -59,9 +70,9 @@ export default function Header({ editing = false }) {
           <a className="editor-nav-extra" href="#edicao-sobre">Sobre mim</a>
           <a className="editor-nav-contact" href="#edicao-contato">Falar com o Sab ↗</a>
           <a className="editor-dev-link" href="#inicio" aria-label="Ir para o portfólio de programação">DEV &lt;/&gt;</a>
-          <LanguageSwitch />
         </nav>
       </div>
+      <LanguageSwitch />
     </header>
   );
   return (
@@ -77,7 +88,6 @@ export default function Header({ editing = false }) {
             <a href={item.href} key={item.href}><span aria-hidden="true">{'0' + (index + 1)}</span>{item.label}</a>
           ))}
         </nav>
-        <LanguageSwitch />
         <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label="Modo escuro" aria-pressed={theme === 'dark'} title={theme === 'dark' ? 'Trocar para modo claro' : 'Trocar para modo escuro'}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
             {theme === 'dark' ? <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" /></> : <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" />}
@@ -89,6 +99,7 @@ export default function Header({ editing = false }) {
         <a href="#edicao" aria-current={editing ? 'page' : undefined}><span aria-hidden="true">▶</span> Edição de vídeo</a>
         <a href="#inicio" aria-current={!editing ? 'page' : undefined}><span aria-hidden="true">&lt;/&gt;</span> Desenvolvimento</a>
       </nav>
+      <LanguageSwitch />
     </header>
   );
 }

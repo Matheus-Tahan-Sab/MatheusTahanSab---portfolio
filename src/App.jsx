@@ -36,6 +36,16 @@ export default function App() {
       ? 'Sab: edição de gameplays, vídeos longos, highlights e vídeos verticais. Conheça meu trabalho e vamos conversar sobre seu próximo vídeo.'
       : 'Portfólio de desenvolvimento de Matheus Tahan Sab.';
     const frame = requestAnimationFrame(() => {
+      const position = history.state?.readingPosition;
+      if (position) {
+        const { readingPosition, ...rest } = history.state;
+        history.replaceState(rest, '');
+        const anchor = document.getElementById(position.anchor);
+        const top = anchor ? window.scrollY + anchor.getBoundingClientRect().top - position.offset : position.y;
+        window.scrollTo({ top, behavior: 'instant' });
+        history.scrollRestoration = 'auto';
+        return;
+      }
       const target = document.getElementById(window.location.hash.slice(1));
       target?.scrollIntoView({ behavior: 'instant' });
     });

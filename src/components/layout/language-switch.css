@@ -4,10 +4,11 @@
 .site-languages button:focus-visible { outline:2px solid #ff713f; outline-offset:-3px; }
 
 .site-languages {
-  position: fixed;
+  position: absolute;
   z-index: 30;
-  top: max(6px, env(safe-area-inset-top));
-  right: max(8px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  right: max(12px, env(safe-area-inset-right));
 }
 @media (max-width: 1510px) {
   .editor-header .editor-header-inner,
