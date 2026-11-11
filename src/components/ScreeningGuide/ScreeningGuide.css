@@ -69,3 +69,18 @@
 
 .screening-guide[data-screen=true] .guide-door-frame {box-shadow:0 0 35px #ffb34880;}
 .screening-guide[data-screen=true] :is(.guide-destination,.guide-arrival) {background:radial-gradient(ellipse at center,#dca654,#56213a 65%,#211321);}
+
+/* Match the conversation pose to the existing waist-up characters. */
+.editor-site .guide-host[aria-expanded=true]:enabled {
+  position:relative;height:300px;overflow:hidden;border-radius:0;
+}
+.editor-site .guide-speaker .guide-host[aria-expanded=true]:enabled img {
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  height:133.333%;width:auto;max-width:none;object-fit:contain;object-position:top;
+}
+@media(max-width:760px) {
+  .editor-site .guide-host[aria-expanded=true]:enabled {height:220px;}
+}
+@media(max-width:420px) {
+  .editor-site .guide-host[aria-expanded=true]:enabled {height:190px;}
+}
