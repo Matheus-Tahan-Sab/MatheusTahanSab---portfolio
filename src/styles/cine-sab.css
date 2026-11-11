@@ -44,27 +44,3 @@
 .editor-site .cinema-speaker .studio-dialogue::after,.editor-site .studio-door .studio-bubble::after { content:''; position:absolute; bottom:-10px; left:52%; width:15px; height:15px; background:#fff2d2; border-right:2px solid #181821; border-bottom:2px solid #181821; transform:skewY(18deg) rotate(35deg); }
 .editor-site .cinema-speaker img { width:min(100%,310px); }
 @media(max-width:760px){.editor-site .studio-scene:has(.cinema-speaker){grid-template-columns:1fr;gap:1rem}.editor-site .cinema-speaker{width:min(85%,360px);justify-self:end}.editor-site .cinema-speaker img{width:min(65%,215px)}}
-
-.editor-site .cinema-room-nav {
-  position:fixed;z-index:40;bottom:16px;left:50%;transform:translateX(-50%);
-  display:flex;gap:5px;padding:7px;width:max-content;max-width:calc(100% - 24px);
-  background:#211820f5;border:1px solid #bc9258;border-radius:8px;
-  box-shadow:0 5px 24px #0008;
-}
-.editor-site .cinema-room-nav a {
-  display:flex;align-items:center;justify-content:center;min-height:44px;
-  padding:.5rem 1rem;color:#ffe7bd;text-decoration:none;border-radius:4px;
-  font-size:.9rem;font-weight:700;
-}
-.editor-site .cinema-room-nav .cinema-lobby-link {border-right:1px solid #856342;color:#cfb998;}
-.editor-site .cinema-room-nav a[aria-current=page] {background:#ffe7bd;color:#301c29;}
-.editor-site .cinema-room-nav a:is(:hover,:focus-visible),
-.editor-site .cinema-room-pagination a:is(:hover,:focus-visible) {outline:2px solid #ff713f;outline-offset:2px;}
-.editor-site .video-portfolio:has(.cinema-room-nav) {padding-bottom:85px;}
-.editor-site .cinema-room-pagination {display:flex;gap:1rem;justify-content:space-between;margin:2rem 0;}
-.editor-site .cinema-room-pagination a {padding:.8rem 1.2rem;min-height:44px;color:#ffe7bd;border:2px solid #bc9258;background:#211820;text-decoration:none;font-weight:700;}
-.editor-site .cinema-room-pagination .cinema-next-room {margin-left:auto;background:#ffe7bd;color:#301c29;}
-@media(max-width:600px) {
-  .editor-site .cinema-room-nav {bottom:max(8px,env(safe-area-inset-bottom));gap:2px;padding:5px;width:calc(100% - 16px);max-width:430px;}
-  .editor-site .cinema-room-nav a {flex:1;padding:.5rem .35rem;font-size:.78rem;}
-}
