@@ -46,6 +46,30 @@ function VideoPlayer({ project, onClose }) {
   </dialog>;
 }
 
+const cinemaRooms = [
+  { id: 'screen', href: '#edicao-trabalhos', label: 'Trabalhos' },
+  { id: 'office', href: '#edicao-servicos', label: 'Serviços' },
+  { id: 'letter', href: '#edicao-convite', label: 'Contato' },
+];
+
+function RoomNavigation({ room }) {
+  return <nav className="cinema-room-nav" aria-label="Salas do Cine Sab">
+    <a className="cinema-lobby-link" href="#edicao">Bilheteria</a>
+    {cinemaRooms.map(destination => <a key={destination.id} href={destination.href}
+      aria-current={room === destination.id ? 'page' : undefined}>{destination.label}</a>)}
+  </nav>;
+}
+
+function RoomPagination({ room }) {
+  const index = cinemaRooms.findIndex(destination => destination.id === room);
+  const previous = cinemaRooms[index - 1];
+  const next = cinemaRooms[index + 1];
+  return <nav className="cinema-room-pagination" aria-label="Continuar pelo cinema">
+    {previous && <a href={previous.href}><span aria-hidden="true">← </span>{previous.label}</a>}
+    {next && <a className="cinema-next-room" href={next.href}>{next.label}<span aria-hidden="true"> →</span></a>}
+  </nav>;
+}
+
 function currentRoom() {
   switch (window.location.hash) {
     case '#edicao-trabalhos': return 'screen';
@@ -91,7 +115,7 @@ export default function VideoEditing() {
   const shorts = videoProjects.filter(project => project.category === 'Vídeos verticais');
   return <div className="video-portfolio">
     {room === 'booth' && <EditorIntro />}
-    {room !== 'booth' && <a href="#edicao" className="back-booth">← Voltar à bilheteria</a>}
+    {room !== 'booth' && <RoomNavigation room={room} />}
 
     {room === 'screen' && <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
       <div className="studio-scene scene-works"><div><SectionHeading number="02" label="Sala de projeção"><span id="cut-work-title">TRABALHOS<br /><em>EM CARTAZ.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Apaguei as luzes. Qual dos vídeos do Sab você quer ver primeiro?</p><img src="/images/doorman/works.webp" alt="" loading="lazy" /></div></div>
@@ -114,6 +138,7 @@ export default function VideoEditing() {
     {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><button type="button" className="hand-letter" aria-label={letterOpen ? 'Fechar carta' : 'Receber a carta'} aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}><img src="/images/doorman/contact.webp" alt="" /></button></div></div></div>
     {letterOpen && <Contact editing />}
     </>}
+    {room !== 'booth' && <RoomPagination room={room} />}
     <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
   </div>;
 }
