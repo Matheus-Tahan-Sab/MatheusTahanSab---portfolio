@@ -2,6 +2,7 @@ import '../styles/cine-sab.css';
 import '../styles/doorman-scenes.css';
 import { useEffect, useRef, useState } from 'react';
 import Contact from './Contact.jsx';
+import ScreeningGuide from '../components/ScreeningGuide/ScreeningGuide.jsx';
 import EditorIntro from '../components/EditorIntro/EditorIntro.jsx';
 import { videoProjects } from '../data/videoProjects.js';
 
@@ -94,7 +95,7 @@ export default function VideoEditing() {
     {room !== 'booth' && <a href="#edicao" className="back-booth">← Voltar à bilheteria</a>}
 
     {room === 'screen' && <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
-      <div className="studio-scene scene-works"><div><SectionHeading number="02" label="Sala de projeção"><span id="cut-work-title">TRABALHOS<br /><em>EM CARTAZ.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Apaguei as luzes. Qual dos vídeos do Sab você quer ver primeiro?</p><img src="/images/doorman/works.webp" alt="" loading="lazy" /></div></div>
+      <ScreeningGuide />
       <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
         {[['all', 'Todos'], ['short', 'Shorts'], ['long', 'Vídeos longos']].map(([id, label]) =>
           <button type="button" key={id} aria-pressed={format === id} onClick={() => setFormat(id)}>{label}</button>)}
