@@ -95,7 +95,7 @@ export default function VideoEditing() {
     {room !== 'booth' && <a href="#edicao" className="back-booth">← Voltar à bilheteria</a>}
 
     {room === 'screen' && <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
-      <ScreeningGuide />
+      <ScreeningGuide key="screen" />
       <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
         {[['all', 'Todos'], ['short', 'Shorts'], ['long', 'Vídeos longos']].map(([id, label]) =>
           <button type="button" key={id} aria-pressed={format === id} onClick={() => setFormat(id)}>{label}</button>)}
@@ -104,7 +104,7 @@ export default function VideoEditing() {
       {format !== 'long' && shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
     </section>}
     {room === 'office' && <><section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
-      <div className="studio-scene scene-services"><div><SectionHeading number="03" label="Serviços"><span id="cut-services-title">QUAL É O<br /><em>FORMATO?</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Já acendi a luz do laboratório. Seu vídeo vai ficar melhor na horizontal ou na vertical?</p><img src="/images/doorman/services.webp" alt="" loading="lazy" /></div></div>
+      <ScreeningGuide key="office" room="office" />
       <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
     </section>
 

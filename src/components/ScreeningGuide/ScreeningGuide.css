@@ -66,3 +66,6 @@
 
 .editor-site .screening-guide .guide-copy > [hidden] {display:none;}
 .editor-site .screening-guide[data-traveling=true] {overflow:clip;}
+
+.screening-guide[data-screen=true] .guide-door-frame {box-shadow:0 0 35px #ffb34880;}
+.screening-guide[data-screen=true] :is(.guide-destination,.guide-arrival) {background:radial-gradient(ellipse at center,#dca654,#56213a 65%,#211321);}
