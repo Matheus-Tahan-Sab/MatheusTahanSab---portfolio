@@ -1,0 +1,86 @@
+
+.editor-site .screening-guide {min-height:460px;}
+.guide-copy {position:relative;min-width:0;}
+.guide-conversation {padding:1.2rem 0;}
+.guide-question {color:#ffebc9;font-weight:700;font-size:clamp(1rem,1.8vw,1.4rem);text-shadow:0 2px 3px #160f18;}
+.guide-conversation nav {display:grid;justify-items:start;gap:.8rem;}
+.editor-site .guide-conversation :is(a,button) {
+  position:relative;padding:.75rem 1.2rem;min-height:44px;max-width:100%;
+  border:2px solid #301c29;border-radius:24px 24px 24px 5px;
+  background:#fff1d4;color:#301c29;box-shadow:4px 4px #20131d;
+  font-family:inherit;font-weight:700;font-size:1rem;line-height:1.3;text-decoration:none;cursor:pointer;text-align:left;
+}
+.editor-site .guide-conversation button {background:#30202bd9;color:#ffe2b3;border-color:#cba46a;}
+.editor-site .guide-conversation :is(a,button):is(:hover,:focus-visible) {outline:3px solid #e8b76b;outline-offset:3px;}
+.editor-site .guide-host {display:block;padding:0;border:0;background:transparent;width:100%;cursor:pointer;border-radius:12px;}
+.editor-site .guide-host:focus-visible {outline:3px solid #ffe0a3;outline-offset:4px;}
+.editor-site .guide-host:enabled:hover img {filter:drop-shadow(0 0 8px #e7b866);}
+.editor-site .guide-speaker .guide-host img {height:300px;width:100%;max-width:340px;object-fit:contain;object-position:bottom;margin:0 auto;}
+.guide-host:disabled {opacity:1;cursor:default;}
+.guide-door-frame {
+  position:relative;margin:0 auto;width:min(75%,260px);height:360px;perspective:900px;
+  border:8px ridge #be9152;overflow:hidden;background:#230f18;box-shadow:0 0 35px #f651374d;
+  animation:guide-approach 2.4s ease-in both;transform-origin:50% 55%;
+}
+.guide-destination {position:absolute;inset:0;background:#32101c url('/images/doorman/darkroom.webp') 80% center / cover;}
+.guide-door-leaf {
+  position:absolute;inset:0;transform-origin:left;backface-visibility:hidden;
+  border:5px solid #8d5639;background:linear-gradient(110deg,#682a36,#33111d);
+  animation:guide-open 1s .35s ease-in-out both;
+}
+.guide-door-leaf::before,.guide-door-leaf::after {content:'';position:absolute;left:12%;right:12%;height:34%;border:5px double #bb8a4a;}
+.guide-door-leaf::before {top:9%;}
+.guide-door-leaf::after {bottom:9%;}
+.guide-door-leaf span {position:absolute;right:6%;top:50%;width:20px;height:9px;background:#f1cf83;border-radius:5px;}
+.screening-guide[data-contact=true] .guide-door-frame {box-shadow:0 0 35px #36bdff80;}
+.screening-guide[data-contact=true] .guide-destination {background:radial-gradient(ellipse,#9dedff,#1672c9 45%,#091b57 85%);}
+.screening-guide[data-contact=true] .guide-destination::before {
+  content:'';position:absolute;inset:-65%;background:repeating-conic-gradient(#0b3970,#27b9ef 45deg,#085197 90deg);
+  animation:guide-swirl 3s linear infinite;opacity:.7;
+}
+.screening-guide[data-traveling=true] .guide-copy {z-index:3;}
+.screening-guide[data-traveling=true] .guide-speaker {animation:guide-fade 2.4s both;}
+.guide-arrival {position:fixed;inset:0;z-index:95;pointer-events:none;background:#250b15 url('/images/doorman/darkroom.webp') 80% center / cover;animation:guide-arrive 2.4s both;}
+.screening-guide[data-contact=true] .guide-arrival {background:radial-gradient(ellipse,#adefff,#1665aa 55%,#101a38);}
+@keyframes guide-open {to{transform:rotateY(-100deg);}}
+@keyframes guide-approach {0%,45%{transform:scale(1);}100%{transform:scale(5);}}
+@keyframes guide-fade {0%,50%{opacity:1;}85%,100%{opacity:0;}}
+@keyframes guide-arrive {0%,65%{opacity:0;}95%,100%{opacity:1;}}
+@keyframes guide-swirl {to{transform:rotate(360deg);}}
+@media(max-width:760px) {
+  .editor-site .screening-guide {min-height:0;grid-template-columns:minmax(0,1fr) minmax(125px,.7fr);align-items:end;padding:1rem 0 0;gap:.6rem;}
+  .editor-site .screening-guide .cinema-speaker {width:100%;}
+  .editor-site .guide-speaker .guide-host img {height:220px;width:100%;}
+  .guide-conversation :is(a,button) {font-size:.83rem!important;padding:.6rem!important;}
+  .guide-door-frame {height:260px;width:90%;}
+}
+@media(max-width:420px) {
+  .editor-site .screening-guide {grid-template-columns:1fr;}
+  .editor-site .screening-guide .guide-speaker {display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+  .editor-site .guide-speaker .guide-host img {height:190px;}
+  .guide-conversation {padding:0 0 1rem;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .screening-guide *,.screening-guide ::before {animation:none!important;transition:none!important;}
+}
+
+.editor-site .screening-guide .guide-copy > [hidden] {display:none;}
+.editor-site .screening-guide[data-traveling=true] {overflow:clip;}
+
+.screening-guide[data-screen=true] .guide-door-frame {box-shadow:0 0 35px #ffb34880;}
+.screening-guide[data-screen=true] :is(.guide-destination,.guide-arrival) {background:radial-gradient(ellipse at center,#dca654,#56213a 65%,#211321);}
+
+/* Match the conversation pose to the existing waist-up characters. */
+.editor-site .guide-host[aria-expanded=true]:enabled {
+  position:relative;height:300px;overflow:hidden;border-radius:0;
+}
+.editor-site .guide-speaker .guide-host[aria-expanded=true]:enabled img {
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  height:133.333%;width:auto;max-width:none;object-fit:contain;object-position:top;
+}
+@media(max-width:760px) {
+  .editor-site .guide-host[aria-expanded=true]:enabled {height:220px;}
+}
+@media(max-width:420px) {
+  .editor-site .guide-host[aria-expanded=true]:enabled {height:190px;}
+}
