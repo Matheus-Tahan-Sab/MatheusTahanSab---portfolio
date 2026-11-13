@@ -276,3 +276,7 @@
  .editor-site .hq-portfolio #edicao-contato .contact-form-panel {border-left:0;border-top:2px solid #101114}
 }
 @media(prefers-reduced-motion:reduce) {.hq-portfolio * {transition:none!important;animation:none!important}}
+
+/* Keep legacy short-video and contact colors consistent with the HQ scenes. */
+.editor-site .hq-portfolio .hq-videos .cut-work-copy h4 {color:#f5f4ee!important}
+.editor-site .hq-portfolio .hq-contact-heading .hq-kicker {color:#9b351a}
