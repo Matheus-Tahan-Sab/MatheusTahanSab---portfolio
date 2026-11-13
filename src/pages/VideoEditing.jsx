@@ -64,22 +64,22 @@ export default function VideoEditing() {
   return <div className="video-portfolio hq-portfolio">
     <section className="hq-opening" id="edicao" aria-labelledby="hq-title">
       <div className="hq-cover-copy">
-        <p className="hq-kicker">SAB / EDIÇÃO DE VÍDEO</p>
-        <h1 id="hq-title">BOAS HISTÓRIAS.<br /><em>BONS CORTES.</em></h1>
-        <p>Sou o Sab, Matheus Tahan Sab. Edito gameplays, vídeos longos e shorts no DaVinci Resolve, com humor e o ritmo do seu canal.</p>
+        <p className="hq-kicker hq-tape">SAB / EDIÇÃO DE VÍDEO</p>
+        <h1 id="hq-title"><span className="hq-title-small">SEU VÍDEO.</span><span className="hq-title-cut">OUTRO</span><em>NÍVEL.</em></h1>
+        <p>Gameplays, vídeos longos e shorts. Cortes com intenção, humor e o ritmo do seu canal.</p>
         <div className="hq-actions"><a className="hq-primary" href="#edicao-trabalhos">Ver meus trabalhos <span aria-hidden="true">↓</span></a><a href="#edicao-contato">Falar com o Sab ↗</a></div>
         <span className="hq-edition">CINE SAB — UMA HISTÓRIA EM QUADROS</span>
       </div>
-      <div className="hq-cover-art">
+      <div className="hq-cover-art"><span className="hq-sound" aria-hidden="true">AÇÃO!</span><span className="hq-stamp" aria-hidden="true">EDIÇÃO<br/>COM<br/>PERSONALIDADE</span>
         <p className="hq-speech">Pode entrar. Os vídeos estão logo no próximo quadro.</p>
         
         <img src="/images/doorman/salute.webp" alt="Doorman cumprimenta você na abertura da HQ." />
-        <span className="hq-art-caption">Seu guia entre um quadro e outro.</span>
+        <a className="hq-art-caption" href="#edicao-trabalhos">PRÓXIMO QUADRO ↓</a>
       </div>
     </section>
 
     <section className="hq-section" id="edicao-trabalhos" aria-labelledby="hq-work-title">
-      <header className="hq-section-head"><div><p className="hq-kicker">01 / TRABALHOS</p><h2 id="hq-work-title">DÊ O <em>PLAY.</em></h2></div><p>Vídeos longos, cortes rápidos e histórias que merecem ser vistas.</p></header>
+      <header className="hq-section-head"><div><p className="hq-kicker">01 / TRABALHOS</p><h2 id="hq-work-title">EM <em>CARTAZ.</em></h2></div><p>Vídeos longos, cortes rápidos e histórias que merecem ser vistas.</p></header>
       <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
         {[['all','Todos'],['long','Vídeos longos'],['short','Shorts']].map(([id,label])=><button type="button" key={id} aria-pressed={format===id} onClick={()=>setFormat(id)}>{label}</button>)}
       </div>
@@ -89,12 +89,12 @@ export default function VideoEditing() {
 
     <section className="hq-section hq-services" id="edicao-servicos" aria-labelledby="hq-services-title">
       <header className="hq-section-head"><div><p className="hq-kicker">02 / SERVIÇOS</p><h2 id="hq-services-title">CADA VÍDEO,<br /><em>UM RITMO.</em></h2></div><p>Do conteúdo completo ao momento que merece replay.</p></header>
-      <div className="hq-service-grid">{services.map(service=><article key={service.format}><p className="hq-kicker">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p><ul aria-label="Formatos">{service.tags.map(tag=><li key={tag}>{tag}</li>)}</ul></article>)}</div>
+      <div className="hq-service-layout"><div className="hq-service-host" aria-hidden="true"><span>ESCOLHA<br/>SEU FORMATO.</span><img src="/images/doorman/invite-backstage.webp" alt="" loading="lazy"/></div><div className="hq-service-grid">{services.map(service=><article key={service.format}><p className="hq-kicker">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p><ul aria-label="Formatos">{service.tags.map(tag=><li key={tag}>{tag}</li>)}</ul></article>)}</div></div>
     </section>
 
     <section className="hq-section hq-process" id="edicao-processo" aria-labelledby="hq-process-title">
       <header className="hq-section-head"><div><p className="hq-kicker">03 / PROCESSO</p><h2 id="hq-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></h2></div></header>
-      <ol className="hq-steps">
+      <div className="hq-editing-mark" aria-hidden="true">REC <span>●</span></div><ol className="hq-steps">
         <li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li>
         <li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li>
         <li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li>
@@ -102,8 +102,11 @@ export default function VideoEditing() {
       <PanelLink href="#edicao-contato" pose="contact">O próximo quadro pode ser o seu vídeo.</PanelLink>
     </section>
 
-    <section className="hq-about" id="edicao-sobre" aria-labelledby="hq-about-title"><p className="hq-kicker">NOS BASTIDORES</p><h2 id="hq-about-title">Pode me chamar de Sab.</h2><p>Sou Matheus Tahan Sab. Gosto de encontrar, no meio da partida, aquele momento que faz a história valer o play. Edito gameplays, vídeos longos e shorts no DaVinci Resolve, com atenção à identidade e ao público de cada canal.</p></section>
-    <div id="edicao-convite" className="hq-contact"><Contact editing /></div>
+    <section className="hq-about" id="edicao-sobre" aria-labelledby="hq-about-title">
+      <div className="hq-about-portrait" aria-hidden="true"><span className="hq-about-word">SAB!</span><img src="/images/doorman/process.webp" alt="" loading="lazy"/><span className="hq-tape">DIRETO DOS BASTIDORES</span></div>
+      <div className="hq-about-copy"><p className="hq-kicker">04 / QUEM ESTÁ NA TIMELINE</p><h2 id="hq-about-title">PODE ME<br/>CHAMAR DE <em>SAB.</em></h2><p>Sou Matheus Tahan Sab. Gosto de encontrar, no meio da partida, aquele momento que faz a história valer o play.</p><p>Edito no DaVinci Resolve, com atenção à identidade e ao público de cada canal.</p><a className="hq-primary" href="#edicao-contato">Vamos criar seu próximo vídeo ↗</a></div>
+    </section>
+    <div id="edicao-convite" className="hq-contact"><header className="hq-contact-heading"><p className="hq-kicker">05 / A HISTÓRIA CONTINUA</p><h2>SEU VÍDEO<br/><em>COMEÇA AQUI.</em></h2><span className="hq-contact-arrow" aria-hidden="true">↙</span></header><Contact editing /></div>
     <VideoPlayer project={playing} onClose={()=>setPlaying(null)} />
   </div>;
 }
