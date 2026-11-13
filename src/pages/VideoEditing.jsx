@@ -12,10 +12,6 @@ const services = [
   { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], icon: '↺' },
 ];
 
-function SectionHeading({ number, label, children }) {
-  return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
-}
-
 function WorkCard({ project, index, onPlay }) {
   const vertical = project.category === 'Vídeos verticais';
   return <article className={'cut-work' + (vertical ? ' cut-work-short' : '')}>
@@ -76,7 +72,7 @@ export default function VideoEditing() {
       </div>
       <div className="hq-cover-art">
         <p className="hq-speech">Pode entrar. Os vídeos estão logo no próximo quadro.</p>
-        <span className="hq-orbit" aria-hidden="true">SAB!</span>
+        
         <img src="/images/doorman/salute.webp" alt="Doorman cumprimenta você na abertura da HQ." />
         <span className="hq-art-caption">Seu guia entre um quadro e outro.</span>
       </div>
