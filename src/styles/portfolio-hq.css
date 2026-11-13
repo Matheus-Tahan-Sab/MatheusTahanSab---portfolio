@@ -112,3 +112,8 @@
 .editor-site .hq-portfolio #edicao-contato :is(h3,p,small) {color:#d0d0d3}
 .editor-site .hq-portfolio #edicao-contato h3 {color:#fff}
 .editor-site .hq-portfolio #edicao-contato .contact-links svg,.editor-site .hq-portfolio #edicao-contato .contact-links a > span:last-child {color:#ff835d}
+
+/* Override the legacy light contact scene's forced text colors. */
+.editor-site .hq-portfolio #edicao-contato .contact-copy :is(h3,p,small) {color:#d0d0d3!important}
+.editor-site .hq-portfolio #edicao-contato .contact-copy h3 {color:#fff!important}
+.editor-site .hq-portfolio .hq-videos .cut-work-copy .cut-label {color:#bcbcc1!important}
