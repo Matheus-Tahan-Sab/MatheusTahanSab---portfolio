@@ -106,3 +106,15 @@
  .hq-about {margin-top:40px}
 }
 @media(prefers-reduced-motion:reduce) {.hq-portfolio * {transition:none!important;animation:none!important}}
+
+.editor-site .video-portfolio.hq-portfolio {color:#25232b}
+.editor-site .hq-portfolio :is(.hq-kicker,.hq-speech,.hq-link-bubble,.hq-actions a) {color:#25232b}
+.editor-site .hq-cover-copy > p:not(.hq-kicker) {color:#57514c}
+.editor-site .hq-cover-copy h1 {font-size:clamp(2.5rem,3.7vw,3.8rem)}
+.editor-site .hq-cover-art {height:480px;min-height:0}
+.editor-site .hq-cover-art > img {height:125%;bottom:-40%}
+@media(max-width:600px) {
+ .editor-site .hq-cover-copy h1 {font-size:2.55rem}
+ .editor-site .hq-cover-art {height:290px}
+ .editor-site .hq-cover-art > img {height:125%;bottom:-38%}
+}
