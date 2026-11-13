@@ -2,8 +2,8 @@ import '../styles/cine-sab.css';
 import '../styles/doorman-scenes.css';
 import { useEffect, useRef, useState } from 'react';
 import Contact from './Contact.jsx';
-import ScreeningGuide from '../components/ScreeningGuide/ScreeningGuide.jsx';
-import EditorIntro from '../components/EditorIntro/EditorIntro.jsx';
+import '../styles/portfolio-hq.css';
+
 import { videoProjects } from '../data/videoProjects.js';
 
 const services = [
@@ -11,10 +11,6 @@ const services = [
   { format: '02 / SHORT FORM', title: 'Direto ao ponto.', text: 'Enquadramento, legendas e timing para transformar uma boa ideia em um vídeo que funciona no celular.', tags: ['Shorts', 'Reels', 'TikTok'], icon: '↟' },
   { format: '03 / HIGHLIGHTS', title: 'Esse momento merece replay.', text: 'Jogadas, reações e resenhas de live. Eu encontro os momentos e dou a eles o destaque que merecem.', tags: ['Lives', 'Clipes', 'Humor'], icon: '↺' },
 ];
-
-function SectionHeading({ number, label, children }) {
-  return <div className="cut-section-heading"><p className="cut-label"><span>{number}</span> {label}</p><h2>{children}</h2></div>;
-}
 
 function WorkCard({ project, index, onPlay }) {
   const vertical = project.category === 'Vídeos verticais';
@@ -47,74 +43,70 @@ function VideoPlayer({ project, onClose }) {
   </dialog>;
 }
 
-function currentRoom() {
-  switch (window.location.hash) {
-    case '#edicao-trabalhos': return 'screen';
-    case '#edicao-servicos':
-    case '#edicao-processo': return 'office';
-    case '#edicao-contato':
-    case '#edicao-convite': return 'letter';
-    default: return 'booth';
-  }
+
+function PanelLink({ href, children, pose = 'invite-backstage' }) {
+  return <a className="hq-panel-link" href={href}>
+    <span className="hq-link-art" aria-hidden="true"><img src={'/images/doorman/' + pose + '.webp'} alt="" loading="lazy" /></span>
+    <span className="hq-link-bubble">{children} <span aria-hidden="true">↗</span></span>
+  </a>;
 }
 
 export default function VideoEditing() {
-  const [room, setRoom] = useState(currentRoom);
-  const [letterOpen, setLetterOpen] = useState(false);
+  const [playing, setPlaying] = useState(null);
+  const [format, setFormat] = useState('all');
   useEffect(() => {
-    function navigate() {
-      if (window.location.hash === '#conteudo') return;
-      setPlaying(null);
-      setLetterOpen(false);
-      setRoom(currentRoom());
-      requestAnimationFrame(() => {
-        const target = document.getElementById(window.location.hash.slice(1));
-        if (window.location.hash === '#edicao-contato' || !target) window.scrollTo({top:0,behavior:'instant'});
-        else target.scrollIntoView({behavior:'instant'});
-      });
-    }
+    const navigate = () => setPlaying(null);
     window.addEventListener('hashchange', navigate);
     return () => window.removeEventListener('hashchange', navigate);
   }, []);
-  useEffect(() => {
-    if (!letterOpen || room !== 'letter') return;
-    const contact = document.getElementById('edicao-contato');
-    if (!contact) return;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    contact.scrollIntoView({
-      behavior: reducedMotion ? 'instant' : 'smooth',
-      block: 'start',
-    });
-  }, [letterOpen, room]);
-  const [playing, setPlaying] = useState(null);
-  const [format, setFormat] = useState('all');
-  const longVideos = videoProjects.filter(project => project.category !== 'Vídeos verticais');
-  const shorts = videoProjects.filter(project => project.category === 'Vídeos verticais');
-  return <div className="video-portfolio">
-    {room === 'booth' && <EditorIntro />}
-    {room !== 'booth' && <a href="#edicao" className="back-booth">← Voltar à bilheteria</a>}
-
-    {room === 'screen' && <section className="cut-section cut-works" id="edicao-trabalhos" tabIndex={-1} aria-labelledby="cut-work-title">
-      <ScreeningGuide key="screen" />
-      <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
-        {[['all', 'Todos'], ['short', 'Shorts'], ['long', 'Vídeos longos']].map(([id, label]) =>
-          <button type="button" key={id} aria-pressed={format === id} onClick={() => setFormat(id)}>{label}</button>)}
+  const filtered = videoProjects.filter(project => format === 'all' ||
+    (format === 'short' ? project.category === 'Vídeos verticais' : project.category !== 'Vídeos verticais'));
+  return <div className="video-portfolio hq-portfolio">
+    <section className="hq-opening" id="edicao" aria-labelledby="hq-title">
+      <div className="hq-cover-copy">
+        <p className="hq-kicker hq-tape">SAB / EDIÇÃO DE VÍDEO</p>
+        <h1 id="hq-title"><span className="hq-title-small">SEU VÍDEO.</span><span className="hq-title-cut">OUTRO</span><em>NÍVEL.</em></h1>
+        <p>Gameplays, vídeos longos e shorts. Cortes com intenção, humor e o ritmo do seu canal.</p>
+        <div className="hq-actions"><a className="hq-primary" href="#edicao-trabalhos">Ver meus trabalhos <span aria-hidden="true">↓</span></a><a href="#edicao-contato">Falar com o Sab ↗</a></div>
+        <span className="hq-edition">CINE SAB — UMA HISTÓRIA EM QUADROS</span>
       </div>
-      {format !== 'short' && longVideos.length > 0 && <div className="cut-work-group"><div className="cut-group-heading"><h3>Vídeos longos</h3><span>HISTÓRIAS COM TEMPO PRA ACONTECER / 16:9</span></div><div className="cut-long-grid">{longVideos.map((project, index) => <WorkCard key={project.id} project={project} index={index} onPlay={setPlaying} />)}</div></div>}
-      {format !== 'long' && shorts.length > 0 && <div className="cut-work-group cut-short-group"><div className="cut-short-note"><p className="cut-label">FORMATO VERTICAL / 9:16</p><h3>POUCOS<br />SEGUNDOS.<br /><em>BOAS IDEIAS.</em></h3><p>Vídeos curtos, com ritmo, legendas e personalidade para acompanhar quem assiste pelo celular.</p><img className="studio-film" loading="lazy" src="/images/doorman/intro.webp" alt="O Doorman escolhe um trecho da película." /><p className="cut-label">SHORTS / REELS / TIKTOK</p></div><div className="cut-shorts-grid">{shorts.map((project, index) => <WorkCard key={project.id} project={project} index={index + longVideos.length} onPlay={setPlaying} />)}</div></div>}
-    </section>}
-    {room === 'office' && <><section className="cut-section cut-services" id="edicao-servicos" aria-labelledby="cut-services-title">
-      <ScreeningGuide key="office" room="office" />
-      <div className="cut-service-list">{services.map(service => <article key={service.format}><div className="cut-service-symbol" aria-hidden="true">{service.icon}</div><div><p className="cut-label">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p></div><ul aria-label="Formatos">{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
+      <div className="hq-cover-art"><span className="hq-sound" aria-hidden="true">AÇÃO!</span><span className="hq-stamp" aria-hidden="true">EDIÇÃO<br/>COM<br/>PERSONALIDADE</span>
+        <p className="hq-speech">Pode entrar. Os vídeos estão logo no próximo quadro.</p>
+        
+        <img src="/images/doorman/salute.webp" alt="Doorman cumprimenta você na abertura da HQ." />
+        <a className="hq-art-caption" href="#edicao-trabalhos">PRÓXIMO QUADRO ↓</a>
+      </div>
     </section>
 
-    <section className="cut-section cut-process-section" id="edicao-processo" aria-labelledby="cut-process-title">
-      <div className="studio-scene scene-process"><div><SectionHeading number="04" label="Ilha de edição"><span id="cut-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></span></SectionHeading></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Olha, é nesta mesa que o Sab monta os vídeos. Puxa uma cadeira!</p><img src="/images/doorman/process.webp" alt="" loading="lazy" /></div></div>
-      <ol className="cut-process"><li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li><li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li><li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li></ol>
-    </section></>}
-    {room === 'letter' && <><div className="cut-contact-intro" id="edicao-convite"><div className="studio-scene scene-contact"><div><p className="cut-label">05 / Contato</p><h2>UM CONVITE<br /><em>PRA VOCÊ.</em></h2></div><div className="cinema-speaker"><p className="studio-dialogue"><small>Doorman</small>Esta carta é pra você. Abra e escolha como quer falar com o Sab.</p><button type="button" className="hand-letter" aria-label={letterOpen ? 'Fechar carta' : 'Receber a carta'} aria-expanded={letterOpen} onClick={() => setLetterOpen(!letterOpen)}><img src="/images/doorman/contact.webp" alt="" /></button></div></div></div>
-    {letterOpen && <Contact editing />}
-    </>}
-    <VideoPlayer project={playing} onClose={() => setPlaying(null)} />
+    <section className="hq-section" id="edicao-trabalhos" aria-labelledby="hq-work-title">
+      <header className="hq-section-head"><div><p className="hq-kicker">01 / TRABALHOS</p><h2 id="hq-work-title">EM <em>CARTAZ.</em></h2></div><p>Vídeos longos, cortes rápidos e histórias que merecem ser vistas.</p></header>
+      <div className="cinema-filter" role="group" aria-label="Filtrar vídeos por formato">
+        {[['all','Todos'],['long','Vídeos longos'],['short','Shorts']].map(([id,label])=><button type="button" key={id} aria-pressed={format===id} onClick={()=>setFormat(id)}>{label}</button>)}
+      </div>
+      <div className="hq-videos">{filtered.map((project,index)=><WorkCard key={project.id} project={project} index={index} onPlay={setPlaying}/>)}</div>
+      <PanelLink href="#edicao-servicos">Viu o resultado? Vem conhecer os bastidores.</PanelLink>
+    </section>
+
+    <section className="hq-section hq-services" id="edicao-servicos" aria-labelledby="hq-services-title">
+      <header className="hq-section-head"><div><p className="hq-kicker">02 / SERVIÇOS</p><h2 id="hq-services-title">CADA VÍDEO,<br /><em>UM RITMO.</em></h2></div><p>Do conteúdo completo ao momento que merece replay.</p></header>
+      <div className="hq-service-layout"><div className="hq-service-host" aria-hidden="true"><span>ESCOLHA<br/>SEU FORMATO.</span><img src="/images/doorman/invite-backstage.webp" alt="" loading="lazy"/></div><div className="hq-service-grid">{services.map(service=><article key={service.format}><p className="hq-kicker">{service.format}</p><h3>{service.title}</h3><p>{service.text}</p><ul aria-label="Formatos">{service.tags.map(tag=><li key={tag}>{tag}</li>)}</ul></article>)}</div></div>
+    </section>
+
+    <section className="hq-section hq-process" id="edicao-processo" aria-labelledby="hq-process-title">
+      <header className="hq-section-head"><div><p className="hq-kicker">03 / PROCESSO</p><h2 id="hq-process-title">DO BRUTO<br /><em>AO CORTE FINAL.</em></h2></div></header>
+      <div className="hq-editing-mark" aria-hidden="true">REC <span>●</span></div><ol className="hq-steps">
+        <li><span>01</span><h3>A gente conversa.</h3><p>Você me conta sobre o canal, manda suas referências e o material. Alinhamos formato, estilo e prazo.</p></li>
+        <li><span>02</span><h3>Eu entro na timeline.</h3><p>Seleciono os momentos, construo o ritmo e combino imagem, som e texto com a ideia que definimos.</p></li>
+        <li><span>03</span><h3>Ajustamos juntos.</h3><p>Você vê o resultado, traz seu feedback e refinamos a edição até a entrega no formato combinado.</p></li>
+      </ol>
+      <PanelLink href="#edicao-contato" pose="contact">O próximo quadro pode ser o seu vídeo.</PanelLink>
+    </section>
+
+    <section className="hq-about" id="edicao-sobre" aria-labelledby="hq-about-title">
+      <div className="hq-about-portrait" aria-hidden="true"><span className="hq-about-word">SAB!</span><img src="/images/doorman/process.webp" alt="" loading="lazy"/><span className="hq-tape">DIRETO DOS BASTIDORES</span></div>
+      <div className="hq-about-copy"><p className="hq-kicker">04 / QUEM ESTÁ NA TIMELINE</p><h2 id="hq-about-title">PODE ME<br/>CHAMAR DE <em>SAB.</em></h2><p>Sou Matheus Tahan Sab. Gosto de encontrar, no meio da partida, aquele momento que faz a história valer o play.</p><p>Edito no DaVinci Resolve, com atenção à identidade e ao público de cada canal.</p><a className="hq-primary" href="#edicao-contato">Vamos criar seu próximo vídeo ↗</a></div>
+    </section>
+    <div id="edicao-convite" className="hq-contact"><header className="hq-contact-heading"><p className="hq-kicker">05 / A HISTÓRIA CONTINUA</p><h2>SEU VÍDEO<br/><em>COMEÇA AQUI.</em></h2><span className="hq-contact-arrow" aria-hidden="true">↙</span></header><Contact editing /></div>
+    <VideoPlayer project={playing} onClose={()=>setPlaying(null)} />
   </div>;
 }
