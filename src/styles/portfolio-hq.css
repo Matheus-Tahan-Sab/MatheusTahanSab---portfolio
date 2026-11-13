@@ -118,3 +118,7 @@
  .editor-site .hq-cover-art {height:290px}
  .editor-site .hq-cover-art > img {height:125%;bottom:-38%}
 }
+
+.editor-site .hq-portfolio #edicao-contato .contact-form-panel {background:#fffaf0;color:#25232b;border:2px solid #25232b;box-shadow:4px 4px #25232b}
+.editor-site .hq-portfolio #edicao-contato :is(input,textarea) {background:#fffdf6;color:#25232b;border-color:#968679}
+.editor-site .hq-portfolio #edicao-contato :is(label,.panel-title h3) {color:#25232b}
