@@ -107,3 +107,8 @@
  .editor-site .hq-portfolio #edicao-contato .contact-form-panel {border-left:0;border-top:1px solid #ffffff40;padding:25px 0}
 }
 @media(prefers-reduced-motion:reduce) {.hq-portfolio * {transition:none!important;animation:none!important}}
+
+.editor-site .hq-portfolio .hq-videos .cut-work-copy .cut-label {color:#bcbcc1}
+.editor-site .hq-portfolio #edicao-contato :is(h3,p,small) {color:#d0d0d3}
+.editor-site .hq-portfolio #edicao-contato h3 {color:#fff}
+.editor-site .hq-portfolio #edicao-contato .contact-links svg,.editor-site .hq-portfolio #edicao-contato .contact-links a > span:last-child {color:#ff835d}
