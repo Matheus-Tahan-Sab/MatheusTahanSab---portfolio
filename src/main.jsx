@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './styles/global.css';
 import './styles/video-editing.css';
 import './styles/editor-studio.css';
+import './styles/editor-mobile.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -1,0 +1,98 @@
+/* Mobile composition for Cine Sab. Desktop artwork and room interactions stay shared. */
+@media (max-width: 760px) {
+  .editor-site .container { width: calc(100% - 32px); }
+  .editor-site .editor-header { position:sticky; top:0; }
+  .editor-site .editor-header-inner {
+    position:relative; display:flex; flex-direction:column; align-items:stretch;
+    gap:8px; min-height:0; padding:12px 0 10px;
+  }
+  .editor-site .editor-logo { align-self:flex-start; font-size:2rem; line-height:44px; }
+  .editor-site .editor-logo small { display:none; }
+  .editor-site .editor-nav { display:flex; flex-wrap:nowrap; justify-content:space-between; gap:4px; width:100%; }
+  .editor-site .editor-nav a { display:flex; align-items:center; justify-content:center; min-height:44px; font-size:12px; padding:6px 4px; white-space:nowrap; }
+  .editor-site .editor-nav .editor-nav-extra { display:flex; }
+  .editor-site .editor-nav a.editor-nav-contact { padding:6px 9px; transform:none; box-shadow:2px 2px 0 #f5f0d9; }
+  .editor-site .editor-nav a.editor-dev-link { position:absolute; top:12px; right:96px; min-height:44px; border:0; font-size:11px; padding:6px; }
+  .editor-site .editor-header .site-languages { top:12px; right:16px; transform:none; }
+  .editor-site .editor-header .site-languages button { min-height:44px; min-width:40px; }
+  .editor-site :is(.ticket-room,.ticket-anchor,.cut-section,.cut-contact-intro,#edicao-contato) { scroll-margin-top:124px; }
+  .editor-site .back-booth { margin:12px 0; min-height:44px; padding:9px 12px; font-size:14px; }
+  .editor-site .cut-section { padding-block:24px 40px; }
+  .editor-site .cut-contact-intro { padding:24px 0; }
+  .editor-site .studio-scene:has(.cinema-speaker) { grid-template-columns:minmax(0,1fr); gap:20px; padding:20px 0 0; margin-bottom:24px; }
+  .editor-site .screening-guide { min-height:0; }
+  .editor-site :is(.scene-works,.scene-services) .cut-section-heading { padding:18px; border-width:4px; box-shadow:4px 4px #130e16; }
+  .editor-site .studio-scene .cut-section-heading h2 { font-size:clamp(2rem,8.5vw,3.4rem); line-height:1.05; letter-spacing:-.045em; }
+  .editor-site .studio-scene .cut-label { margin-bottom:16px; font-size:10px; }
+  .editor-site .studio-scene .cinema-speaker {
+    display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+    align-items:center; gap:8px; width:100%; max-width:520px; justify-self:center;
+  }
+  .editor-site .cinema-speaker .studio-dialogue { width:100%; max-width:none; margin:0 0 16px; padding:12px; font-size:14px; line-height:1.45; }
+  .editor-site .cinema-speaker .studio-dialogue::after { left:auto; right:-8px; bottom:24px; transform:rotate(-45deg); }
+  .editor-site .cinema-speaker > img { width:100%; max-width:none; max-height:250px; object-fit:contain; object-position:bottom; align-self:end; }
+  .editor-site .guide-speaker .guide-host img { width:100%; height:215px; max-width:none; }
+  .editor-site .guide-host[aria-expanded=true]:enabled { height:215px; }
+  .editor-site .guide-speaker .guide-host[aria-expanded=true]:enabled img { width:auto; height:133.333%; }
+  .editor-site .guide-conversation { padding:0; }
+  .editor-site .guide-conversation nav { justify-items:stretch; gap:10px; }
+  .editor-site .guide-conversation :is(a,button) { font-size:15px!important; min-height:48px; padding:12px 14px!important; }
+  .editor-site .guide-question { font-size:18px; line-height:1.4; }
+  .editor-site .cinema-filter { display:grid; grid-template-columns:auto auto 1fr; gap:8px; margin:20px 0 28px; }
+  .editor-site .cinema-filter button { min-height:46px; padding:8px; font-size:14px; }
+  .editor-site .cut-group-heading { align-items:start; }
+  .editor-site .cut-group-heading > span { font-size:9px; max-width:45%; }
+  .editor-site .cut-works .cut-long-grid .cut-work { transform:none; padding:10px; border-width:4px; box-shadow:4px 4px #d1a457; }
+  .editor-site .cut-work-copy { padding:14px 6px 4px; }
+  .editor-site .cut-work-copy .cut-label { font-size:10px; }
+  .editor-site .cut-work-copy h4 { font-size:17px; line-height:1.45; }
+  .editor-site .cut-work-copy > a { display:inline-flex; align-items:center; min-height:44px; font-size:13px; }
+  .editor-site .cut-short-group { margin-top:36px; gap:20px; }
+  .editor-site .cut-short-note { position:relative; padding-right:100px; min-height:130px; }
+  .editor-site .cut-short-note h3 { font-size:clamp(1.8rem,7vw,2.6rem); }
+  .editor-site .cut-short-note > p:not(.cut-label) { font-size:14px; }
+  .editor-site .cut-short-note img { position:absolute; right:0; bottom:0; width:90px; margin:0; }
+  .editor-site .cut-shorts-grid { grid-template-columns:minmax(0,1fr); gap:24px; padding:0; }
+  .editor-site .cut-works .cut-work-short { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1fr); gap:10px; margin:0; transform:none; padding:10px; border-width:3px; box-shadow:4px 4px #b78548; align-items:center; }
+  .editor-site .cut-work-short .cut-work-copy { padding:0; }
+  .editor-site .cut-work-short .cut-work-copy h4 { font-size:15px; }
+  .editor-site .cut-work-short .cut-work-copy .cut-label { font-size:9px; }
+  .editor-site .cut-service-list { margin-top:24px; }
+  .editor-site .cut-services .cut-service-list > article { grid-template-columns:44px minmax(0,1fr); gap:12px; padding:16px; transform:none; border-width:4px; box-shadow:4px 4px #d1a457; margin-top:20px; }
+  .editor-site .cut-service-list h3 { font-size:21px; line-height:1.2; }
+  .editor-site .cut-service-list p:not(.cut-label) { font-size:15px; line-height:1.6; }
+  .editor-site .cut-service-list li { font-size:11px; }
+  .editor-site .cut-service-list ul { grid-column:1 / -1; padding-top:4px; }
+  .editor-site .cut-process { margin-top:24px; gap:20px; }
+  .editor-site .cut-process li { transform:none; padding:16px; gap:8px 14px; box-shadow:4px 4px #3555f5; }
+  .editor-site .cut-process p { font-size:15px; line-height:1.6; }
+  .editor-site .scene-contact .cinema-speaker img { width:100%; height:235px; }
+  .editor-site #edicao-contato .contact-layout { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .editor-site #edicao-contato .contact-form-panel { padding:16px; box-shadow:4px 4px #111216; transform:none; min-width:0; }
+  .editor-site #edicao-contato :is(input,textarea,select) { font-size:16px; max-width:100%; }
+  .editor-site #edicao-contato .contact-links a { overflow-wrap:anywhere; }
+  .editor-site .cut-player { width:calc(100% - 20px); padding:12px; max-height:calc(100dvh - 24px); }
+  .editor-site .cut-player-heading button { min-width:44px; min-height:44px; }
+  .editor-site .cut-player iframe.cut-player-vertical { width:auto; max-width:100%; height:min(65dvh,560px); }
+  .editor-site .site-footer { padding:24px 0; }
+  .editor-site .site-footer .footer-inner { flex-wrap:wrap; gap:12px; }
+  .editor-site .footer-end a { display:inline-flex; align-items:center; min-height:44px; font-size:12px; }
+}
+@media (max-width:700px) {
+  .editor-site .ticket-room .ticket-set { height:420px; max-height:none; background-size:200% 100%; background-position:right center; }
+  .editor-site .booth-art { left:-100%; }
+  .editor-site .ticket-host,.editor-site .ticket-guide { left:36%; height:62%; bottom:12%; }
+  .editor-site .ticket-balloon { top:20px; left:8%; right:8%; width:auto; max-width:none; padding:12px 16px; font-size:16px; line-height:1.4; }
+  .editor-site .ticket-balloon::after { left:24%; bottom:-7px; transform:rotate(-45deg); }
+  .editor-site .counter-bell { left:36%; width:68px; bottom:7%; }
+  .editor-site .ticket-bio { padding:24px; border:0; border-top:3px solid #bc8d53; background:#20211e; }
+  .editor-site .ticket-bio h1 { font-size:36px; line-height:1.05; margin:8px 0; }
+  .editor-site .ticket-bio h1 br::after { content:' '; }
+  .editor-site .ticket-bio p:last-child { font-size:19px; line-height:1.45; max-width:38ch; margin-top:12px; }
+  .editor-site .booth-choices { left:49%; right:4%; top:48%; max-width:none; gap:12px; }
+  .editor-site .booth-choices a { width:100%; min-height:48px; padding:10px; margin:0; font-size:15px; border-radius:16px 16px 16px 4px; }
+  .editor-site .ticket-giver { left:36%; height:106%; }
+  .editor-site .ticket-room[data-offering=true] .ticket-balloon { top:16px; bottom:auto; left:6%; right:6%; max-width:none; }
+  .editor-site .ticket-room[data-offering=true] .booth-return { top:auto; bottom:16px; right:16px; font-size:14px; }
+  .editor-site .ticket-room[data-portal=true] .ticket-set { transform-origin:75% 51%; }
+}
